@@ -17,7 +17,8 @@ public class JoinEvent {
 		FileRead fr = new FileRead();
 		Vector<Event> events = fr.readEvents();
 		Vector<Integer> times=new Vector<Integer>();
-		int eventChoice = 0;
+		String eventChoice = "";
+		int eventC = 0;
 		Scanner myScan = new Scanner(System.in);
 		int timeChoice = 0;
 		boolean invalidInput = true;
@@ -25,12 +26,23 @@ public class JoinEvent {
 		while(invalidInput) 
 		{
 			System.out.println("12 Hour / 24 Hour Mode? (12/24):");
-				timeChoice = myScan.nextInt();
-				if(timeChoice == 12 || timeChoice == 24) 
-				{
-					invalidInput = false;
+				try {
+					if (!myScan.hasNextInt())
+					{
+						myScan.next();
+						throw new Exception();
+					}
+					timeChoice = myScan.nextInt();
+					if(timeChoice == 12 || timeChoice == 24) 
+					{
+						invalidInput = false;
+					}
+					else 
+					{
+						throw new Exception();
+					}
 				}
-				else 
+				catch (Exception e)
 				{
 					clearPrint("Error\nThe selection is invalid.\n");
 					invalidInput = true;
@@ -47,33 +59,45 @@ public class JoinEvent {
 			{
 				System.out.println((i+1)+". "+events.elementAt(i).getEventName());
 			}
-				eventChoice = myScan.nextInt();
-				if(eventChoice > events.size() || eventChoice < 1) 
+			
+			try {
+				if (!myScan.hasNextInt())
+				{
+					myScan.next();
+					throw new Exception();
+				}
+					eventC = myScan.nextInt();
+					if(eventC > events.size() || eventC < 1) 
+					{
+						throw new Exception();
+					}
+					else 
+					{
+						invalidInput = false;
+					}
+				}
+				catch (Exception e)
 				{
 					clearPrint("Error\nThe selection is invalid.\n");
 					invalidInput = true;
 				}
-				else 
-				{
-					invalidInput = false;
-				}
 		}
 		clearScreen();
 		
-		clearPrint("The following attendees of " + events.get(eventChoice-1).getEventName() + " have the following availabilities:\n");
-		for (int i = 0; i < events.get(eventChoice-1).a_attendees.size(); i++)
+		clearPrint("The following attendees of " + events.get(eventC-1).getEventName() + " have the following availabilities:\n");
+		for (int i = 0; i < events.get(eventC-1).a_attendees.size(); i++)
 		{
 			String timestring = "\t";
-			System.out.println(events.get(eventChoice-1).a_attendees.get(i).getName() + ": ");
-			for (int j = 0; j < events.get(eventChoice-1).a_attendees.get(i).getAvailability().size(); j++)
+			System.out.println(events.get(eventC-1).a_attendees.get(i).getName() + ": ");
+			for (int j = 0; j < events.get(eventC-1).a_attendees.get(i).getAvailability().size(); j++)
 			{
 				if (timeChoice == 12)
 				{
-					timestring += " " + twelveHourConversion(events.get(eventChoice-1).a_attendees.get(i).getAvailability().get(j));
+					timestring += " " + twelveHourConversion(events.get(eventC-1).a_attendees.get(i).getAvailability().get(j));
 				}
 				else if (timeChoice == 24)
 				{
-					timestring += " " + twentyFourHourConversion(events.get(eventChoice-1).a_attendees.get(i).getAvailability().get(j));
+					timestring += " " + twentyFourHourConversion(events.get(eventC-1).a_attendees.get(i).getAvailability().get(j));
 				}
 			}
 			System.out.print(timestring + "\n");
@@ -101,11 +125,12 @@ public class JoinEvent {
 		/** 
 		 * int that stores the user's choice in which event to join.
 		 */
-		int eventChoice = 0;
+		String eventChoice = "";
 		/** 
 		 * int that stores the user's choice in 12/24 hour mode for time representation.
 		 */
 		int timeChoice = 0;
+		int eventC = 0;
 		clearPrint("Please enter your name.");
 		userName = myScan.nextLine();
 		/** 
@@ -121,28 +146,60 @@ public class JoinEvent {
 			{
 				System.out.println((i+1)+". "+events.elementAt(i).getEventName());
 			}
-				eventChoice = myScan.nextInt();
-				if(eventChoice > events.size() || eventChoice < 1) 
+			try {
+				if (!myScan.hasNextInt())
 				{
-					clearPrint("Error\nThe selection is invalid.\n");
-					invalidInput = true;
+					myScan.next();
+					throw new Exception();
+				}
+				eventC = myScan.nextInt();
+				if(eventC > events.size() || eventC < 1) 
+				{
+					throw new Exception();
 				}
 				else 
 				{
 					invalidInput = false;
 				}
+			}
+			catch (Exception e)
+			{
+				clearPrint("Error\nThe selection is invalid.\n");
+				invalidInput = true;
+			}
 		}
 				clearScreen();
 				boolean wrongFormat = true;
 				while (wrongFormat) {
-					System.out.println("12 Hour / 24 Hour Mode? (12/24):");	
-					timeChoice = myScan.nextInt();
+					System.out.println("12 Hour / 24 Hour Mode? (12/24):");
+					
+					try {
+						if (!myScan.hasNextInt())
+						{
+							myScan.next();
+							throw new Exception();
+						}
+						timeChoice = myScan.nextInt();
+						if(timeChoice == 12 || timeChoice == 24) 
+						{
+							invalidInput = false;
+						}
+						else 
+						{
+							throw new Exception();
+						}
+					}
+					catch (Exception e)
+					{
+						clearPrint("Error\nThe selection is invalid.\n");
+						invalidInput = true;
+					}
 					if(timeChoice == 12) 
 					{
 						clearPrint("The available times:");
 						for(int i=0; i<events.size(); i++) 
 						{
-							if(i+1 == eventChoice) 
+							if(i+1 == eventC) 
 							{
 								events.elementAt(i).get12HourAvailability();
 							}
@@ -154,7 +211,7 @@ public class JoinEvent {
 						clearPrint("The available times:");
 						for(int i=0; i<events.size(); i++) 
 						{
-							if(i+1 == eventChoice) 
+							if(i+1 == eventC) 
 							{
 								events.elementAt(i).get24HourAvailability();
 							}
@@ -176,12 +233,20 @@ public class JoinEvent {
 					for(int i = 0; i<temp.length; i++) 
 					{
 						boolean correctValueFound = false;
-						Integer num = twelveHourtoInt(temp[i]);
-						for(int j=0; j<events.elementAt(eventChoice-1).getAvailability().size(); j++) 
+						Integer num = 0;
+						if (timeChoice == 12)
 						{
-							if(num == events.elementAt(eventChoice-1).getAvailability().elementAt(j)) 
+							num =twelveHourtoInt(temp[i]);
+						}
+						else
+						{
+							num = twentyFourHourtoInt(temp[i]);
+						}
+						for(int j=0; j<events.elementAt(eventC-1).getAvailability().size(); j++) 
+						{
+							if(num == events.elementAt(eventC-1).getAvailability().elementAt(j)) 
 							{
-								j=events.elementAt(eventChoice-1).getAvailability().size();
+								j=events.elementAt(eventC-1).getAvailability().size();
 								correctValueFound = true;
 								times.add(num);
 							}
@@ -196,7 +261,7 @@ public class JoinEvent {
 								System.out.println("The available times:");
 								for(int j=0; j<events.size(); j++) 
 								{
-									if(j+1 == eventChoice) 
+									if(j+1 == eventC) 
 									{
 										events.elementAt(j).get12HourAvailability();
 									}
@@ -207,7 +272,7 @@ public class JoinEvent {
 								System.out.println("The available times:");
 								for(int j=0; j<events.size(); j++) 
 								{
-									if(j+1 == eventChoice) 
+									if(j+1 == eventC) 
 									{
 										events.elementAt(j).get24HourAvailability();
 									}
@@ -222,9 +287,9 @@ public class JoinEvent {
 				}
 				System.out.println(times);
 				Attendee a = new Attendee(userName, times);
-				events.elementAt(eventChoice-1).a_attendees.add(a);
-				events.elementAt(eventChoice-1).exportEvent();
-				clearPrint("You have successfully been added to the event " + events.elementAt(eventChoice-1).getEventName() + "!");
+				events.elementAt(eventC-1).a_attendees.add(a);
+				events.elementAt(eventC-1).exportEvent();
+				clearPrint("You have successfully been added to the event " + events.elementAt(eventC-1).getEventName() + "!");
 
 	}
 		/**
@@ -868,6 +933,7 @@ public class JoinEvent {
 	
 	//method converts ints in vectors into corresponding strings for 24:00 hour mode
 	public static String twentyFourHourConversion(int i) 
+	
 	{
 		String conversion = "\0";
 		

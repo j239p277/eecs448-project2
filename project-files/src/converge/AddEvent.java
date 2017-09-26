@@ -426,21 +426,6 @@ public class AddEvent{
 	}
 	
 	/**
-	 * Finds the current month as an integer.
-	 * 
-	 * @return an integer representing the current month.
-	 */
-	public int currentMonth() 
-	{
-		int month;
-		java.util.Date date = new Date();
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(date);
-		month = cal.get(Calendar.MONTH);
-		return month;
-	}
-	
-	/**
 	 * Converts time strings for 12 hour mode as its corresponding integer for the availability vectors.
 	 * 
 	 * @param time The time as a string that the user inputs in 12 hour mode.
@@ -869,6 +854,16 @@ public class AddEvent{
 	int currentYear = Calendar.getInstance().get(Calendar.YEAR); 
 	
 	/**
+	 * integer used to track the current month.
+	 */
+	int currentMonth = Calendar.getInstance().get(Calendar.MONTH); 
+	
+	/**
+	 * integer used to track the current day.
+	 */
+	int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH); 
+	
+	/**
 	 * string used to store the starting availability of the admin.
 	 */
 	String startAvailability; 
@@ -925,31 +920,53 @@ public class AddEvent{
 		adminEvent.setDay(date[1]);
 		adminEvent.setYear(date[2]);
 		
-		clearPrint("12 Hour / 24 Hour Mode? (12/24):");	
-		choice = userInput.nextInt();
+		boolean invalidInput = true;
+		clearScreen();
+		while(invalidInput) 
+		{
+			System.out.println("12 Hour / 24 Hour Mode? (12/24):");
+			userInput.nextLine();
+				try {
+					choice = userInput.nextInt();
+					if(choice == 12 || choice == 24) 
+					{
+						invalidInput = false;
+					}
+					else 
+					{
+						throw new Exception();
+					}
+				}
+				catch (Exception e)
+				{
+					clearPrint("Error\nThe selection is invalid.\n");
+					invalidInput = true;
+				}
+		}
+		invalidInput = true;
 		
 		if (choice == 12)
 		{
 			String cont;
 			do
 			{
-				clearPrint("Input your starting availability. Format: 0:00PM");
+				clearPrint("Input your starting availability. Format: 1:00PM");
 				startAvailability = userInput.next();
 				//checks to see if the time the user input is valid
 				while(twelveHourtoInt(startAvailability) == 50) 
 				{
-					clearPrint("Error\nThe time inputted is invalid.\nInput your starting availability. Format: 0:00PM");
+					clearPrint("Error\nThe time inputted is invalid.\nInput your starting availability. Format: 1:00PM");
 					startAvailability = userInput.next();
 				}
 				
-				clearPrint("Input your ending availability. Format: 0:00PM");
+				clearPrint("Input your ending availability. Format: 1:00PM");
 				endAvailability = userInput.next();
 				
 				//checks to see if the time the user input was valid
 				while((twelveHourtoInt(endAvailability) == 50) || (twelveHourtoInt(endAvailability) < twelveHourtoInt(startAvailability))) 
 				{
 					//checks if the String the user input isn't valid
-					clearPrint("Error\nThe time inputted is invalid.\nInput your ending availability. Format: 0:00PM");
+					clearPrint("Error\nThe time inputted is invalid.\nInput your ending availability. Format: 1:00PM");
 					endAvailability = userInput.next();
 				}
 				
@@ -970,23 +987,23 @@ public class AddEvent{
 			String cont;
 			do
 			{
-				clearPrint("Input your starting availability. Format: 0:00");
+				clearPrint("Input your starting availability. Format: 13:00");
 				startAvailability = userInput.next();
 				//checks to see if the time the user input is valid
 				while(twentyFourHourtoInt(startAvailability) == 50) 
 				{
-					clearPrint("Error\nThe time inputted is invalid.\nInput your starting availability. Format: 0:00");
+					clearPrint("Error\nThe time inputted is invalid.\nInput your starting availability. Format: 13:00");
 					startAvailability = userInput.next();
 				}
 				
-				clearPrint("Input your ending availability. Format: 0:00");
+				clearPrint("Input your ending availability. Format: 13:00");
 				endAvailability = userInput.next();
 				
 				//checks to see if the time the user input was valid
 				while((twentyFourHourtoInt(endAvailability) == 50) || (twentyFourHourtoInt(endAvailability) < twentyFourHourtoInt(startAvailability))) 
 				{
 					//checks if the String the user input isn't valid
-					clearPrint("Error\nThe time inputted is invalid.\nInput your ending availability. Format: 0:00");
+					clearPrint("Error\nThe time inputted is invalid.\nInput your ending availability. Format: 13:00");
 					endAvailability = userInput.next();
 				}
 				
@@ -1002,12 +1019,7 @@ public class AddEvent{
 				
 			} while (cont.charAt(0) == 'y' || cont.charAt(0) == 'Y');
 		}
-		else
-		{
-			clearPrint("Error\nThe input is invalid 12 Hour / 24 Hour Mode? (12/24)");
-		}
 		
-		userInput.close();
 		adminEvent.addAttendee(admin);
 		adminEvent.exportEvent();
 		
@@ -1054,37 +1066,37 @@ public class AddEvent{
 			System.out.println("Enter date of event (mm/dd/yyyy): ");
 			String date = userInput.next();
 			
-			String monthString = new StringBuilder().append(date.charAt(0)).append(date.charAt(1)).toString();
-			String dayString = new StringBuilder().append(date.charAt(3)).append(date.charAt(4)).toString();
-			String yearString = new StringBuilder().append(date.charAt(6)).append(date.charAt(7)).append(date.charAt(8)).append(date.charAt(9)).toString();
-			System.out.println(monthString + dayString + yearString);
-
 			//Check year input with current year and integer status
 			try
 			{
+				if (date.length() < 10)
+				{
+					throw new NumberFormatException();
+				}
+				
+				String monthString = new StringBuilder().append(date.charAt(0)).append(date.charAt(1)).toString();
+				String dayString = new StringBuilder().append(date.charAt(3)).append(date.charAt(4)).toString();
+				String yearString = new StringBuilder().append(date.charAt(6)).append(date.charAt(7)).append(date.charAt(8)).append(date.charAt(9)).toString();
+
 				year = Integer.parseInt(yearString);
 				month = Integer.parseInt(monthString);
 				day = Integer.parseInt(dayString);
 				cont = true;
 				if (year < currentYear)
 				{
-					clearPrint("Error\nThe date inputted is invalid\n"); //Re-prompt
-					cont = false;
+					throw new NumberFormatException();
 				}
-				else if (month < currentMonth() && year == currentYear)
+				else if (month < currentMonth && year == currentYear && day < currentDay)
 				{
-					clearPrint("Error\nThe date inputted is invalid\n"); //Re-prompt
-					cont = false;
+					throw new NumberFormatException();
 				}
 				else if (day > 31 || day < 1)
 				{
-					clearPrint("Error\nThe date inputted is invalid\n"); //Re-prompt
-					cont = false;
+					throw new NumberFormatException();
 				}
 				else if((day > 30 && ((month == 4) || (month == 6) || (month == 9) || (month == 11))) || (day > 29 && month == 2 && year%4 == 0) || (day > 28 && month == 2 && year%4 != 0))
 				{
-					clearPrint("Error\nThe date inputted is invalid\n"); //Re-prompt
-					cont = false;
+					throw new NumberFormatException();
 				}
 			}
 			catch (NumberFormatException e)
@@ -1102,4 +1114,3 @@ public class AddEvent{
 		return returnDate;
 	}
 } //ends AddEvent class
-

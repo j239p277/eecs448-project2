@@ -17,27 +17,39 @@ public class Main {
 		boolean incorrectInput = true;
 		boolean cont = true;
 		int c = 0;
+		AddEvent AdminEvent = new AddEvent();
+
 		while (cont)
 		{
+			incorrectInput = true;
 			while(incorrectInput) {
-				clearPrint("What would you like to do?\n 1. Create an Event\n 2. Join an event\n 3. View an existing event\nPlease enter number corresponding to the option you choose.");
-				choice = myScan.nextLine();
-				if(isInteger(choice)) {
-					c = Integer.valueOf(choice);
-					if(c == 1 || c == 2 || c == 3) {
+				clearPrint("What would you like to do?\n 1. Create an Event\n 2. Join an event\n 3. View an existing event\n 0. Quit\nPlease enter number corresponding to the option you choose.");
+				try 
+				{
+					if (!myScan.hasNextInt())
+					{
+						myScan.next();
+						throw new Exception();
+					}
+					
+					c = myScan.nextInt();
+					
+					if(c == 0 || c == 1 || c == 2 || c == 3) {
 						incorrectInput = false;
 					}
-					else {
-						System.out.println("Invalid input. Please enter option 1 or 2.");
-					}
 				}
-				else {
-					System.out.println("Invalid input. Please enter option 1 or 2.");
+				catch (Exception e)
+				{
+					System.out.println("Error\nPlease enter valid option.");
 				}
 			}
-			
-			if(c == 1) {
-				AddEvent AdminEvent = new AddEvent();
+			if (c == 0)
+			{
+				clearScreen();
+				System.exit(0);
+			}
+			else if(c == 1) 
+			{
 				AdminEvent.start();
 			}
 			else if (c == 2) {
@@ -47,16 +59,43 @@ public class Main {
 			{
 				JoinEvent.view();
 			}
-			
-			System.out.println("\nPress enter to return to main menu\nType 'quit' to exit:\n");
-			String exit = myScan.nextLine();
-			if (exit.equals("quit"))
-			{
-				cont = false;
-			}
+
 			c = 0;
 			incorrectInput = true;
+			choice = "";
+			String exit = "";
+
+			while (incorrectInput)
+			{
+				try 
+				{
+					System.out.println("\nType 'return' to return to main menu\nType 'quit' to exit:\n");
+					//myScan.next();
+					exit = myScan.next();
+					if (exit.equals("quit"))
+					{
+						clearScreen();
+						cont = false;
+						incorrectInput = false;
+						System.exit(0);
+					}
+					else if (exit.equals("return"))
+					{
+						cont = true;
+						incorrectInput = false;
+					}
+					else
+					{
+						throw new Exception();
+					}
+				}
+				catch (Exception e)
+				{
+					clearPrint("Error\nPlease enter valid option.");
+				}
+			}
 		}
+		clearScreen();
 		myScan.close();
 	}
 	
