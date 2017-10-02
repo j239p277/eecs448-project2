@@ -16,6 +16,10 @@ public class Event {
 	 */
 	String a_eventName;
 	/**
+	 * String used to store the name of the event creator.
+	 */
+	String a_eventCreator;
+	/**
 	 * int used to store the month of the event.
 	 */
 	int a_month;
@@ -28,6 +32,14 @@ public class Event {
 	 */
 	int a_year;
 	/**
+	 * int used to store the availability of the event.
+	 */
+	int a_availability;
+	/**
+	 * TimwSlot used to store the month, day, year, and availability of the event.
+	 */
+	TimeSlot timeslot = new TimeSlot(a_month, a_day, a_year, a_availability);
+	/**
 	 * Vector of attendees used to store all the attendees able to go to the event
 	 * along with all their information specified in the attendee class.
 	 */
@@ -35,7 +47,7 @@ public class Event {
 	/**
 	 * Vector of integers used to store the admins availability.
 	 */
-	Vector<Integer> a_adminAvailability = new Vector<Integer>();
+	Vector<TimeSlot> a_adminAvailability = new Vector<TimeSlot>();
 	/**
 	 * Default constructor for the Event class.
 	 */
@@ -52,12 +64,13 @@ public class Event {
 	 * able to attend the event.
 	 * @param adminAvailability vector of integers storing the availability of the admin.
 	 */
-	public Event(String eventName, int month, int day, int year, Vector attendees, Vector adminAvailability )
+	public Event(String eventName, String eventCreator, Vector<Attendee> attendees, Vector<TimeSlot> adminAvailability )
 	{
 		a_eventName = eventName;
-		a_month = month;
-		a_day = day;
-		a_year = year;
+		a_eventCreator = eventCreator;
+//		a_month = month;
+//		a_day = day;
+//		a_year = year;
 		a_attendees = attendees;
 		a_adminAvailability = adminAvailability;
 
@@ -68,9 +81,9 @@ public class Event {
 	public void print()
 	{
 		System.out.println(a_eventName);
-		System.out.println(a_month);
-		System.out.println(a_day);
-		System.out.println(a_year);
+//		System.out.println(a_month);
+//		System.out.println(a_day);
+//		System.out.println(a_year);
 		System.out.println(a_adminAvailability);
 		for (int i = 0; i < a_attendees.size(); i++)
 		{
@@ -159,7 +172,6 @@ public class Event {
 	{
 		return a_year;
 	}
-
 	/**
 	 * method that adds an attendee to the attendee vector.
 	 * 
@@ -182,25 +194,22 @@ public class Event {
 
 		//Output name and date accordingly
 		writer.write(a_eventName + "\n");
-		writer.write(a_month + " " + a_day + " " + a_year + "\n");
 
 		//Output the admin availability vector
 		for (int i = 0; i < a_adminAvailability.size(); i++)
 		{
-			writer.write(a_adminAvailability.get(i) + " ");
+//			writer.write(a_attendees.get(i).getName() + " " + a_month + " " + a_day + " " + a_year + " " + a_adminAvailability.get(i) + "\n");
 		}
-		writer.write("\n");
 
 		//Iterate through attendees lines
 		for (int i = 0; i < a_attendees.size(); i++)
 		{
 			//Output the name and availability of the attendee
-			writer.write(a_attendees.get(i).getName() + " ");
+//			writer.write(a_attendees.get(i).getName() + "\n");
 			for (int j = 0; j < a_attendees.get(i).getAvailability().size(); j++)
 			{
-				writer.write(a_attendees.get(i).getAvailability().get(j) + " ");
+				writer.write(a_attendees.get(i).getName() + " " + a_month + " " + a_day + " " + a_year + " " + a_attendees.get(i).getAvailability().get(j).getAvailability() + "\n");
 			}
-			writer.write("\n");
 		}
 
 		//Close FileWriter
@@ -212,7 +221,7 @@ public class Event {
 	 * 
 	 * @return a vector that stores the admin's availability.
 	 */
-	public Vector getAvailability()
+	public Vector<TimeSlot> getAvailability()
 	{
 		return a_adminAvailability;
 	}
@@ -222,149 +231,149 @@ public class Event {
 	 */
 	public void get12HourAvailability() {
 		for(int i= 0; i < a_adminAvailability.size(); i++) {
-
-			if(a_adminAvailability.elementAt(i) == 0) {
+		
+			if(a_adminAvailability.elementAt(i).getAvailability() == 0) {
 				System.out.println("12:00AM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 1) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 1) {
 				System.out.println("12:30AM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 2) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 2) {
 				System.out.println("1:00AM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 3) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 3) {
 				System.out.println("1:30AM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 4) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 4) {
 				System.out.println("2:00AM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 5) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 5) {
 				System.out.println("2:30AM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 6) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 6) {
 				System.out.println("3:00AM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 7) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 7) {
 				System.out.println("3:30AM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 8) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 8) {
 				System.out.println("4:00AM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 9) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 9) {
 				System.out.println("4:30AM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 10) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 10) {
 				System.out.println("5:00AM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 11) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 11) {
 				System.out.println("5:30AM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 12) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 12) {
 				System.out.println("6:00AM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 13) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 13) {
 				System.out.println("6:30AM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 14) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 14) {
 				System.out.println("7:00AM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 15) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 15) {
 				System.out.println("7:30AM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 16) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 16) {
 				System.out.println("8:00AM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 17) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 17) {
 				System.out.println("8:30AM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 18) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 18) {
 				System.out.println("9:00AM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 19) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 19) {
 				System.out.println("9:30AM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 20) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 20) {
 				System.out.println("10:00AM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 21) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 21) {
 				System.out.println("10:30AM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 22) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 22) {
 				System.out.println("11:00AM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 23) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 23) {
 				System.out.println("11:30AM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 24) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 24) {
 				System.out.println("12:00PM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 25) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 25) {
 				System.out.println("12:30PM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 26) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 26) {
 				System.out.println("1:00PM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 27) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 27) {
 				System.out.println("1:30PM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 28) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 28) {
 				System.out.println("2:00PM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 29) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 29) {
 				System.out.println("2:30PM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 30) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 30) {
 				System.out.println("3:00PM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 31) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 31) {
 				System.out.println("3:30PM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 32) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 32) {
 				System.out.println("4:00PM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 33) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 33) {
 				System.out.println("4:30PM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 34) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 34) {
 				System.out.println("5:00PM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 35) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 35) {
 				System.out.println("5:30PM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 36) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 36) {
 				System.out.println("6:00PM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 37) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 37) {
 				System.out.println("6:30PM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 38) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 38) {
 				System.out.println("7:00PM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 39) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 39) {
 				System.out.println("7:30PM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 40) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 40) {
 				System.out.println("8:00PM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 41) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 41) {
 				System.out.println("8:30PM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 42) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 42) {
 				System.out.println("9:00PM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 43) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 43) {
 				System.out.println("9:30PM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 44) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 44) {
 				System.out.println("10:00PM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 45) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 45) {
 				System.out.println("10:30PM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 46) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 46) {
 				System.out.println("11:00PM ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 47) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 47) {
 				System.out.println("11:30PM ");
 			}
 		}
@@ -376,150 +385,151 @@ public class Event {
 	public void get24HourAvailability() {
 		for(int i= 0; i < a_adminAvailability.size(); i++) {
 
-			if(a_adminAvailability.elementAt(i) == 0) {
+			if(a_adminAvailability.elementAt(i).getAvailability() == 0) {
 				System.out.println("00:00 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 1) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 1) {
 				System.out.println("00:30 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 2) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 2) {
 				System.out.println("1:00 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 3) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 3) {
 				System.out.println("1:30 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 4) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 4) {
 				System.out.println("2:00 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 5) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 5) {
 				System.out.println("2:30 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 6) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 6) {
 				System.out.println("3:00 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 7) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 7) {
 				System.out.println("3:30 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 8) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 8) {
 				System.out.println("4:00 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 9) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 9) {
 				System.out.println("4:30 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 10) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 10) {
 				System.out.println("5:00 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 11) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 11) {
 				System.out.println("5:30 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 12) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 12) {
 				System.out.println("6:00 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 13) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 13) {
 				System.out.println("6:30 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 14) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 14) {
 				System.out.println("7:00 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 15) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 15) {
 				System.out.println("7:30 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 16) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 16) {
 				System.out.println("8:00");
 			}
-			else if(a_adminAvailability.elementAt(i) == 17) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 17) {
 				System.out.println("8:30 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 18) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 18) {
 				System.out.println("9:00 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 19) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 19) {
 				System.out.println("9:30 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 20) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 20) {
 				System.out.println("10:00 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 21) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 21) {
 				System.out.println("10:30 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 22) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 22) {
 				System.out.println("11:00 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 23) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 23) {
 				System.out.println("11:30 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 24) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 24) {
 				System.out.println("12:00 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 25) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 25) {
 				System.out.println("12:30 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 26) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 26) {
 				System.out.println("13:00 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 27) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 27) {
 				System.out.println("13:30 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 28) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 28) {
 				System.out.println("14:00 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 29) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 29) {
 				System.out.println("14:30 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 30) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 30) {
 				System.out.println("15:00 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 31) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 31) {
 				System.out.println("15:30 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 32) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 32) {
 				System.out.println("16:00 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 33) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 33) {
 				System.out.println("16:30 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 34) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 34) {
 				System.out.println("17:00 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 35) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 35) {
 				System.out.println("17:30 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 36) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 36) {
 				System.out.println("18:00 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 37) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 37) {
 				System.out.println("18:30 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 38) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 38) {
 				System.out.println("19:00 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 39) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 39) {
 				System.out.println("19:30 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 40) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 40) {
 				System.out.println("20:00 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 41) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 41) {
 				System.out.println("20:30 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 42) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 42) {
 				System.out.println("21:00 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 43) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 43) {
 				System.out.println("21:30 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 44) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 44) {
 				System.out.println("22:00 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 45) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 45) {
 				System.out.println("22:30 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 46) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 46) {
 				System.out.println("23:00 ");
 			}
-			else if(a_adminAvailability.elementAt(i) == 47) {
+			else if(a_adminAvailability.elementAt(i).getAvailability() == 47) {
 				System.out.println("23:30 ");
 			}
 		}
 	}
 }
+

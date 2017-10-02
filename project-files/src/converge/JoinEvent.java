@@ -93,11 +93,11 @@ public class JoinEvent {
 			{
 				if (timeChoice == 12)
 				{
-					timestring += " " + twelveHourConversion(events.get(eventC-1).a_attendees.get(i).getAvailability().get(j));
+					timestring += " " + twelveHourConversion(events.get(eventC-1).a_attendees.get(i).getAvailability().get(j).getAvailability());
 				}
 				else if (timeChoice == 24)
 				{
-					timestring += " " + twentyFourHourConversion(events.get(eventC-1).a_attendees.get(i).getAvailability().get(j));
+					timestring += " " + twentyFourHourConversion(events.get(eventC-1).a_attendees.get(i).getAvailability().get(j).getAvailability());
 				}
 			}
 			System.out.print(timestring + "\n");
@@ -116,7 +116,7 @@ public class JoinEvent {
 		/** 
 		 * vector used to hold the user's available times.
 		 */
-		Vector<Integer> times=new Vector<Integer>();
+		Vector<TimeSlot> timeslots=new Vector<TimeSlot>();
 		Scanner myScan = new Scanner(System.in);
 		/** 
 		 * string that takes the user's name.
@@ -244,11 +244,11 @@ public class JoinEvent {
 						}
 						for(int j=0; j<events.elementAt(eventC-1).getAvailability().size(); j++) 
 						{
-							if(num == events.elementAt(eventC-1).getAvailability().elementAt(j)) 
+							if(num == events.elementAt(eventC-1).getAvailability().elementAt(j).getAvailability()) 
 							{
 								j=events.elementAt(eventC-1).getAvailability().size();
 								correctValueFound = true;
-								times.add(num);
+								timeslots.add(num);
 							}
 						}
 						if(!correctValueFound) 

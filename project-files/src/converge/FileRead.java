@@ -57,7 +57,11 @@ public class FileRead
 		        //Take file input as multiple lines in 'record' list
 	            BufferedReader bufferedReader = new BufferedReader(in);
 		        String line = null;
-			  	List<String> records = new ArrayList<String>();
+		        int month, day, year, avail = 0;
+		        String name, attendeeName, date = "";
+		        Vector<TimeSlot> adminAvailability = new Vector<TimeSlot>();
+		        Vector<Attendee> attendees = new Vector<Attendee>();
+			  	ArrayList<String> records = new ArrayList<String>();
 
 		        //Adds every line to 'record' list
 		        while ((line = bufferedReader.readLine()) != null)
@@ -66,53 +70,56 @@ public class FileRead
 		        }
 		        
 		        //Assign first value as event name
-		        String name = records.get(0);
+		        name = records.get(0);
 		        
-		        //Assign second value as date
-		        String date = records.get(1);
-		        String[] splitDate = date.split("\\s+");
-		        int month = 	Integer.parseInt(splitDate[0]);
-		        int day =	Integer.parseInt(splitDate[1]);
-		        int year = 	Integer.parseInt(splitDate[2]);
-		        
-		        Vector<Integer> adminAvailability = new Vector<Integer>();
-		        Vector<Attendee> attendees = new Vector<Attendee>();
+		        //Assign second value as attendee name
+//		        attendeeName = records.get(1);
 		        
 		        //Iterate through admin availability and each attendee in file
-		        int attendeeIndex = 2;
+		        int attendeeIndex = 1;
 		        do
 		        {
-		        		//Index records to find
-		        		String temp = records.get(attendeeIndex);
-		        		int tempInt = 0;
-		        		String[] splitAtt = temp.split("\\s+");
-		        		String attendeeName = null;
-		        		Vector<Integer> availability = new Vector<Integer>();
+		        	//Index records to find
+			        line = records.get(attendeeIndex);
+			        String[] splitLine = line.split("\\s+");
+			        attendeeName = splitLine[0];
+			        month = 	Integer.parseInt(splitLine[1]);
+			        day =	Integer.parseInt(splitLine[2]);
+			        year = 	Integer.parseInt(splitLine[3]);
+			        avail = 	Integer.parseInt(splitLine[4]);
+
 		        		
-		        		//Within the line, consider the int values as the user availability
-		        		int availabilityIndex = 0;
-		        		do
-		        		{
-			        		try 
-			        		{
-			        			//If the value can be parsed, add to availability
-			        		    tempInt = Integer.parseInt(splitAtt[availabilityIndex]);
-			        		    availability.add(tempInt);
-			        		} 
-			        		catch (NumberFormatException e) 
-			        		{
-			        			//Otherwise set that value as the name of the user
-			        			if (attendeeName == null)
-			        			{
-			        				attendeeName = splitAtt[availabilityIndex];
-			        			}
-			        			else
-			        			{
-				        		    attendeeName = attendeeName + " " + splitAtt[availabilityIndex];
-			        			}
-			        		}
-			        		availabilityIndex++;
-		        		} while (availabilityIndex < splitAtt.length);
+//		        		String temp = records.get(attendeeIndex);
+//		        		int tempInt = 0;
+//		        		String[] splitAtt = temp.split("\\s+");
+//		        		String attendeeName = null;
+		        		Vector<TimeSlot> availability = new Vector<TimeSlot>();
+		        		
+//		        		//Within the line, consider the int values as the user availability
+//		        		int availabilityIndex = 0;
+//		        		do
+//		        		{
+//			        		try 
+//			        		{
+//			        			//If the value can be parsed, add to availability
+//			        		    tempInt = Integer.parseInt(splitAtt[availabilityIndex]);
+//			        		    TimeSlot tempTimeSlot = new TimeSlot(month, day, year, tempInt);
+//			        		    availability.add(availabilityIndex, tempTimeSlot);	
+//			        		} 
+//			        		catch (NumberFormatException e) 
+//			        		{
+//			        			//Otherwise set that value as the name of the user
+//			        			if (attendeeName == null)
+//			        			{
+//			        				attendeeName = splitAtt[availabilityIndex];
+//			        			}
+//			        			else
+//			        			{
+//				        		    attendeeName = attendeeName + " " + splitAtt[availabilityIndex];
+//			        			}
+//			        		}
+//			        		availabilityIndex++;
+//		        		} while (availabilityIndex < splitAtt.length);
 		        		
 		        		//Consider the nameless line as the admin availability
 		        		if (attendeeName == null)
@@ -130,7 +137,7 @@ public class FileRead
 		        } while(attendeeIndex < records.size());
 		        
 		        //Create event with values from file
-		        Event e = new Event(name, month, day, year, attendees, adminAvailability);
+		        Event e = new Event(name, attendees, adminAvailability);
 		        events.add(e);
 		  } 
 		}

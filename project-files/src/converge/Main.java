@@ -50,10 +50,11 @@ public class Main {
 			}
 			else if(c == 1) 
 			{
-				AdminEvent.start();
+
+AdminEvent.start();
 			}
 			else if (c == 2) {
-				JoinEvent.run();
+//				JoinEvent.run();	TODO
 			}
 			else if (c == 3)
 			{

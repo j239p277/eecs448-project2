@@ -874,13 +874,18 @@ public class AddEvent{
 	String endAvailability; 
 	
 	/**
-	 * vector that hold integers 0-47 that each represent time availability in 30
+	 * vector that holds integers 0-47 that each represent time availability in 30
 	 * minute periods throughout the day.
 	 */
 	Vector<Integer> timeVec = new Vector<Integer>() ;
 	{ 
 	for (int i = 0; i < 48; i++)
 		{
+//			TimeSlot temp = null;
+//			temp.setDay(currentDay);
+//			temp.setMonth(currentMonth);
+//			temp.setYear(currentYear);
+//			temp.setAvailability(i);
 			timeVec.addElement(i);
 		}
 	}
@@ -973,8 +978,14 @@ public class AddEvent{
 				//adds the availability times of the admin
 				for( int i = twelveHourtoInt(startAvailability); i<twelveHourtoInt(endAvailability); i++)
 				{
-					adminEvent.a_adminAvailability.addElement(i);
-					admin.availability.addElement(i);
+					TimeSlot temp = null;
+					temp.setDay(currentDay);
+					temp.setMonth(currentMonth);
+					temp.setYear(currentYear);
+					temp.setAvailability(i);
+					timeVec.addElement(i);
+					adminEvent.a_adminAvailability.addElement(temp);
+					admin.availability.addElement(temp);
 				}
 				
 				clearPrint("Would you like to add another slot of availability? (type 'yes'/'no')");
@@ -1010,8 +1021,14 @@ public class AddEvent{
 				//adds the availability times of the admin
 				for( int i = twentyFourHourtoInt(startAvailability); i<twentyFourHourtoInt(endAvailability); i++)
 				{
-					adminEvent.a_adminAvailability.addElement(i);
-					admin.availability.addElement(i);
+					TimeSlot temp = new TimeSlot(0,0,0,0);
+					temp.setDay(currentDay);
+					temp.setMonth(currentMonth);
+					temp.setYear(currentYear);
+					temp.setAvailability(i);
+					timeVec.addElement(i);
+					adminEvent.a_adminAvailability.addElement(temp);
+					admin.availability.addElement(temp);
 				}
 				
 				clearPrint("Would you like to add another slot of availability? (type 'yes'/'no')");

@@ -18,7 +18,7 @@ public class Attendee {
 	 * Represents the availability of the attendee as a Vector of integers 0-47
 	 * each representing a specific 30 minute block of the day.
 	 */
-	Vector<Integer> availability = new Vector<Integer>();
+	Vector<TimeSlot> availability = new Vector<TimeSlot>();
 	
 	//Constructor methods
 	/**
@@ -31,7 +31,7 @@ public class Attendee {
 	 * @param name String the represents the attendee's name
 	 * @param input Vector of integers that represents the attendee's availability.
 	 */
-	public Attendee(String name, Vector<Integer> input)
+	public Attendee(String name, Vector<TimeSlot> input)
 	{
 		userName = name;
 		availability = input;
@@ -50,7 +50,7 @@ public class Attendee {
 	 * 
 	 * @return A vector of integers representing the attendee's availability.
 	 */
-	public Vector<Integer> getAvailability()
+	public Vector<TimeSlot> getAvailability()
 	{
 		return availability;
 	}
