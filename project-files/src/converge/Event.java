@@ -6,7 +6,7 @@ import java.util.*;
 /**
  * The Event.java file is used to implement the Event class that stores the information needed
  * for an event to be created.
- * 
+ *
  * @author Vivek Tallavajhala
  * @since 2017-09-15
  */
@@ -37,28 +37,35 @@ public class Event {
 	 */
 	Vector<Integer> a_adminAvailability = new Vector<Integer>();
 	/**
+	 * Vector of integers used to store the admin's requested tasks.
+	 */
+	Vector<Integer> a_adminTaskList = new Vector<Integer>();
+	/**
 	 * Default constructor for the Event class.
 	 */
 	public Event() {}
 	/**
 	 * Parameterized constructor that sets the name, month, day, year, attendees information,
 	 * and admin availability of the event.
-	 * 
+	 *
 	 * @param eventName string that stores the name of the event
 	 * @param month int that stores the month of the event
 	 * @param day int that stores the day of the event
 	 * @param year int that stores the year of the event
 	 * @param attendees vector of attendees holding the information of all the attendees
 	 * able to attend the event.
+	 * @param tasks vector of attendees holding the information of all the attendees
+	 * tasks.
 	 * @param adminAvailability vector of integers storing the availability of the admin.
 	 */
-	public Event(String eventName, int month, int day, int year, Vector attendees, Vector adminAvailability )
+	public Event(String eventName, int month, int day, int year, Vector attendees, Vector adminAvailability, Vector tasks )
 	{
 		a_eventName = eventName;
 		a_month = month;
 		a_day = day;
 		a_year = year;
 		a_attendees = attendees;
+		a_tasks = tasks;
 		a_adminAvailability = adminAvailability;
 
 	}
@@ -72,6 +79,7 @@ public class Event {
 		System.out.println(a_day);
 		System.out.println(a_year);
 		System.out.println(a_adminAvailability);
+		System.out.println(a_adminTaskList);
 		for (int i = 0; i < a_attendees.size(); i++)
 		{
 			Attendee a = a_attendees.get(i);
@@ -80,7 +88,7 @@ public class Event {
 	}
 	/**
 	 * Method that returns the admin's username.
-	 * 
+	 *
 	 * @return A string that is the Admin's username.
 	 */
 	public String getAdminName()
@@ -89,7 +97,7 @@ public class Event {
 	}
 	/**
 	 * method that sets the name of the event.
-	 * 
+	 *
 	 * @param eventName string that represents the name of the event.
 	 */
 	public void setEventName(String eventName)
@@ -98,7 +106,7 @@ public class Event {
 	}
 	/**
 	 * method that gets the event name.
-	 * 
+	 *
 	 * @return A string that is the name of the event.
 	 */
 	public String getEventName()
@@ -107,7 +115,7 @@ public class Event {
 	}
 	/**
 	 * method that sets the month of the event
-	 * 
+	 *
 	 * @param month an integer that represents the month of the event.
 	 */
 	public void setMonth(int month)
@@ -116,7 +124,7 @@ public class Event {
 	}
 	/**
 	 * method that gets the month of the event.
-	 * 
+	 *
 	 * @return an integer illustrating the month of the event.
 	 */
 	public int getMonth()
@@ -125,7 +133,7 @@ public class Event {
 	}
 	/**
 	 * method that sets the day of the event.
-	 * 
+	 *
 	 * @param day an integer that represents the day of the event.
 	 */
 	public void setDay(int day)
@@ -134,7 +142,7 @@ public class Event {
 	}
 	/**
 	 * method that gets the day of the event.
-	 * 
+	 *
 	 * @return an integer representing the day of the event.
 	 */
 	public int getDay()
@@ -143,7 +151,7 @@ public class Event {
 	}
 	/**
 	 * method to set the year of the event.
-	 * 
+	 *
 	 * @param year integer that represents the year of the event.
 	 */
 	public void setYear(int year)
@@ -152,7 +160,7 @@ public class Event {
 	}
 	/**
 	 * method that gets the year of the event.
-	 * 
+	 *
 	 * @return an integer that represents the year of the event.
 	 */
 	public int getYear()
@@ -162,7 +170,7 @@ public class Event {
 
 	/**
 	 * method that adds an attendee to the attendee vector.
-	 * 
+	 *
 	 * @param a the attendee being added to the attendee vector.
 	 */
 	public void addAttendee(Attendee a)
@@ -170,16 +178,16 @@ public class Event {
 		a_attendees.add(a);
 	}
 	/**
-	 * method that exports the event information to a file. 
-	 * 
+	 * method that exports the event information to a file.
+	 *
 	 * @throws IOException on bad input
 	 */
 	public void exportEvent() throws IOException
 	{
-		
+
 		File file = new File("events.txt");
 		file.createNewFile();
-	
+
 		FileWriter prewrite = new FileWriter(file, true);
 		BufferedWriter writer = new BufferedWriter(prewrite);
 
@@ -214,7 +222,7 @@ public class Event {
 	}
 	/**
 	 * method that gets the admin's availability.
-	 * 
+	 *
 	 * @return a vector that stores the admin's availability.
 	 */
 	public Vector getAvailability()
@@ -222,7 +230,16 @@ public class Event {
 		return a_adminAvailability;
 	}
 	/**
-	 * method that looks at the vector of integer for the admin's availability and prints 
+	 * method that gets the admin's tasks.
+	 *
+	 * @return a vector that stores the admin's tasks.
+	 */
+	public Vector getTasks()
+	{
+		return a_adminTaskList;
+	}
+	/**
+	 * method that looks at the vector of integer for the admin's availability and prints
 	 * its corresponding 12 hour time string.
 	 */
 	public void get12HourAvailability() {
@@ -375,7 +392,7 @@ public class Event {
 		}
 	}
 	/**
-	 * method that looks at the vector of integer for the admin's availability and prints 
+	 * method that looks at the vector of integer for the admin's availability and prints
 	 * its corresponding 24 hour time string.
 	 */
 	public void get24HourAvailability() {
