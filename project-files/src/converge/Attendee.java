@@ -4,7 +4,7 @@ import java.util.*;
 /**
  * The Attendee.java file implements the class Attendee that store's the attendee's information
  * needed to join an event.
- * 
+ *
  * @author Vivek Tallavajhala
  * @since 2017-09-14
  */
@@ -19,7 +19,8 @@ public class Attendee {
 	 * each representing a specific 30 minute block of the day.
 	 */
 	Vector<Integer> availability = new Vector<Integer>();
-	
+	Vector<Integer> taskSignup = new Vector<Integer>();
+
 	//Constructor methods
 	/**
 	 * default constructor for the Attendee class.
@@ -27,18 +28,19 @@ public class Attendee {
 	public Attendee() {}
 	/**
 	 * Parameterized constructor that initializes the name and availability of the attendee.
-	 * 
+	 *
 	 * @param name String the represents the attendee's name
 	 * @param input Vector of integers that represents the attendee's availability.
 	 */
-	public Attendee(String name, Vector<Integer> input)
+	public Attendee(String name, Vector<Integer> input0, Vector<Integer> input1)
 	{
 		userName = name;
-		availability = input;
+		availability = input0;
+		taskSignup = input1;
 	}
 	/**
 	 * Method that gets attendee's username.
-	 * 
+	 *
 	 * @return A string representing the attendee's username.
 	 */
 	public String getName()
@@ -47,7 +49,7 @@ public class Attendee {
 	}
 	/**
 	 * Method that get's attendee's availability.
-	 * 
+	 *
 	 * @return A vector of integers representing the attendee's availability.
 	 */
 	public Vector<Integer> getAvailability()
@@ -55,8 +57,17 @@ public class Attendee {
 		return availability;
 	}
 	/**
+	 * Method that get's attendee's task signing.
+	 *
+	 * @return A vector of integers representing the attendee's task signup.
+	 */
+	public Vector<Integer> getTasks()
+	{
+		return taskSignup;
+	}
+	/**
 	 * Sets the attendee's username.
-	 * 
+	 *
 	 * @param name A string containing the attendee's username.
 	 */
 	public void setName(String name)
