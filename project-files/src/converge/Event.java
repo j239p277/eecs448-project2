@@ -176,20 +176,25 @@ public class Event {
 	 */
 	public void exportEvent() throws IOException
 	{
-		//Export file to .event file in /event_log/ directory
-		String filename = "event_log/" + a_eventName.replaceAll("\\s+","") + ".event";
-		FileWriter writer = new FileWriter(filename);
+		
+		File file = new File("events.txt");
+		file.createNewFile();
+	
+		FileWriter prewrite = new FileWriter(file, true);
+		BufferedWriter writer = new BufferedWriter(prewrite);
 
 		//Output name and date accordingly
-		writer.write(a_eventName + "\n");
-		writer.write(a_month + " " + a_day + " " + a_year + "\n");
+		writer.write(a_eventName);
+		writer.newLine();
+		writer.write(a_month + " " + a_day + " " + a_year);
+		writer.newLine();
 
 		//Output the admin availability vector
 		for (int i = 0; i < a_adminAvailability.size(); i++)
 		{
 			writer.write(a_adminAvailability.get(i) + " ");
 		}
-		writer.write("\n");
+		writer.newLine();
 
 		//Iterate through attendees lines
 		for (int i = 0; i < a_attendees.size(); i++)
@@ -200,7 +205,7 @@ public class Event {
 			{
 				writer.write(a_attendees.get(i).getAvailability().get(j) + " ");
 			}
-			writer.write("\n");
+			writer.newLine();
 		}
 
 		//Close FileWriter

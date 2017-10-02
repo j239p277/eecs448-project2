@@ -21,9 +21,10 @@ public class Main {
 
 		while (cont)
 		{
+			clearScreen();
 			incorrectInput = true;
 			while(incorrectInput) {
-				clearPrint("What would you like to do?\n 1. Create an Event\n 2. Join an event\n 3. View an existing event\n 0. Quit\nPlease enter number corresponding to the option you choose.");
+				System.out.println("What would you like to do?\n 1. Create an Event\n 2. Join an event\n 3. View an existing event\n 0. Quit\nPlease enter number corresponding to the option you choose.");
 				try 
 				{
 					if (!myScan.hasNextInt())
@@ -40,7 +41,7 @@ public class Main {
 				}
 				catch (Exception e)
 				{
-					System.out.println("Error\nPlease enter valid option.");
+					clearPrint("Error\nPlease enter valid option.");
 				}
 			}
 			if (c == 0)

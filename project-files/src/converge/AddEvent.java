@@ -22,201 +22,198 @@ public class AddEvent{
 	 */
 	public String twelveHourConversion(int i) 
 	{
-		String conversion = "\0";
-		
-		if(i==0)
+		if(i==0) 
 		{
-			conversion = "12:00AM";
-		}
-		if(i==1)
+			return "12:00AM";
+		} 
+		else if(i==1) 
 		{
-			conversion = "12:30AM";
-		}
-		if(i==2)
+			return "12:30AM";
+		} 
+		else if(i==2) 
 		{
-			conversion = "1:00AM";
-		}
-		if(i==3)
+			return "1:00AM";
+		} 
+		else if(i==3) 
 		{
-			conversion = "1:30AM";
-		}
-		if(i==4)
+			return "1:30AM";
+		} 
+		else if(i==4) 
 		{
-			conversion = "2:00AM";
-		}
-		if(i==5)
+			return "2:00AM";
+		} 
+		else if(i==5) 
 		{
-			conversion = "2:30AM";
-		}
-		if(i==6)
+			return "2:30AM";
+		} 
+		else if(i==6)
 		{
-			conversion = "3:00AM";
+			return "3:00AM";
 		}
-		if(i==7)
+		else if(i==7)
 		{
-			conversion = "3:30AM";
+			return "3:30AM";
 		}
-		if(i==8)
+		else if(i==8)
 		{
-			conversion = "4:00AM";
+			return "4:00AM";
 		}
-		if(i==9)
+		else if(i==9)
 		{
-			conversion = "4:30AM";
+			return "4:30AM";
 		}
-		if(i==10)
+		else if(i==10)
 		{
-			conversion = "5:00AM";
+			return "5:00AM";
 		}
-		if(i==11)
+		else if(i==11)
 		{
-			conversion = "5:30AM";
+			return "5:30AM";
 		}
-		if(i==12)
+		else if(i==12)
 		{
-			conversion = "6:00AM";
+			return "6:00AM";
 		}
-		if(i==13)
+		else if(i==13)
 		{
-			conversion = "6:30AM";
+			return "6:30AM";
 		}
-		if(i==14)
+		else if(i==14)
 		{
-			conversion = "7:00AM";
+			return "7:00AM";
 		}
-		if(i==15)
+		else if(i==15)
 		{
-			conversion = "7:30AM";
+			return "7:30AM";
 		}
-		if(i==16)
+		else if(i==16)
 		{
-			conversion = "8:00AM";
+			return "8:00AM";
 		}
-		if(i==17)
+		else if(i==17)
 		{
-			conversion = "8:30AM";
+			return "8:30AM";
 		}
-		if(i==18)
+		else if(i==18)
 		{
-			conversion = "9:00AM";
+			return "9:00AM";
 		}
-		if(i==19)
+		else if(i==19)
 		{
-			conversion = "9:30AM";
+			return "9:30AM";
 		}
-		if(i==20)
+		else if(i==20)
 		{
-			conversion = "10:00AM";
+			return "10:00AM";
 		}
-		if(i==21)
+		else if(i==21)
 		{
-			conversion = "10:30AM";
+			return "10:30AM";
 		}
-		if(i==22)
+		else if(i==22)
 		{
-			conversion = "11:00AM";
+			return "11:00AM";
 		}
-		if(i==23)
+		else if(i==23)
 		{
-			conversion = "11:30AM";
+			return "11:30AM";
 		}
-		if(i==24)
+		else if(i==24)
 		{
-			conversion = "12:00PM";
+			return "12:00PM";
 		}
-		if(i==25)
+		else if(i==25)
 		{
-			conversion = "12:30PM";
+			return "12:30PM";
 		}
-		if(i==26)
+		else if(i==26)
 		{
-			conversion = "1:00PM";
+			return "1:00PM";
 		}
-		if(i==27)
+		else if(i==27)
 		{
-			conversion = "1:30PM";
+			return "1:30PM";
 		}
-		if(i==28)
+		else if(i==28)
 		{
-			conversion = "2:00PM";
+			return "2:00PM";
 		}
-		if(i==29)
+		else if(i==29)
 		{
-			conversion = "2:30PM";
+			return "2:30PM";
 		}
-		if(i==30)
+		else if(i==30)
 		{
-			conversion = "3:00PM";
+			return "3:00PM";
 		}
-		if(i==31)
+		else if(i==31)
 		{
-			conversion = "3:30PM";
+			return "3:30PM";
 		}
-		if(i==32)
+		else if(i==32)
 		{
-			conversion = "4:00PM";
+			return "4:00PM";
 		}
-		if(i==33)
+		else if(i==33)
 		{
-			conversion = "4:30PM";
+			return "4:30PM";
 		}
-		if(i==34)
+		else if(i==34)
 		{
-			conversion = "5:00PM";
+			return "5:00PM";
 		}
-		if(i==35)
+		else if(i==35)
 		{
-			conversion = "5:30PM";
+			return "5:30PM";
 		}
-		if(i==36)
+		else if(i==36)
 		{
-			conversion = "6:00PM";
+			return "6:00PM";
 		}
-		if(i==37)
+		else if(i==37)
 		{
-			conversion = "6:30PM";
+			return "6:30PM";
 		}
-		if(i==38)
+		else if(i==38)
 		{
-			conversion = "7:00PM";
+			return "7:00PM";
 		}
-		if(i==39)
+		else if(i==39)
 		{
-			conversion = "7:30PM";
+			return "7:30PM";
 		}
-		if(i==40)
+		else if(i==40)
 		{
-			conversion = "8:00PM";
+			return "8:00PM";
 		}
-		if(i==41)
+		else if(i==41)
 		{
-			conversion = "8:30PM";
+			return "8:30PM";
 		}
-		if(i==42)
+		else if(i==42)
 		{
-			conversion = "9:00PM";
+			return "9:00PM";
 		}
-		if(i==43)
+		else if(i==43)
 		{
-			conversion = "9:30PM";
+			return "9:30PM";
 		}
-		if(i==44)
+		else if(i==44)
 		{
-			conversion = "10:00PM";
+			return "10:00PM";
 		}
-		if(i==45)
+		else if(i==45)
 		{
-			conversion = "10:30PM";
+			return "10:30PM";
 		}
-		if(i==46)
+		else if(i==46)
 		{
-			conversion = "11:00PM";
+			return "11:00PM";
 		}
-		if(i==47)
+		else
 		{
-			conversion = "11:30PM";
+			return "11:30PM";
 		}
-		return conversion;
 	}
 	
 	/**
@@ -227,202 +224,199 @@ public class AddEvent{
 	 * @return A string representing the integers corresponding time string.
 	 */
 	public String twentyFourHourConversion(int i) 
-	{
-		String conversion = "\0";
-		
+	{	
 		if(i==0)
 		{
-			conversion = "0:00";
+			return "0:00";
 		}
-		if(i==1)
+		else if(i==1)
 		{
-			conversion = "0:30";
+			return "0:30";
 		}
-		if(i==2)
+		else if(i==2)
 		{
-			conversion = "1:00";
+			return "1:00";
 		}
-		if(i==3)
+		else if(i==3)
 		{
-			conversion = "1:30";
+			return "1:30";
 		}
-		if(i==4)
+		else if(i==4)
 		{
-			conversion = "2:00";
+			return "2:00";
 		}
-		if(i==5)
+		else if(i==5)
 		{
-			conversion = "2:30";
+			return "2:30";
 		}
-		if(i==6)
+		else if(i==6)
 		{
-			conversion = "3:00";
+			return "3:00";
 		}
-		if(i==7)
+		else if(i==7)
 		{
-			conversion = "3:30";
+			return "3:30";
 		}
-		if(i==8)
+		else if(i==8)
 		{
-			conversion = "4:00";
+			return "4:00";
 		}
-		if(i==9)
+		else if(i==9)
 		{
-			conversion = "4:30";
+			return "4:30";
 		}
-		if(i==10)
+		else if(i==10)
 		{
-			conversion = "5:00";
+			return "5:00";
 		}
-		if(i==11)
+		else if(i==11)
 		{
-			conversion = "5:30";
+			return "5:30";
 		}
-		if(i==12)
+		else if(i==12)
 		{
-			conversion = "6:00";
+			return "6:00";
 		}
-		if(i==13)
+		else if(i==13)
 		{
-			conversion = "6:30";
+			return "6:30";
 		}
-		if(i==14)
+		else if(i==14)
 		{
-			conversion = "7:00";
+			return "7:00";
 		}
-		if(i==15)
+		else if(i==15)
 		{
-			conversion = "7:30";
+			return "7:30";
 		}
-		if(i==16)
+		else if(i==16)
 		{
-			conversion = "8:00";
+			return "8:00";
 		}
-		if(i==17)
+		else if(i==17)
 		{
-			conversion = "8:30";
+			return "8:30";
 		}
-		if(i==18)
+		else if(i==18)
 		{
-			conversion = "9:00";
+			return "9:00";
 		}
-		if(i==19)
+		else if(i==19)
 		{
-			conversion = "9:30";
+			return "9:30";
 		}
-		if(i==20)
+		else if(i==20)
 		{
-			conversion = "10:00";
+			return "10:00";
 		}
-		if(i==21)
+		else if(i==21)
 		{
-			conversion = "10:30";
+			return "10:30";
 		}
-		if(i==22)
+		else if(i==22)
 		{
-			conversion = "11:00";
+			return "11:00";
 		}
-		if(i==23)
+		else if(i==23)
 		{
-			conversion = "11:30";
+			return "11:30";
 		}
-		if(i==24)
+		else if(i==24)
 		{
-			conversion = "12:00";
+			return "12:00";
 		}
-		if(i==25)
+		else if(i==25)
 		{
-			conversion = "12:30";
+			return "12:30";
 		}
-		if(i==26)
+		else if(i==26)
 		{
-			conversion = "13:00";
+			return "13:00";
 		}
-		if(i==27)
+		else if(i==27)
 		{
-			conversion = "13:30";
+			return "13:30";
 		}
-		if(i==28)
+		else if(i==28)
 		{
-			conversion = "14:00";
+			return "14:00";
 		}
-		if(i==29)
+		else if(i==29)
 		{
-			conversion = "14:30";
+			return "14:30";
 		}
-		if(i==30)
+		else if(i==30)
 		{
-			conversion = "15:00";
+			return "15:00";
 		}
-		if(i==31)
+		else if(i==31)
 		{
-			conversion = "15:30";
+			return "15:30";
 		}
-		if(i==32)
+		else if(i==32)
 		{
-			conversion = "16:00";
+			return "16:00";
 		}
-		if(i==33)
+		else if(i==33)
 		{
-			conversion = "16:30";
+			return "16:30";
 		}
-		if(i==34)
+		else if(i==34)
 		{
-			conversion = "17:00";
+			return "17:00";
 		}
-		if(i==35)
+		else if(i==35)
 		{
-			conversion = "17:30";
+			return "17:30";
 		}
-		if(i==36)
+		else if(i==36)
 		{
-			conversion = "18:00";
+			return "18:00";
 		}
-		if(i==37)
+		else if(i==37)
 		{
-			conversion = "18:30";
+			return "18:30";
 		}
-		if(i==38)
+		else if(i==38)
 		{
-			conversion = "19:00";
+			return "19:00";
 		}
-		if(i==39)
+		else if(i==39)
 		{
-			conversion = "19:30";
+			return "19:30";
 		}
-		if(i==40)
+		else if(i==40)
 		{
-			conversion = "20:00";
+			return "20:00";
 		}
-		if(i==41)
+		else if(i==41)
 		{
-			conversion = "20:30";
+			return "20:30";
 		}
-		if(i==42)
+		else if(i==42)
 		{
-			conversion = "21:00";
+			return "21:00";
 		}
-		if(i==43)
+		else if(i==43)
 		{
-			conversion = "21:30";
+			return "21:30";
 		}
-		if(i==44)
+		else if(i==44)
 		{
-			conversion = "22:00";
+			return "22:00";
 		}
-		if(i==45)
+		else if(i==45)
 		{
-			conversion = "22:30";
+			return "22:30";
 		}
-		if(i==46)
+		else if(i==46)
 		{
-			conversion = "23:00";
+			return "23:00";
 		}
-		if(i==47)
+		else
 		{
-			conversion = "23:30";
+			return "23:30";
 		}
-		return conversion;
 	}
 	
 	/**
@@ -432,206 +426,203 @@ public class AddEvent{
 	 * @return an integer representing the time string's corresponding integer for the availability vector.
 	 */
 	public static int twelveHourtoInt(String time)
-	{
-		int timeAsInt; //variable that will convert string into the corresponding number
-		
+	{	
 		if(time.equals("12:00AM"))
 		{
-			timeAsInt = 0;
+			return 0;
 		}
 		else if(time.equals( "12:30AM"))
 		{
-			timeAsInt = 1;
+			return 1;
 		}
 		else if(time.equals( "1:00AM"))
 		{
-			timeAsInt = 2;
+			return 2;
 		}
 		else if(time.equals( "1:30AM"))
 		{
-			timeAsInt = 3;
+			return 3;
 		}
 		else if(time.equals( "2:00AM"))
 		{
-			timeAsInt = 4;
+			return 4;
 		}
 		else if(time.equals( "2:30AM"))
 		{
-			timeAsInt = 5;
+			return 5;
 		}
 		else if(time.equals( "3:00AM"))
 		{
-			timeAsInt = 6;
+			return 6;
 		}
 		else if(time.equals( "3:30AM"))
 		{
-			timeAsInt = 7;
+			return 7;
 		}
 		else if(time.equals( "4:00AM"))
 		{
-			timeAsInt = 8;
+			return 8;
 		}
 		else if(time.equals( "4:30AM"))
 		{
-			timeAsInt = 9;
+			return 9;
 		}
 		else if(time.equals( "5:00AM"))
 		{
-			timeAsInt = 10;
+			return 10;
 		}
 		else if(time.equals( "5:30AM"))
 		{
-			timeAsInt = 11;
+			return 11;
 		}
 		else if(time.equals( "6:00AM"))
 		{
-			timeAsInt = 12;
+			return 12;
 		}
 		else if(time.equals( "6:30AM"))
 		{
-			timeAsInt = 13;
+			return 13;
 		}
 		else if(time.equals( "7:00AM"))
 		{
-			timeAsInt = 14;
+			return 14;
 		}
 		else if(time.equals( "7:30AM"))
 		{
-			timeAsInt = 15;
+			return 15;
 		}
 		else if(time.equals( "8:00AM"))
 		{
-			timeAsInt = 16;
+			return 16;
 		}
 		else if(time.equals( "8:30AM"))
 		{
-			timeAsInt = 17;
+			return 17;
 		}
 		else if(time.equals( "9:00AM"))
 		{
-			timeAsInt = 18;
+			return 18;
 		}
 		else if(time.equals( "9:30AM"))
 		{
-			timeAsInt = 19;
+			return 19;
 		}
 		else if(time.equals( "10:00AM"))
 		{
-			timeAsInt = 20;
+			return 20;
 		}
 		else if(time.equals( "10:30AM"))
 		{
-			timeAsInt = 21;
+			return 21;
 		}
 		else if(time.equals( "11:00AM"))
 		{
-			timeAsInt = 22;
+			return 22;
 		}
 		else if(time.equals( "11:30AM"))
 		{
-			timeAsInt = 23;
+			return 23;
 		}
 		else if(time.equals( "12:00PM"))
 		{
-			timeAsInt = 24;
+			return 24;
 		}
 		else if(time.equals( "12:30PM"))
 		{
-			timeAsInt = 25;
+			return 25;
 		}
 		else if(time.equals( "1:00PM"))
 		{
-			timeAsInt = 26;
+			return 26;
 		}
 		else if(time.equals( "1:30PM"))
 		{
-			timeAsInt = 27;
+			return 27;
 		}
 		else if(time.equals( "2:00PM"))
 		{
-			timeAsInt = 28;
+			return 28;
 		}
 		else if(time.equals( "2:30PM"))
 		{
-			timeAsInt = 29;
+			return 29;
 		}
 		else if(time.equals( "3:00PM"))
 		{
-			timeAsInt = 30;
+			return 30;
 		}
 		else if(time.equals( "3:30PM"))
 		{
-			timeAsInt = 31;
+			return 31;
 		}
 		else if(time.equals( "4:00PM"))
 		{
-			timeAsInt = 32;
+			return 32;
 		}
 		else if(time.equals( "4:30PM"))
 		{
-			timeAsInt = 33;
+			return 33;
 		}
 		else if(time.equals( "5:00PM"))
 		{
-			timeAsInt = 34;
+			return 34;
 		}
 		else if(time.equals( "5:30PM"))
 		{
-			timeAsInt = 35;
+			return 35;
 		}
 		else if(time.equals( "6:00PM"))
 		{
-			timeAsInt = 36;
+			return 36;
 		}
 		else if(time.equals( "6:30PM"))
 		{
-			timeAsInt = 37;
+			return 37;
 		}
 		else if(time.equals( "7:00PM"))
 		{
-			timeAsInt = 38;
+			return 38;
 		}
 		else if(time.equals( "7:30PM"))
 		{
-			timeAsInt = 39;
+			return 39;
 		}
 		else if(time.equals( "8:00PM"))
 		{
-			timeAsInt = 40;
+			return 40;
 		}
 		else if(time.equals( "8:30PM"))
 		{
-			timeAsInt = 41;
+			return 41;
 		}
 		else if(time.equals( "9:00PM"))
 		{
-			timeAsInt = 42;
+			return 42;
 		}
 		else if(time.equals( "9:30PM"))
 		{
-			timeAsInt = 43;
+			return 43;
 		}
 		else if(time.equals( "10:00PM"))
 		{
-			timeAsInt = 44;
+			return 44;
 		}
 		else if(time.equals( "10:30PM"))
 		{
-			timeAsInt = 45;
+			return 45;
 		}
 		else if(time.equals( "11:00PM"))
 		{
-			timeAsInt = 46;
+			return 46;
 		}
 		else if(time.equals( "11:30PM"))
 		{
-			timeAsInt = 47;
+			return 47;
 		}
 		else
 		{
-			timeAsInt = 50; //random value that for all other cases that will throw an error if the time isn't one of the above.
+			return 50; //random value that for all other cases that will throw an error else if the time isn't one of the above.
 		}
-		return timeAsInt;
 	}
 	
 	/**
@@ -642,205 +633,202 @@ public class AddEvent{
 	 */
 	public static int twentyFourHourtoInt(String time)
 	{
-		int timeAsInt; //variable that will convert string into the corresponding number
-		
 		if(time.equals( "0:00"))
 		{
-			timeAsInt = 0;
+			return 0;
 		}
 		else if(time.equals( "0:30"))
 		{
-			timeAsInt = 1;
+			return 1;
 		}
 		else if(time.equals( "1:00"))
 		{
-			timeAsInt = 2;
+			return 2;
 		}
 		else if(time.equals( "1:30"))
 		{
-			timeAsInt = 3;
+			return 3;
 		}
 		else if(time.equals( "2:00"))
 		{
-			timeAsInt = 4;
+			return 4;
 		}
 		else if(time.equals( "2:30"))
 		{
-			timeAsInt = 5;
+			return 5;
 		}
 		else if(time.equals( "3:00"))
 		{
-			timeAsInt = 6;
+			return 6;
 		}
 		else if(time.equals( "3:30"))
 		{
-			timeAsInt = 7;
+			return 7;
 		}
 		else if(time.equals( "4:00"))
 		{
-			timeAsInt = 8;
+			return 8;
 		}
 		else if(time.equals( "4:30"))
 		{
-			timeAsInt = 9;
+			return 9;
 		}
 		else if(time.equals( "5:00"))
 		{
-			timeAsInt = 10;
+			return 10;
 		}
 		else if(time.equals( "5:30"))
 		{
-			timeAsInt = 11;
+			return 11;
 		}
 		else if(time.equals( "6:00"))
 		{
-			timeAsInt = 12;
+			return 12;
 		}
 		else if(time.equals( "6:30"))
 		{
-			timeAsInt = 13;
+			return 13;
 		}
 		else if(time.equals( "7:00"))
 		{
-			timeAsInt = 14;
+			return 14;
 		}
 		else if(time.equals( "7:30"))
 		{
-			timeAsInt = 15;
+			return 15;
 		}
 		else if(time.equals( "8:00"))
 		{
-			timeAsInt = 16;
+			return 16;
 		}
 		else if(time.equals( "8:30"))
 		{
-			timeAsInt = 17;
+			return 17;
 		}
 		else if(time.equals( "9:00"))
 		{
-			timeAsInt = 18;
+			return 18;
 		}
 		else if(time.equals( "9:30"))
 		{
-			timeAsInt = 19;
+			return 19;
 		}
 		else if(time.equals( "10:00"))
 		{
-			timeAsInt = 20;
+			return 20;
 		}
 		else if(time.equals( "10:30"))
 		{
-			timeAsInt = 21;
+			return 21;
 		}
 		else if(time.equals( "11:00"))
 		{
-			timeAsInt = 22;
+			return 22;
 		}
 		else if(time.equals( "11:30"))
 		{
-			timeAsInt = 23;
+			return 23;
 		}
 		else if(time.equals( "12:00"))
 		{
-			timeAsInt = 24;
+			return 24;
 		}
 		else if(time.equals( "12:30"))
 		{
-			timeAsInt = 25;
+			return 25;
 		}
 		else if(time.equals( "13:00"))
 		{
-			timeAsInt = 26;
+			return 26;
 		}
 		else if(time.equals( "13:30"))
 		{
-			timeAsInt = 27;
+			return 27;
 		}
 		else if(time.equals( "14:00"))
 		{
-			timeAsInt = 28;
+			return 28;
 		}
 		else if(time.equals( "14:30"))
 		{
-			timeAsInt = 29;
+			return 29;
 		}
 		else if(time.equals( "15:00"))
 		{
-			timeAsInt = 30;
+			return 30;
 		}
 		else if(time.equals( "15:30"))
 		{
-			timeAsInt = 31;
+			return 31;
 		}
 		else if(time.equals( "16:00"))
 		{
-			timeAsInt = 32;
+			return 32;
 		}
 		else if(time.equals( "16:30"))
 		{
-			timeAsInt = 33;
+			return 33;
 		}
 		else if(time.equals( "17:00"))
 		{
-			timeAsInt = 34;
+			return 34;
 		}
 		else if(time.equals( "17:30"))
 		{
-			timeAsInt = 35;
+			return 35;
 		}
 		else if(time.equals( "18:00"))
 		{
-			timeAsInt = 36;
+			return 36;
 		}
 		else if(time.equals( "18:30"))
 		{
-			timeAsInt = 37;
+			return 37;
 		}
 		else if(time.equals( "19:00"))
 		{
-			timeAsInt = 38;
+			return 38;
 		}
 		else if(time.equals( "19:30"))
 		{
-			timeAsInt = 39;
+			return 39;
 		}
 		else if(time.equals( "20:00"))
 		{
-			timeAsInt = 40;
+			return 40;
 		}
 		else if(time.equals( "20:30"))
 		{
-			timeAsInt = 41;
+			return 41;
 		}
 		else if(time.equals( "21:00"))
 		{
-			timeAsInt = 42;
+			return 42;
 		}
 		else if(time.equals( "21:30"))
 		{
-			timeAsInt = 43;
+			return 43;
 		}
 		else if(time.equals( "22:00"))
 		{
-			timeAsInt = 44;
+			return 44;
 		}
 		else if(time.equals("22:30"))
 		{
-			timeAsInt = 45;
+			return 45;
 		}
 		else if(time.equals("23:00"))
 		{
-			timeAsInt = 46;
+			return 46;
 		}
 		else if(time.equals("23:30"))
 		{
-			timeAsInt = 47;
+			return 47;
 		}
 		else
 		{
-			timeAsInt = 50; //random value that for all other cases that will throw an error if the time isn't one of the above.
+			return 50; //random value that for all other cases that will throw an error else if the time isn't one of the above.
 		}
-		return timeAsInt;
 	}
 	
 	/** 
@@ -952,7 +940,7 @@ public class AddEvent{
 			{
 				clearPrint("Input your starting availability. Format: 1:00PM");
 				startAvailability = userInput.next();
-				//checks to see if the time the user input is valid
+				//checks to see else if the time the user input is valid
 				while(twelveHourtoInt(startAvailability) == 50) 
 				{
 					clearPrint("Error\nThe time inputted is invalid.\nInput your starting availability. Format: 1:00PM");
@@ -962,10 +950,10 @@ public class AddEvent{
 				clearPrint("Input your ending availability. Format: 1:00PM");
 				endAvailability = userInput.next();
 				
-				//checks to see if the time the user input was valid
+				//checks to see else if the time the user input was valid
 				while((twelveHourtoInt(endAvailability) == 50) || (twelveHourtoInt(endAvailability) < twelveHourtoInt(startAvailability))) 
 				{
-					//checks if the String the user input isn't valid
+					//checks else if the String the user input isn't valid
 					clearPrint("Error\nThe time inputted is invalid.\nInput your ending availability. Format: 1:00PM");
 					endAvailability = userInput.next();
 				}
@@ -982,14 +970,14 @@ public class AddEvent{
 				
 			} while (cont.charAt(0) == 'y' || cont.charAt(0) == 'Y');
 		}
-		else if (choice == 24)
+		if (choice == 24)
 		{
 			String cont;
 			do
 			{
 				clearPrint("Input your starting availability. Format: 13:00");
 				startAvailability = userInput.next();
-				//checks to see if the time the user input is valid
+				//checks to see else if the time the user input is valid
 				while(twentyFourHourtoInt(startAvailability) == 50) 
 				{
 					clearPrint("Error\nThe time inputted is invalid.\nInput your starting availability. Format: 13:00");
@@ -999,10 +987,10 @@ public class AddEvent{
 				clearPrint("Input your ending availability. Format: 13:00");
 				endAvailability = userInput.next();
 				
-				//checks to see if the time the user input was valid
+				//checks to see else if the time the user input was valid
 				while((twentyFourHourtoInt(endAvailability) == 50) || (twentyFourHourtoInt(endAvailability) < twentyFourHourtoInt(startAvailability))) 
 				{
-					//checks if the String the user input isn't valid
+					//checks else if the String the user input isn't valid
 					clearPrint("Error\nThe time inputted is invalid.\nInput your ending availability. Format: 13:00");
 					endAvailability = userInput.next();
 				}
