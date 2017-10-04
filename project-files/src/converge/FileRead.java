@@ -15,7 +15,11 @@ public class FileRead
 	 * default constructor for the FileRead class.
 	 */
 	public FileRead() {}
-	
+	//Declare input stream
+	FileReader in = null;
+	BufferedReader bufferedReader = null;
+	String line = null;
+	List<String> records = new ArrayList<String>();
 	/**
 	 * Method reads and processes the event files stored in local "event_log" directory
 	 * to output a vector of event objects representing the existing events.
@@ -28,40 +32,30 @@ public class FileRead
 		//Declare List of events
 		Vector<Event> events = new Vector<Event>();
 		
-		//Declare input stream
-		FileReader in = null;
-		BufferedReader bufferedReader = null;
-		try 
-        {
+
+		try {
 			in = new FileReader("events.txt");
 			bufferedReader = new BufferedReader(in);
 		}
         catch (FileNotFoundException e) 
         {
+        		System.err.println("Error reading events. Stack trace: ");
 			e.printStackTrace();
 		}
-		finally {
-
-			try {
-
-				if (bufferedReader != null)
-					bufferedReader.close();
-
-				if (in != null)
-					in.close();
-
-			} catch (IOException ex) {
-
-				ex.printStackTrace();
-
-			}
-		}
+//		finally {
+//			try {
+//				if (bufferedReader != null) {
+//					bufferedReader.close();
+//				}
+//				if (in != null) {
+//					in.close();
+//				}
+//			} catch (IOException ex) {
+//				ex.printStackTrace();
+//			}
+//		}
 
 		//Iterate through files
-		bufferedReader = new BufferedReader(in);
-		String line = null;
-		List<String> records = new ArrayList<String>();
-
 		//Adds every line to 'record' list
 		while ((line = bufferedReader.readLine()) != null)
 		{
