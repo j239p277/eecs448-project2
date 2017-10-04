@@ -14,6 +14,384 @@ import java.util.Date;
  */
 public class AddEvent{
 	/**
+	 * integer used to track the user's choice input.
+	 */
+	int choice;
+
+	/**
+	 * integer used to track the current year.
+	 */
+	int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+
+	/**
+	 * integer used to track the current month.
+	 */
+	int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
+
+	/**
+	 * integer used to track the current day.
+	 */
+	int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+
+	/**
+	 * string used to store the starting availability of the admin.
+	 */
+	String startAvailability;
+
+	/**
+	 * string used to store the ending availability of the admin.
+	 */
+	String endAvailability;
+
+	/**
+	 * vector that hold integers 0-47 that each represent time availability in 30
+	 * minute periods throughout the day.
+	 */
+	Vector<Integer> timeVec = new Vector<Integer>() ;
+	{
+	for (int i = 0; i < 48; i++)
+		{
+			timeVec.addElement(i);
+		}
+	}
+
+	/**
+	 * attendee object created for the admin.
+	 */
+	Attendee admin = new Attendee();
+
+	/**
+	 * Event object initialized to later store all admin event information.
+	 */
+	Event adminEvent = new Event();
+
+	/**
+	 * Scanner object initialized to handle user interaction.
+	 */
+	Scanner userInput = new Scanner(System.in);
+	
+	Vector<Vector<String>> datesAndTimes = new Vector();
+
+	/**
+	 * Method runs the user interaction allowing the admin to create an event.
+	 * @throws IOException On invalid user input
+	 */
+	public void start() throws IOException
+	{
+		clearPrint("Enter event name:");
+		String eventName = userInput.nextLine(); //get event name
+		while(eventName.length() == 0) {
+			clearPrint("Error! Event name cannot be blank\nEnter event name:");
+			eventName = userInput.nextLine();
+		}
+
+		clearPrint("Enter host name:");
+		String hostName = userInput.nextLine(); //get host name
+		while(hostName.length() == 0) {
+			clearPrint("Error! Host name cannot be blank\nEnter host name:");
+			hostName = userInput.nextLine();
+		}
+
+		getDatesAndTimes();
+		
+		System.out.println(datesAndTimes);
+		//now the variable "days" holds number of days for this event
+		
+		//Vector<String> tasks = getTasks();
+		
+		
+		//NOW WRITE TO FILE
+	}
+
+	/**
+	 * This method is used to clearly print a string for better looking output.
+	 *
+	 * @param text The string that will get clearly printed.
+	 * @throws IOException On input error.
+	 */
+	private void clearPrint(String text)
+	{
+		clearScreen();
+		System.out.println(text);
+	}
+
+	/**
+	 * This method clears the output of whatever has been previously displayed.
+	 */
+	private void clearScreen()
+	{
+		for (int i = 0; i < 100; i++)
+		{
+			System.out.println("\n");
+		}
+	}
+	
+	Vector<String> tempDay; //vector that stores all times for a specific day
+
+	int days;
+	
+	boolean subsequentDate;
+	
+	/**
+	 * This method requests the Admin's event date and stores it in an integer array.
+	 *
+	 * @return an integer array that stores the date in the format mm/dd/yyyy.
+	 */
+	private void getDatesAndTimes()
+	{
+		boolean moreDates = true; //boolean that checks if user wants to add more dates
+		days = 0; //number of days the event takes place
+		String addAnotherDay;
+		subsequentDate = false;
+
+		while(moreDates) {
+			clearPrint("Enter event date (mm/dd/yyyy)");
+			String tempDate = userInput.nextLine();
+
+			while(!checkDate(tempDate)) {
+				clearPrint("Error! Invalid date.\nEnter event date(mm/dd/yyyy)");
+				tempDate = userInput.nextLine();
+			}
+				
+			int monthInt = Integer.parseInt(tempDate.substring(0,2));
+			int dayInt = Integer.parseInt(tempDate.substring(3,5));
+			int yearInt = Integer.parseInt(tempDate.substring(6,10));
+
+			while((yearInt < currentYear) || (yearInt == currentYear && monthInt < currentMonth + 1) || (yearInt == currentYear && monthInt == currentMonth + 1 && dayInt < currentDay)) {
+				clearPrint("Error! Cannot create an event in the past.\nEnter event date(mm/dd/yyyy)");
+				tempDate = userInput.nextLine();
+				
+				while(!checkDate(tempDate)) {
+					clearPrint("Error! Invalid date.\nEnter event date(mm/dd/yyyy)");
+					tempDate = userInput.nextLine();
+				}
+				
+				monthInt = Integer.parseInt(tempDate.substring(0,2));
+				dayInt = Integer.parseInt(tempDate.substring(3,5));
+				yearInt = Integer.parseInt(tempDate.substring(6,10));
+			}
+			
+			tempDay = new Vector();
+			getTimes(tempDate);
+			datesAndTimes.addElement(tempDay);
+			days++;
+			
+			clearPrint("Would you like to add another day? Enter: 'y' or 'n' (Without quotes)");
+			addAnotherDay = userInput.nextLine();
+			
+			while(!(addAnotherDay.charAt(0) == 'y' || addAnotherDay.charAt(0) == 'n')) {
+				clearPrint("Error! Invalid input\nWould you like to add another day? Enter: 'y' or 'n' (Without quotes)");
+				addAnotherDay = userInput.nextLine();
+			}
+			
+			if(addAnotherDay.charAt(0) == 'n') {
+				moreDates = false;
+			} else {
+				subsequentDate = true;
+			}
+		}
+	}
+	/**
+	 * This method checks if a given date is real
+	 * @return true if given date is an authentic date, false if not
+	 */
+
+	private boolean checkDate(String input) {
+			if(input.length() != 10) { //given date is not correct length
+					return false;
+			} else if(input.charAt(2) != '/' || input.charAt(5) != '/') { //given date is not formatted correctly
+					return false;
+			} else {
+					String month = input.substring(0,2);
+					String day = input.substring(3,5);
+					String year = input.substring(6,10);
+
+					int monthInt;
+					int dayInt;
+					int yearInt;
+
+					try {
+						monthInt = Integer.parseInt(month); //if they enter anything but numbers, return false
+						dayInt = Integer.parseInt(day);
+						yearInt = Integer.parseInt(year);
+					} catch (Exception e) {
+						return false;
+					}
+
+					if(monthInt < 1 || monthInt > 12) { //valid month check
+						return false;
+					}
+
+					if(dayInt < 1) {
+						return false;
+					}
+
+
+					if(monthInt == 1 || monthInt == 3 || monthInt == 5 || monthInt == 7 || monthInt == 8 || monthInt == 10 || monthInt == 12) {
+					 	if(dayInt > 31) {
+							return false;
+					 	}
+					} else if(monthInt == 2) {
+						return checkLeapYear(yearInt, dayInt);
+					} else {
+						if(dayInt > 30) {
+							return false;
+						}
+					}
+
+					return true;
+
+			}
+	}
+
+	/**
+	 * This method checks if given date is a valid leap year
+	 * @return true if date is valid, false if not
+	 */
+	private boolean checkLeapYear(int year, int day) {
+	 	if(day < 1) {
+			return false;
+		} else {
+			if(year % 4 == 0) {
+					if(year % 100 == 0) {
+							if(year % 400 == 0) {
+								return day <= 29;
+							}
+							return day <= 28;
+					}
+					return day <= 29;
+			}
+			return day <= 28;
+		}
+	}
+	
+	/**
+	 * This method takes in a day and prompts user to input times for that day
+	 * @return Vector<String> containing times
+	 */
+	private void getTimes(String day) {
+		boolean moreTimes = true; //boolean that checks if user wants to add more times to a certain date
+		boolean validInput = false;
+		String modeInput = "";
+		String copyTimesInput = "";
+		
+		if(subsequentDate) {
+			clearPrint("Would you like to copy times from original date? Enter: 'y' or 'n' (Without quotes)");
+			copyTimesInput = userInput.nextLine();
+			
+			while(copyTimesInput.charAt(0) != 'y' && copyTimesInput.charAt(0) != 'n') {
+				clearPrint("Error! Invalid input\nWould you like to copy times from original date? Enter: 'y' or 'n' (Without quotes)");
+				copyTimesInput = userInput.nextLine();
+			}
+			
+			if(copyTimesInput.charAt(0) == 'y') {
+				int numberOfTimes = datesAndTimes.elementAt(0).size() - 1;
+				
+				tempDay.addElement(day);
+				
+				for(int i = 1; i <= numberOfTimes; i++) {
+					tempDay.addElement(datesAndTimes.elementAt(0).elementAt(i));
+				}
+				
+			} else {
+				subsequentDate = false;
+				getTimes(day);
+			}
+		} else {
+		
+		clearPrint("Would you like to use 12 hour mode or 24 hour mode? (12/24)");
+		
+		modeInput = userInput.nextLine();
+		
+		while(!validInput) {
+			try {
+				if(Integer.parseInt(modeInput) != 12 && Integer.parseInt(modeInput) != 24) {
+					throw new Exception();
+				} else {
+					validInput = true;
+				}
+				
+			} catch (Exception e) {
+				clearPrint("Error! Invalid input\nWould you like to use 12 hour mode or 24 hour mode? (12/24)");
+				modeInput = userInput.nextLine();
+			}
+		}
+		
+		String addAnotherTime;
+		
+		do {
+			if(Integer.parseInt(modeInput) == 12) {
+				clearPrint("Enter your starting availability. Format: 3:00AM or 3:00PM");
+				startAvailability = userInput.nextLine();
+				
+				while(twelveHourtoInt(startAvailability) == 50) {
+					clearPrint("Error! Invalid input\nEnter your starting availability. Format: 3:00AM or 3:00PM");
+					startAvailability = userInput.nextLine();
+				}
+				
+				clearPrint("Enter your ending availability. Format: 3:00AM or 3:00PM");
+				endAvailability = userInput.nextLine();
+				
+				while(twelveHourtoInt(endAvailability) == 50 || twelveHourtoInt(endAvailability) < twelveHourtoInt(startAvailability)) {
+					clearPrint("Error! The input time is invalid\nEnter your ending availability. Format: 3:00AM or 3:00PM");
+					endAvailability = userInput.nextLine();
+				}
+				
+				tempDay.addElement(day);
+				
+				for(int i = twelveHourtoInt(startAvailability); i <= twelveHourtoInt(endAvailability); i++) {
+					tempDay.addElement(Integer.toString(i));
+				}
+			} else {
+				clearPrint("Enter your starting availability. Format: 3:00 or 15:00");
+				startAvailability = userInput.nextLine();
+				
+				while(twentyFourHourtoInt(startAvailability) == 50) {
+					clearPrint("Error! Invalid input\nEnter your starting availability. Format: 3:00 or 15:00");
+					startAvailability = userInput.nextLine();
+				}
+				
+				clearPrint("Enter your ending availability. Format: 3:00 or 15:00");
+				endAvailability = userInput.nextLine();
+				
+				while(twentyFourHourtoInt(endAvailability) == 50 || twentyFourHourtoInt(endAvailability) < twentyFourHourtoInt(startAvailability)) {
+					clearPrint("Error! The input time is invalid\nEnter your ending availability. Format: 3:00 or 15:00");
+					endAvailability = userInput.nextLine();
+				}
+				
+				tempDay.addElement(day);
+				
+				for(int i = twentyFourHourtoInt(startAvailability); i <= twentyFourHourtoInt(endAvailability); i++) {
+					tempDay.addElement(Integer.toString(i));
+				}
+			}
+			
+			clearPrint("Would you like to add another slot of availability? Enter: 'y' or 'n' (Without quotes)");
+			addAnotherTime = userInput.nextLine();
+			
+			while(addAnotherTime.charAt(0) != 'y' && addAnotherTime.charAt(0) != 'n') {
+				clearPrint("Error! Invalid input\nWould you like to add another slot of availability? Enter: 'y' or 'n' (Without quotes)");
+				addAnotherTime = userInput.nextLine();
+			}
+			
+		} while(addAnotherTime.charAt(0) == 'y');}
+	}
+	
+	int numberOfTasks;
+	
+	/**
+	 * This method prompts user to input tasks their event requires
+	 * @return string vector containing tasks
+	 */
+	
+	/*private Vector<String> getTasks() {
+		boolean moreTasks = true;
+		numberOfTasks = 0;
+		while(moreTasks) {
+			
+		}
+	}*/
+	/**
 	 * This is a method that will take in ints placed in the availability vectors
 	 * and will convert it into its corresponding time string for 12 hour mode.
 	 *
@@ -830,383 +1208,4 @@ public class AddEvent{
 			return 50; //random value that for all other cases that will throw an error else if the time isn't one of the above.
 		}
 	}
-
-	/**
-	 * integer used to track the user's choice input.
-	 */
-	int choice;
-
-	/**
-	 * integer used to track the current year.
-	 */
-	int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-
-	/**
-	 * integer used to track the current month.
-	 */
-	int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
-
-	/**
-	 * integer used to track the current day.
-	 */
-	int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-
-	/**
-	 * string used to store the starting availability of the admin.
-	 */
-	String startAvailability;
-
-	/**
-	 * string used to store the ending availability of the admin.
-	 */
-	String endAvailability;
-
-	/**
-	 * vector that hold integers 0-47 that each represent time availability in 30
-	 * minute periods throughout the day.
-	 */
-	Vector<Integer> timeVec = new Vector<Integer>() ;
-	{
-	for (int i = 0; i < 48; i++)
-		{
-			timeVec.addElement(i);
-		}
-	}
-
-	/**
-	 * attendee object created for the admin.
-	 */
-	Attendee admin = new Attendee();
-
-	/**
-	 * Event object initialized to later store all admin event information.
-	 */
-	Event adminEvent = new Event();
-
-	/**
-	 * Scanner object initialized to handle user interaction.
-	 */
-	Scanner userInput = new Scanner(System.in);
-	
-	Vector<Vector<String>> datesAndTimes = new Vector();
-
-	/**
-	 * Method runs the user interaction allowing the admin to create an event.
-	 * @throws IOException On invalid user input
-	 */
-	public void start() throws IOException
-	{
-		clearPrint("Enter event name:");
-		String eventName = userInput.nextLine(); //get event name
-		while(eventName.length() == 0) {
-			clearPrint("Error! Event name cannot be blank\nEnter event name:");
-			eventName = userInput.nextLine();
-		}
-
-		clearPrint("Enter host name:");
-		String hostName = userInput.nextLine(); //get host name
-		while(hostName.length() == 0) {
-			clearPrint("Error! Host name cannot be blank\nEnter host name:");
-			hostName = userInput.nextLine();
-		}
-
-		getDatesAndTimes();
-		
-		System.out.println(datesAndTimes);
-		//now the variable "days" holds number of days for this event
-		
-		//Vector<String> tasks = getTasks();
-		
-		
-		//NOW WRITE TO FILE
-	}
-
-	/**
-	 * This method is used to clearly print a string for better looking output.
-	 *
-	 * @param text The string that will get clearly printed.
-	 * @throws IOException On input error.
-	 */
-	private void clearPrint(String text)
-	{
-		clearScreen();
-		System.out.println(text);
-	}
-
-	/**
-	 * This method clears the output of whatever has been previously displayed.
-	 */
-	private void clearScreen()
-	{
-		for (int i = 0; i < 100; i++)
-		{
-			System.out.println("\n");
-		}
-	}
-	
-	Vector<String> tempDay; //vector that stores all times for a specific day
-
-	int days;
-	
-	boolean subsequentDate;
-	
-	/**
-	 * This method requests the Admin's event date and stores it in an integer array.
-	 *
-	 * @return an integer array that stores the date in the format mm/dd/yyyy.
-	 */
-	private void getDatesAndTimes()
-	{
-		boolean moreDates = true; //boolean that checks if user wants to add more dates
-		days = 0; //number of days the event takes place
-		String addAnotherDay;
-		subsequentDate = false;
-
-		while(moreDates) {
-			clearPrint("Enter event date (mm/dd/yyyy)");
-			String tempDate = userInput.nextLine();
-
-			while(!checkDate(tempDate)) {
-				clearPrint("Error! Invalid date.\nEnter event date(mm/dd/yyyy)");
-				tempDate = userInput.nextLine();
-			}
-				
-			int monthInt = Integer.parseInt(tempDate.substring(0,2));
-			int dayInt = Integer.parseInt(tempDate.substring(3,5));
-			int yearInt = Integer.parseInt(tempDate.substring(6,10));
-
-			while((yearInt < currentYear) || (yearInt == currentYear && monthInt < currentMonth + 1) || (yearInt == currentYear && monthInt == currentMonth + 1 && dayInt < currentDay)) {
-				clearPrint("Error! Cannot create an event in the past.\nEnter event date(mm/dd/yyyy)");
-				tempDate = userInput.nextLine();
-				
-				while(!checkDate(tempDate)) {
-					clearPrint("Error! Invalid date.\nEnter event date(mm/dd/yyyy)");
-					tempDate = userInput.nextLine();
-				}
-				
-				monthInt = Integer.parseInt(tempDate.substring(0,2));
-				dayInt = Integer.parseInt(tempDate.substring(3,5));
-				yearInt = Integer.parseInt(tempDate.substring(6,10));
-			}
-			
-			tempDay = new Vector();
-			getTimes(tempDate);
-			datesAndTimes.addElement(tempDay);
-			days++;
-			
-			clearPrint("Would you like to add another day? Enter: 'y' or 'n' (Without quotes)");
-			addAnotherDay = userInput.nextLine();
-			
-			while(!(addAnotherDay.charAt(0) == 'y' || addAnotherDay.charAt(0) == 'n')) {
-				clearPrint("Error! Invalid input\nWould you like to add another day? Enter: 'y' or 'n' (Without quotes)");
-				addAnotherDay = userInput.nextLine();
-			}
-			
-			if(addAnotherDay.charAt(0) == 'n') {
-				moreDates = false;
-			} else {
-				subsequentDate = true;
-			}
-		}
-	}
-	/**
-	 * This method checks if a given date is real
-	 * @return true if given date is an authentic date, false if not
-	 */
-
-	private boolean checkDate(String input) {
-			if(input.length() != 10) { //given date is not correct length
-					return false;
-			} else if(input.charAt(2) != '/' || input.charAt(5) != '/') { //given date is not formatted correctly
-					return false;
-			} else {
-					String month = input.substring(0,2);
-					String day = input.substring(3,5);
-					String year = input.substring(6,10);
-
-					int monthInt;
-					int dayInt;
-					int yearInt;
-
-					try {
-						monthInt = Integer.parseInt(month); //if they enter anything but numbers, return false
-						dayInt = Integer.parseInt(day);
-						yearInt = Integer.parseInt(year);
-					} catch (Exception e) {
-						return false;
-					}
-
-					if(monthInt < 1 || monthInt > 12) { //valid month check
-						return false;
-					}
-
-					if(dayInt < 1) {
-						return false;
-					}
-
-
-					if(monthInt == 1 || monthInt == 3 || monthInt == 5 || monthInt == 7 || monthInt == 8 || monthInt == 10 || monthInt == 12) {
-					 	if(dayInt > 31) {
-							return false;
-					 	}
-					} else if(monthInt == 2) {
-						return checkLeapYear(yearInt, dayInt);
-					} else {
-						if(dayInt > 30) {
-							return false;
-						}
-					}
-
-					return true;
-
-			}
-	}
-
-	/**
-	 * This method checks if given date is a valid leap year
-	 * @return true if date is valid, false if not
-	 */
-	private boolean checkLeapYear(int year, int day) {
-	 	if(day < 1) {
-			return false;
-		} else {
-			if(year % 4 == 0) {
-					if(year % 100 == 0) {
-							if(year % 400 == 0) {
-								return day <= 29;
-							}
-							return day <= 28;
-					}
-					return day <= 29;
-			}
-			return day <= 28;
-		}
-	}
-	
-	/**
-	 * This method takes in a day and prompts user to input times for that day
-	 * @return Vector<String> containing times
-	 */
-	private void getTimes(String day) {
-		boolean moreTimes = true; //boolean that checks if user wants to add more times to a certain date
-		boolean validInput = false;
-		String modeInput = "";
-		String copyTimesInput = "";
-		
-		if(subsequentDate) {
-			clearPrint("Would you like to copy times from original date? Enter: 'y' or 'n' (Without quotes)");
-			copyTimesInput = userInput.nextLine();
-			
-			while(copyTimesInput.charAt(0) != 'y' && copyTimesInput.charAt(0) != 'n') {
-				clearPrint("Error! Invalid input\nWould you like to copy times from original date? Enter: 'y' or 'n' (Without quotes)");
-				copyTimesInput = userInput.nextLine();
-			}
-			
-			if(copyTimesInput.charAt(0) == 'y') {
-				int numberOfTimes = datesAndTimes.elementAt(0).size() - 1;
-				
-				tempDay.addElement(day);
-				
-				for(int i = 1; i <= numberOfTimes; i++) {
-					tempDay.addElement(datesAndTimes.elementAt(0).elementAt(i));
-				}
-				
-			} else {
-				subsequentDate = false;
-				getTimes(day);
-			}
-		} else {
-		
-		clearPrint("Would you like to use 12 hour mode or 24 hour mode? (12/24)");
-		
-		modeInput = userInput.nextLine();
-		
-		while(!validInput) {
-			try {
-				if(Integer.parseInt(modeInput) != 12 && Integer.parseInt(modeInput) != 24) {
-					throw new Exception();
-				} else {
-					validInput = true;
-				}
-				
-			} catch (Exception e) {
-				clearPrint("Error! Invalid input\nWould you like to use 12 hour mode or 24 hour mode? (12/24)");
-				modeInput = userInput.nextLine();
-			}
-		}
-		
-		String addAnotherTime;
-		
-		do {
-			if(Integer.parseInt(modeInput) == 12) {
-				clearPrint("Enter your starting availability. Format: 3:00AM or 3:00PM");
-				startAvailability = userInput.nextLine();
-				
-				while(twelveHourtoInt(startAvailability) == 50) {
-					clearPrint("Error! Invalid input\nEnter your starting availability. Format: 3:00AM or 3:00PM");
-					startAvailability = userInput.nextLine();
-				}
-				
-				clearPrint("Enter your ending availability. Format: 3:00AM or 3:00PM");
-				endAvailability = userInput.nextLine();
-				
-				while(twelveHourtoInt(endAvailability) == 50 || twelveHourtoInt(endAvailability) < twelveHourtoInt(startAvailability)) {
-					clearPrint("Error! The input time is invalid\nEnter your ending availability. Format: 3:00AM or 3:00PM");
-					endAvailability = userInput.nextLine();
-				}
-				
-				tempDay.addElement(day);
-				
-				for(int i = twelveHourtoInt(startAvailability); i <= twelveHourtoInt(endAvailability); i++) {
-					tempDay.addElement(Integer.toString(i));
-				}
-			} else {
-				clearPrint("Enter your starting availability. Format: 3:00 or 15:00");
-				startAvailability = userInput.nextLine();
-				
-				while(twentyFourHourtoInt(startAvailability) == 50) {
-					clearPrint("Error! Invalid input\nEnter your starting availability. Format: 3:00 or 15:00");
-					startAvailability = userInput.nextLine();
-				}
-				
-				clearPrint("Enter your ending availability. Format: 3:00 or 15:00");
-				endAvailability = userInput.nextLine();
-				
-				while(twentyFourHourtoInt(endAvailability) == 50 || twentyFourHourtoInt(endAvailability) < twentyFourHourtoInt(startAvailability)) {
-					clearPrint("Error! The input time is invalid\nEnter your ending availability. Format: 3:00 or 15:00");
-					endAvailability = userInput.nextLine();
-				}
-				
-				tempDay.addElement(day);
-				
-				for(int i = twentyFourHourtoInt(startAvailability); i <= twentyFourHourtoInt(endAvailability); i++) {
-					tempDay.addElement(Integer.toString(i));
-				}
-			}
-			
-			clearPrint("Would you like to add another slot of availability? Enter: 'y' or 'n' (Without quotes)");
-			addAnotherTime = userInput.nextLine();
-			
-			while(addAnotherTime.charAt(0) != 'y' && addAnotherTime.charAt(0) != 'n') {
-				clearPrint("Error! Invalid input\nWould you like to add another slot of availability? Enter: 'y' or 'n' (Without quotes)");
-				addAnotherTime = userInput.nextLine();
-			}
-			
-		} while(addAnotherTime.charAt(0) == 'y');}
-	}
-	
-	int numberOfTasks;
-	
-	/**
-	 * This method prompts user to input tasks their event requires
-	 * @return string vector containing tasks
-	 */
-	
-	/*private Vector<String> getTasks() {
-		boolean moreTasks = true;
-		numberOfTasks = 0;
-		while(moreTasks) {
-			
-		}
-	}*/
 }
