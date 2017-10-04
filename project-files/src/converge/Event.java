@@ -16,20 +16,11 @@ public class Event {
 	 */
 	String a_eventName;
 	/**
-	 * int used to store the month of the event.
+	 * string used to store the date of the event.
 	 */
-	int a_month;
+	String a_date;
 	/**
-	 * int used to store the day of the event.
-	 */
-	int a_day;
-	/**
-	 * int used to store the year of the event.
-	 */
-	int a_year;
-	/**
-	 * Vector of attendees used to store all the attendees able to go to the event
-	 * along with all their information specified in the attendee class.
+	 * Vector of Attendees used to store the attendees.
 	 */
 	Vector<Attendee> a_attendees = new Vector<Attendee>();
 	/**
@@ -58,12 +49,10 @@ public class Event {
 	 * tasks.
 	 * @param adminAvailability vector of integers storing the availability of the admin.
 	 */
-	public Event(String eventName, int month, int day, int year, Vector<Attendee> attendees, Vector<Integer> adminAvailability, Vector<String> tasks )
+	public Event(String eventName, String date, Vector<Attendee> attendees, Vector<Integer> adminAvailability, Vector<String> tasks )
 	{
 		a_eventName = eventName;
-		a_month = month;
-		a_day = day;
-		a_year = year;
+		a_date = date;
 		a_attendees = attendees;
 		a_adminTaskList = tasks;
 		a_adminAvailability = adminAvailability;
@@ -75,9 +64,7 @@ public class Event {
 	public void print()
 	{
 		System.out.println(a_eventName);
-		System.out.println(a_month);
-		System.out.println(a_day);
-		System.out.println(a_year);
+		System.out.println(a_date);
 		System.out.println(a_adminAvailability);
 		System.out.println(a_adminTaskList);
 		for (int i = 0; i < a_attendees.size(); i++)
@@ -114,61 +101,6 @@ public class Event {
 		return a_eventName;
 	}
 	/**
-	 * method that sets the month of the event
-	 *
-	 * @param month an integer that represents the month of the event.
-	 */
-	public void setMonth(int month)
-	{
-		a_month = month;
-	}
-	/**
-	 * method that gets the month of the event.
-	 *
-	 * @return an integer illustrating the month of the event.
-	 */
-	public int getMonth()
-	{
-		return a_month;
-	}
-	/**
-	 * method that sets the day of the event.
-	 *
-	 * @param day an integer that represents the day of the event.
-	 */
-	public void setDay(int day)
-	{
-		a_day = day;
-	}
-	/**
-	 * method that gets the day of the event.
-	 *
-	 * @return an integer representing the day of the event.
-	 */
-	public int getDay()
-	{
-		return a_day;
-	}
-	/**
-	 * method to set the year of the event.
-	 *
-	 * @param year integer that represents the year of the event.
-	 */
-	public void setYear(int year)
-	{
-		a_year = year;
-	}
-	/**
-	 * method that gets the year of the event.
-	 *
-	 * @return an integer that represents the year of the event.
-	 */
-	public int getYear()
-	{
-		return a_year;
-	}
-
-	/**
 	 * method that adds an attendee to the attendee vector.
 	 *
 	 * @param a the attendee being added to the attendee vector.
@@ -194,7 +126,7 @@ public class Event {
 		//Output name and date accordingly
 		writer.write(a_eventName);
 		writer.newLine();
-		writer.write(a_month + " " + a_day + " " + a_year);
+		writer.write(a_date);
 		writer.newLine();
 
 		//Output the admin availability vector
