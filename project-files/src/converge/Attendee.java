@@ -32,11 +32,10 @@ public class Attendee {
 	 * @param name String the represents the attendee's name
 	 * @param input Vector of integers that represents the attendee's availability.
 	 */
-	public Attendee(String name, Vector<Integer> input0, Vector<Integer> input1)
+	public Attendee(String name, Vector<Integer> input0)
 	{
 		userName = name;
 		availability = input0;
-		taskSignup = input1;
 	}
 	/**
 	 * Method that gets attendee's username.
