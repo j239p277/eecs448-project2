@@ -286,7 +286,7 @@ public class JoinEvent {
 					}
 				}
 				System.out.println(times);
-				Attendee a = new Attendee(userName, availability, times);
+				Attendee a = new Attendee(userName, times); //REMOVED AVAILABILITY PARAMETER BETWEEN USERNAME AND TIMES FOR COMPILE CHECK, MUST ADD LATER
 				events.elementAt(eventC-1).a_attendees.add(a);
 				events.elementAt(eventC-1).exportEvent();
 				clearPrint("You have successfully been added to the event " + events.elementAt(eventC-1).getEventName() + "!");
