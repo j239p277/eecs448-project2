@@ -19,7 +19,7 @@ public class Attendee {
 	 * each representing a specific 30 minute block of the day.
 	 */
 	Vector<Integer> availability = new Vector<Integer>();
-	Vector<Integer> taskSignup = new Vector<Integer>();
+	Vector<String> taskSignup = new Vector<String>();
 
 	//Constructor methods
 	/**
@@ -32,7 +32,7 @@ public class Attendee {
 	 * @param name String the represents the attendee's name
 	 * @param input Vector of integers that represents the attendee's availability.
 	 */
-	public Attendee(String name, Vector<Integer> input0, Vector<Integer> input1)
+	public Attendee(String name, Vector<Integer> input0, Vector<String> input1)
 	{
 		userName = name;
 		availability = input0;
@@ -61,7 +61,7 @@ public class Attendee {
 	 *
 	 * @return A vector of integers representing the attendee's task signup.
 	 */
-	public Vector<Integer> getTasks()
+	public Vector<String> getTasks()
 	{
 		return taskSignup;
 	}

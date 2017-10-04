@@ -26,7 +26,7 @@ public class DateAndTime {
 	/**
 	 * vector of ints used to store times for each date.
 	 */
-	Vector<Integer>  dt_availability;
+	Vector<Integer>  dt_availability = new Vector<Integer>();;
 	
 	public DateAndTime(Integer month, Integer day, Integer year, Vector<Integer> availability) {
 		this.dt_month = month;

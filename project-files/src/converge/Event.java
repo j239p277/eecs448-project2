@@ -39,7 +39,7 @@ public class Event {
 	/**
 	 * Vector of integers used to store the admin's requested tasks.
 	 */
-	Vector<Integer> a_adminTaskList = new Vector<Integer>();
+	Vector<String> a_adminTaskList = new Vector<String>();
 	/**
 	 * Default constructor for the Event class.
 	 */
