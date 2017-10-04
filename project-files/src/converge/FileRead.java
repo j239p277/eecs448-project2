@@ -54,7 +54,8 @@ public class FileRead
 		        
 		Vector<Integer> adminAvailability = new Vector<Integer>();
 		Vector<Attendee> attendees = new Vector<Attendee>();
-		        
+		Vector<String> task = new Vector<String>();
+		
 		//Iterate through admin availability and each attendee in file
 		int attendeeIndex = 2;
 		do
@@ -99,7 +100,7 @@ public class FileRead
 			else
 			{
 				//Otherwise add the attendee to the vector of attendees
-				Attendee a = new Attendee(attendeeName, availability);
+				Attendee a = new Attendee(attendeeName, availability, task);
 				attendees.add(a);
 			}
 		        		
@@ -107,7 +108,7 @@ public class FileRead
 		} while(attendeeIndex < records.size());
 		        
 		//Create event with values from file
-		Event e = new Event(name, month, day, year, attendees, adminAvailability);
+		Event e = new Event(name, month, day, year, attendees, adminAvailability, task);
 		events.add(e);
 		//Et voila!
 		return events;

@@ -116,7 +116,10 @@ public class JoinEvent {
 		/** 
 		 * vector used to hold the user's available times.
 		 */
-		Vector<Integer> times=new Vector<Integer>();
+		Vector<Integer> times=new Vector<Integer>();		/** 
+		 * vector used to hold the user's tasks.
+		 */
+		Vector<String> tasks=new Vector<String>();
 		Scanner myScan = new Scanner(System.in);
 		/** 
 		 * string that takes the user's name.
@@ -286,7 +289,7 @@ public class JoinEvent {
 					}
 				}
 				System.out.println(times);
-				Attendee a = new Attendee(userName, availability, times);
+				Attendee a = new Attendee(userName, times, tasks);
 				events.elementAt(eventC-1).a_attendees.add(a);
 				events.elementAt(eventC-1).exportEvent();
 				clearPrint("You have successfully been added to the event " + events.elementAt(eventC-1).getEventName() + "!");

@@ -58,14 +58,14 @@ public class Event {
 	 * tasks.
 	 * @param adminAvailability vector of integers storing the availability of the admin.
 	 */
-	public Event(String eventName, int month, int day, int year, Vector attendees, Vector adminAvailability, Vector tasks )
+	public Event(String eventName, int month, int day, int year, Vector<Attendee> attendees, Vector<Integer> adminAvailability, Vector<String> tasks )
 	{
 		a_eventName = eventName;
 		a_month = month;
 		a_day = day;
 		a_year = year;
 		a_attendees = attendees;
-		a_tasks = tasks;
+		a_adminTaskList = tasks;
 		a_adminAvailability = adminAvailability;
 
 	}
