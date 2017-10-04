@@ -58,25 +58,14 @@ public class Event {
 	 * tasks.
 	 * @param adminAvailability vector of integers storing the availability of the admin.
 	 */
-<<<<<<< HEAD
 	public Event(String eventName, int month, int day, int year, Vector<Attendee> attendees, Vector<Integer> adminAvailability, Vector<String> tasks )
-||||||| merged common ancestors
-	public Event(String eventName, int month, int day, int year, Vector attendees, Vector adminAvailability, Vector tasks )
-=======
-	public Event(String eventName, int month, int day, int year, Vector attendees, Vector adminAvailability)
->>>>>>> 79473d3df94b8a6cd019298fec0785b4ea9a46ec
 	{
 		a_eventName = eventName;
 		a_month = month;
 		a_day = day;
 		a_year = year;
 		a_attendees = attendees;
-<<<<<<< HEAD
 		a_adminTaskList = tasks;
-||||||| merged common ancestors
-		a_tasks = tasks;
-=======
->>>>>>> 79473d3df94b8a6cd019298fec0785b4ea9a46ec
 		a_adminAvailability = adminAvailability;
 
 	}

@@ -289,13 +289,10 @@ public class JoinEvent {
 					}
 				}
 				System.out.println(times);
-<<<<<<< HEAD
-				Attendee a = new Attendee(userName, times, tasks);
-||||||| merged common ancestors
-				Attendee a = new Attendee(userName, availability, times);
-=======
+				
+//				Attendee a = new Attendee(userName, times, tasks);
 				Attendee a = new Attendee(userName, times); //REMOVED AVAILABILITY PARAMETER BETWEEN USERNAME AND TIMES FOR COMPILE CHECK, MUST ADD LATER
->>>>>>> 79473d3df94b8a6cd019298fec0785b4ea9a46ec
+
 				events.elementAt(eventC-1).a_attendees.add(a);
 				events.elementAt(eventC-1).exportEvent();
 				clearPrint("You have successfully been added to the event " + events.elementAt(eventC-1).getEventName() + "!");

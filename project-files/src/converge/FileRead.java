@@ -100,7 +100,8 @@ public class FileRead
 			else
 			{
 				//Otherwise add the attendee to the vector of attendees
-				Attendee a = new Attendee(attendeeName, availability, task);
+				Attendee a = new Attendee(attendeeName, availability); //REMOVED TASK PORTION TO TEST COMPILE, MUST REMEMBER TO ADD TASK PORTION
+//				Attendee a = new Attendee(attendeeName, availability, task);
 				attendees.add(a);
 			}
 		        		
