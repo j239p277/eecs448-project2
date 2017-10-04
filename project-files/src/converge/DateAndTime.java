@@ -1,5 +1,7 @@
 package converge;
 
+import java.util.Vector;
+
 /**
  * The DateAndTime.java file is used to implement the DateAndTime class that stores the information needed
  * for an DayAndTime to be created.
@@ -12,25 +14,25 @@ public class DateAndTime {
 	/**
 	 * int used to store the month of the DayAndTime.
 	 */
-	int ts_month;
+	int dt_month;
 	/**
 	 * int used to store the day of the DayAndTime.
 	 */
-	int ts_day;
+	int dt_day;
 	/**
 	 * int used to store the year of the DayAndTime.
 	 */
-	int ts_year;
+	int dt_year;
 	/**
-	 * int used to store an integer corresponding to the DayAndTime.
+	 * vector of ints used to store times for each date.
 	 */
-	int ts_availability;
+	Vector<Integer>  dt_availability;
 	
-	public DateAndTime(Integer month, Integer day, Integer year, Integer availability) {
-		this.ts_month = month;
-		this.ts_day = day;
-		this.ts_year = year;
-		this.ts_availability = availability;
+	public DateAndTime(Integer month, Integer day, Integer year, Vector<Integer> availability) {
+		this.dt_month = month;
+		this.dt_day = day;
+		this.dt_year = year;
+		this.dt_availability = availability;
 	}
 	/**
 	 * method that sets the month of the DayAndTime.
@@ -38,15 +40,15 @@ public class DateAndTime {
 	 * @param month an integer that represents the month of the DayAndTime.
 	 */
 	public int getMonth() {
-		return ts_month;
+		return dt_month;
 	}
 	/**
 	 * method that gets the month of the DayAndTime.
 	 * 
 	 * @return an integer illustrating the month of the DayAndTime.
 	 */
-	public void setMonth(int ts_month) {
-		this.ts_month = ts_month;
+	public void setMonth(int dt_month) {
+		this.dt_month = dt_month;
 	}
 	/**
 	 * method that gets the day of the DayAndTime.
@@ -54,15 +56,15 @@ public class DateAndTime {
 	 * @return an integer representing the day of the DayAndTime.
 	 */
 	public int getDay() {
-		return ts_day;
+		return dt_day;
 	}
 	/**
 	 * method that sets the day of the DayAndTime.
 	 * 
 	 * @param day an integer that represents the day of the DayAndTime.
 	 */
-	public void setDay(int ts_day) {
-		this.ts_day = ts_day;
+	public void setDay(int dt_day) {
+		this.dt_day = dt_day;
 	}
 	/**
 	 * method to set the year of the DayAndTime.
@@ -70,32 +72,30 @@ public class DateAndTime {
 	 * @param year integer that represents the year of the DayAndTime.
 	 */
 	public int getYear() {
-		return ts_year;
+		return dt_year;
 	}
 	/**
 	 * method to set the year of the DayAndTime.
 	 * 
 	 * @param year integer that represents the year of the DayAndTime.
 	 */
-	public void setYear(int ts_year) {
-		this.ts_year = ts_year;
+	public void setYear(int dt_year) {
+		this.dt_year = dt_year;
 	}
 	/**
-	/**
-	 * method to set the availability of the DayAndTime.
+	 * method that gets the availability vector of the DayAndTime.
 	 * 
-	 * @param year integer that represents the year of the DayAndTime.
+	 * @return vector of ints used to store times for each date.
 	 */
-	public int getAvailability() {
-		return ts_availability;
+	public Vector<Integer> getDt_availability() {
+		return dt_availability;
 	}
 	/**
-	 * method to set the availability integer of the DayAndTime.
+	 * method to set the availability vector of the DayAndTime.
 	 * 
-	 * @param year integer that represents the year of the DayAndTime.
+	 * @param vector of ints used to store times for each date.
 	 */
-	public void setAvailability(int ts_availability) {
-		this.ts_availability = ts_availability;
+	public void setDt_availability(Vector<Integer> dt_availability) {
+		this.dt_availability = dt_availability;
 	}
-
 }
