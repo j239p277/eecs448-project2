@@ -29,10 +29,36 @@ public class FileRead
 		Vector<Event> events = new Vector<Event>();
 		
 		//Declare input stream
-		FileReader in = new FileReader("events.txt");
+		FileReader in = null;
+		BufferedReader bufferedReader = null;
+		try 
+        {
+			in = new FileReader("events.txt");
+			bufferedReader = new BufferedReader(in);
+		}
+        catch (FileNotFoundException e) 
+        {
+			e.printStackTrace();
+		}
+		finally {
+
+			try {
+
+				if (bufferedReader != null)
+					bufferedReader.close();
+
+				if (in != null)
+					in.close();
+
+			} catch (IOException ex) {
+
+				ex.printStackTrace();
+
+			}
+		}
 
 		//Iterate through files
-		BufferedReader bufferedReader = new BufferedReader(in);
+		bufferedReader = new BufferedReader(in);
 		String line = null;
 		List<String> records = new ArrayList<String>();
 
