@@ -20,6 +20,10 @@ public class Event {
 	 */
 	String a_date;
 	/**
+	 * String used to store the name of the event.
+	 */
+	String a_adminName;
+	/**
 	 * Vector of Attendees used to store the attendees.
 	 */
 	Vector<Attendee> a_attendees = new Vector<Attendee>();
@@ -82,6 +86,9 @@ public class Event {
 	{
 		return a_attendees.get(0).getName();
 	}
+	public void setAdminName(String a_adminName) {
+		this.a_adminName = a_adminName;
+	}
 	/**
 	 * method that sets the name of the event.
 	 *
@@ -117,17 +124,21 @@ public class Event {
 	public void exportEvent() throws IOException
 	{
 
-		File file = new File("events.txt");
-		file.createNewFile();
-
-		FileWriter prewrite = new FileWriter(file, true);
+//		File file = new File("events.txt");
+//		file.createNewFile();
+//
+//		FileWriter prewrite = new FileWriter(file, true);
+//		BufferedWriter writer = new BufferedWriter(prewrite);
+		//Export file to .event file in /bin/ directory
+		String fileName = "bin/" + a_eventName.replaceAll("\\s+","") + ".event";
+		FileWriter prewrite = new FileWriter(fileName, true);
 		BufferedWriter writer = new BufferedWriter(prewrite);
 
 		//Output name and date accordingly
 		writer.write(a_eventName);
 		writer.newLine();
-		writer.write(a_date);
-		writer.newLine();
+//		writer.write(a_date);
+//		writer.newLine();
 
 		//Output the admin availability vector
 		for (int i = 0; i < a_adminAvailability.size(); i++)

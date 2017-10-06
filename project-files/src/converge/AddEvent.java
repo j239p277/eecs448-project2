@@ -84,6 +84,8 @@ public class AddEvent{
 			clearPrint("Error! Event name cannot be blank\nEnter event name:");
 			eventName = userInput.nextLine();
 		}
+		//sets Name of the event to the string the user inputs
+		adminEvent.setEventName(eventName);
 
 		clearPrint("Enter host name:");
 		String hostName = userInput.nextLine(); //get host name
@@ -91,6 +93,7 @@ public class AddEvent{
 			clearPrint("Error! Host name cannot be blank\nEnter host name:");
 			hostName = userInput.nextLine();
 		}
+		adminEvent.setAdminName(hostName);
 
 		getDatesAndTimes();
 		
@@ -101,6 +104,7 @@ public class AddEvent{
 		
 		
 		//NOW WRITE TO FILE
+		adminEvent.exportEvent();
 	}
 
 	/**
