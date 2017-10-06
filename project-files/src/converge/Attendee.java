@@ -18,7 +18,7 @@ public class Attendee {
 	 * Represents the availability of the attendee as a Vector of integers 0-47
 	 * each representing a specific 30 minute block of the day.
 	 */
-	Vector<Integer> availability = new Vector<Integer>();
+	Vector<DateAndTimes> availability = new Vector<DateAndTimes>();
 	Vector<String> taskSignup = new Vector<String>();
 
 	//Constructor methods
@@ -32,10 +32,11 @@ public class Attendee {
 	 * @param name String the represents the attendee's name
 	 * @param input Vector of integers that represents the attendee's availability.
 	 */
-	public Attendee(String name, Vector<Integer> input0)  //REMOVED TASK PORTION TO TEST COMPILE, MUST REMEMBER TO ADD TASK PORTION
+	public Attendee(String name, Vector<DateAndTimes> input0, Vector<String> task)  //REMOVED TASK PORTION TO TEST COMPILE, MUST REMEMBER TO ADD TASK PORTION
 	{
 		userName = name;
 		availability = input0;
+		taskSignup = task;
 	}
 	/**
 	 * Method that gets attendee's username.
@@ -51,7 +52,7 @@ public class Attendee {
 	 *
 	 * @return A vector of integers representing the attendee's availability.
 	 */
-	public Vector<Integer> getAvailability()
+	public Vector<DateAndTimes> getAvailability()
 	{
 		return availability;
 	}

@@ -93,11 +93,13 @@ public class JoinEvent {
 			{
 				if (timeChoice == 12)
 				{
-					timestring += " " + twelveHourConversion(events.get(eventC-1).a_attendees.get(i).getAvailability().get(j));
+					timestring += " ";
+//	TODO				+ twelveHourConversion(events.get(eventC-1).a_attendees.get(i).getAvailability().get(j));
 				}
 				else if (timeChoice == 24)
 				{
-					timestring += " " + twentyFourHourConversion(events.get(eventC-1).a_attendees.get(i).getAvailability().get(j));
+					timestring += " " ;
+//	TODO			+ twentyFourHourConversion(events.get(eventC-1).a_attendees.get(i).getAvailability().get(j));
 				}
 			}
 			System.out.print(timestring + "\n");
@@ -116,7 +118,7 @@ public class JoinEvent {
 		/** 
 		 * vector used to hold the user's available times.
 		 */
-		Vector<Integer> times=new Vector<Integer>();		/** 
+		Vector<DateAndTimes> times=new Vector<DateAndTimes>();		/** 
 		 * vector used to hold the user's tasks.
 		 */
 		Vector<String> tasks=new Vector<String>();
@@ -216,7 +218,7 @@ public class JoinEvent {
 						{
 							if(i+1 == eventC) 
 							{
-								events.elementAt(i).get24HourAvailability();
+								events.elementAt(i).get24HourAvailability(); 
 							}
 						}
 						wrongFormat = false;
@@ -247,12 +249,14 @@ public class JoinEvent {
 						}
 						for(int j=0; j<events.elementAt(eventC-1).getAvailability().size(); j++) 
 						{
-							if(num == events.elementAt(eventC-1).getAvailability().elementAt(j)) 
+							if(num == events.elementAt(eventC-1).getAvailability().elementAt(j).getAvailability().elementAt(j)) 
 							{
 								j=events.elementAt(eventC-1).getAvailability().size();
 								correctValueFound = true;
-								times.add(num);
-							}
+								
+//		TODO						times.add(num[i]);
+//								times.add(String.valueOf(num).indexOf(1));
+								}
 						}
 						if(!correctValueFound) 
 						{
@@ -277,7 +281,7 @@ public class JoinEvent {
 								{
 									if(j+1 == eventC) 
 									{
-										events.elementAt(j).get24HourAvailability();
+//			TODO							events.elementAt(j).get24HourAvailability();
 									}
 								}
 							}
@@ -290,11 +294,11 @@ public class JoinEvent {
 				}
 				System.out.println(times);
 				
-//				Attendee a = new Attendee(userName, times, tasks);
-				Attendee a = new Attendee(userName, times); //REMOVED AVAILABILITY PARAMETER BETWEEN USERNAME AND TIMES FOR COMPILE CHECK, MUST ADD LATER
+				Attendee a = new Attendee(userName, times, tasks);
+//				Attendee a = new Attendee(userName, times); //REMOVED AVAILABILITY PARAMETER BETWEEN USERNAME AND TIMES FOR COMPILE CHECK, MUST ADD LATER
 
 				events.elementAt(eventC-1).a_attendees.add(a);
-				events.elementAt(eventC-1).exportEvent();
+				events.elementAt(eventC-1).writeEventToFile();
 				clearPrint("You have successfully been added to the event " + events.elementAt(eventC-1).getEventName() + "!");
 
 	}

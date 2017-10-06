@@ -61,16 +61,23 @@ public class AddEvent{
 	Attendee admin = new Attendee();
 
 	/**
+	 * attendee object created for the admin.
+	 */
+	DateAndTimes adminAvailability = new DateAndTimes();
+
+	/**
 	 * Event object initialized to later store all admin event information.
 	 */
 	Event adminEvent = new Event();
+	
+	String task = "";
 
 	/**
 	 * Scanner object initialized to handle user interaction.
 	 */
 	Scanner userInput = new Scanner(System.in);
 	
-	Vector<Vector<String>> datesAndTimes = new Vector();
+	Vector<Vector<String>> datesAndTimes = new Vector<Vector<String>>();
 
 	/**
 	 * Method runs the user interaction allowing the admin to create an event.
@@ -84,6 +91,8 @@ public class AddEvent{
 			clearPrint("Error! Event name cannot be blank\nEnter event name:");
 			eventName = userInput.nextLine();
 		}
+		//sets Name of the event to the string the user inputs
+		adminEvent.setEventName(eventName);
 
 		clearPrint("Enter host name:");
 		String hostName = userInput.nextLine(); //get host name
@@ -91,6 +100,7 @@ public class AddEvent{
 			clearPrint("Error! Host name cannot be blank\nEnter host name:");
 			hostName = userInput.nextLine();
 		}
+		adminEvent.setAdminName(hostName);
 
 		getDatesAndTimes();
 		
@@ -99,8 +109,12 @@ public class AddEvent{
 		
 		//Vector<String> tasks = getTasks();
 		
+//		adminEvent.addAttendee(admin);
+//		adminEvent.addAdminAvailability(adminAvailability);
+//		adminEvent.addTask(task);
 		
 		//NOW WRITE TO FILE
+		adminEvent.writeEventToFile();
 	}
 
 	/**

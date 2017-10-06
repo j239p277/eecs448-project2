@@ -31,7 +31,7 @@ public class FileRead
 		BufferedReader bufferedReader = null;
 		String line = null;
 		List<String> records = new ArrayList<String>();
-		Vector<Integer> adminAvailability = new Vector<Integer>();
+		Vector<DateAndTimes> adminAvailability = new Vector<DateAndTimes>();
 		Vector<Attendee> attendees = new Vector<Attendee>();
 		Vector<String> task = new Vector<String>();
 		
@@ -46,7 +46,7 @@ public class FileRead
 		{
 		  File file = listOfFiles[i];
 //		  System.out.println(file.getName());
-		  if (file.isFile() && file.getName().endsWith(".txt")) // TODO CHANGED FROM ".event" ??? YES/NO
+		  if (file.isFile() && file.getName().endsWith(".event")) 
 		  {
 				try {
 					System.out.println(file.getName());
@@ -80,10 +80,13 @@ public class FileRead
 		        
 		//Assign first value as event name
 		String name = records.get(0);
-		        
+		
+		//Assign second value as event admin
+		String admin = records.get(1);
+				        
 		//Assign second value as date
-		String dateAndTimesLine = records.get(1);
-		String[] splitDateAndTimes = dateAndTimesLine.split("\\s+");
+		String dateAndTimesLine = records.get(2);
+//		String[] splitDateAndTimes = dateAndTimesLine.split("\\s+");
 //		int month = 	Integer.parseInt(splitLine[0]);
 //		int day =	Integer.parseInt(splitLine[1]);
 //		int year = 	Integer.parseInt(splitLine[2]);
@@ -102,7 +105,7 @@ public class FileRead
 			int tempInt = 0;
 			String[] splitAtt = temp.split("\\s+");
 			String attendeeName = null;
-			Vector<Integer> availability = new Vector<Integer>();
+			Vector<DateAndTimes> availability = new Vector<DateAndTimes>();
 		        		
 			//Within the line, consider the int values as the user availability
 			int availabilityIndex = 0;
@@ -112,7 +115,7 @@ public class FileRead
 				{
 					//If the value can be parsed, add to availability
 					tempInt = Integer.parseInt(splitAtt[availabilityIndex]);
-					availability.add(tempInt);
+//					availability.add(tempInt);		TODO ADD BACK
 				} 
 				catch (NumberFormatException e) 
 				{
@@ -137,8 +140,8 @@ public class FileRead
 			else
 			{
 				//Otherwise add the attendee to the vector of attendees
-				Attendee a = new Attendee(attendeeName, availability); //REMOVED TASK PORTION TO TEST COMPILE, MUST REMEMBER TO ADD TASK PORTION
-//				Attendee a = new Attendee(attendeeName, availability, task);
+//				Attendee a = new Attendee(attendeeName, availability); //REMOVED TASK PORTION TO TEST COMPILE, MUST REMEMBER TO ADD TASK PORTION
+				Attendee a = new Attendee(attendeeName, availability, task);
 				attendees.add(a);
 			}
 		        		
@@ -146,7 +149,7 @@ public class FileRead
 		} while(attendeeIndex < records.size());
 		        
 		//Create event with values from file
-		Event e = new Event(name, dateAndTimesLine, attendees, adminAvailability, task);
+		Event e = new Event(name, admin, attendees, adminAvailability, task);
 //		Event e = new Event(name, date, attendees, adminAvailability, task);	// TODO USE WHEN DATE FINISHED
 		events.add(e);
 			}
