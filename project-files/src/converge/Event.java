@@ -65,4 +65,11 @@ public class Event {
 	public void viewAllEvents() {
 		
 	}
+    
+    // Returns date from the event's DatesAndTimes vector
+    public String getDate(int index) {
+        String date = "Date error";
+        date = this.getDatesAndTimes().get(index).get(0);
+        return date;
+    }
 }
