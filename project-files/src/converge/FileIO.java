@@ -5,11 +5,10 @@ import java.util.Vector;
 
 public class FileIO {
 	
-	public Vector<Event> loadEventsVector() {
+	public void loadEventsVector(Vector<Event> eventsVector) {
 		File eventsFile = new File("events.txt");
 		
 		if(eventsFile.exists()) { //check if "events.txt" even exists
-			Vector<Event> tempEventsVector = new Vector<Event>();
 			
 			String eventName, hostName, numberOfDays, numberOfTasks, numberOfAttendees;
 			String[] tempTimes, tempAttendeeAndTasks;
@@ -22,9 +21,9 @@ public class FileIO {
 					hostName = reader.readLine();  //get host name
 					numberOfDays = reader.readLine(); //get number of days to control following for loop
 					
-					Vector<Vector<String>> datesAndTimes = new Vector<Vector<String>>(); //create a new datesAndTimes vector to hold info from file
+					Vector<Vector<String>> datesAndTimes = new Vector(); //create a new datesAndTimes vector to hold info from file
 					for(int i = 0; i < Integer.parseInt(numberOfDays); i++) { //get all datesAndTimes
-						Vector<String> tempDay = new Vector<String>();
+						Vector<String> tempDay = new Vector();
 						
 						tempTimes = reader.readLine().split(" ");
 						
@@ -36,15 +35,15 @@ public class FileIO {
 					}
 					
 					numberOfTasks = reader.readLine(); //get number of tasks to control following for loop
-					Vector<String> tasks = new Vector<String>(); //create a new tasks vector to hold information from file
+					Vector<String> tasks = new Vector(); //create a new tasks vector to hold information from file
 					for(int i = 0; i < Integer.parseInt(numberOfTasks); i++) { //get all tasks
 						tasks.addElement(reader.readLine());
 					}
 					
 					numberOfAttendees = reader.readLine(); //get number of attendees to control following for loop
-					Vector<Vector<String>> attendees = new Vector<Vector<String>>(); //create a new attendees vector to hold information from file
+					Vector<Vector<String>> attendees = new Vector(); //create a new attendees vector to hold information from file
 					for(int i = 0; i < Integer.parseInt(numberOfAttendees); i++) { //get all attendees
-						Vector<String> tempAttendee = new Vector<String>();
+						Vector<String> tempAttendee = new Vector();
 						
 						tempAttendeeAndTasks = reader.readLine().split("~");
 						
@@ -54,19 +53,18 @@ public class FileIO {
 						
 						attendees.addElement(tempAttendee);
 					}
-					tempEventsVector.addElement(new Event(eventName, hostName, datesAndTimes, tasks, attendees)); //add event to events vector that will be returned
+					eventsVector.addElement(new Event(eventName, hostName, datesAndTimes, tasks, attendees)); //add event to events vector that will be returned
 				}	
 				
 				reader.close();
-				return tempEventsVector;
 				
 			} catch(Exception e) { //if anything goes wrong during this process, return an empty vector
 				System.out.println("error");
-				return new Vector<Event>();
+				eventsVector = new Vector();
 			}
 			
 		} else { //if "events.txt" does not exists simply return an empty vector
-			return new Vector<Event>();
+			eventsVector = new Vector();
 		}
 	}
 	

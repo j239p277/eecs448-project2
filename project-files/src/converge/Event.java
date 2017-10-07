@@ -1,7 +1,7 @@
 package converge;
 
+import java.io.*;
 import java.util.*;
-
 
 /**
  * The Event.java file is used to implement the Event class that stores the information needed
@@ -12,11 +12,11 @@ import java.util.*;
  */
 public class Event {
 	
-	private String m_eventName = "";
-	private String m_hostName = "";
-	private Vector<Vector<String>> m_datesAndTimes = new Vector<Vector<String>>();
-	private Vector<String> m_tasks = new Vector<String>();
-	private Vector<Vector<String>> m_attendees = new Vector<Vector<String>>();
+	String m_eventName = "";
+	String m_hostName = "";
+	Vector<Vector<String>> m_datesAndTimes = new Vector();
+	Vector<String> m_tasks = new Vector();
+	Vector<Vector<String>> m_attendees = new Vector();
 	
 	public Event() {}
 	
@@ -48,44 +48,4 @@ public class Event {
 	public Vector<Vector<String>> getAttendees() {
 		return m_attendees;
 	}
-	
-	public void addDatesAndTimes(Vector<String> temp) {
-		this.m_datesAndTimes.add(temp);
-	}
-	
-	public void addTask(String task)
-	{
-		this.m_tasks.add(task);
-	}
-	
-	public void addttendee(Vector<String> temp) {
-		this.m_attendees.add(temp);
-	}
-	
-	// Prints info for this event
-	public void viewEvent() {
-		System.out.println("Event: " + this.getEventName());
-		System.out.println("Host: " + this.getHostName());
-		for (int i = 0; i<m_datesAndTimes.size(); i++) {	// TODO ADD TIMES
-			System.out.println("Times: " + this.getDate(i));
-		}
-		for (int i = 0; i<m_attendees.size(); i++) {
-			System.out.println("Attendees: " + this.getAttendeeName(i));
-		}
-			System.out.println("Tasks: " + this.getTasks());
-	}
-    
-    // Returns a date string from the event's DatesAndTimes vector
-    public String getDate(int datesAndTimesIndex) {
-        String date = "Date error";
-        date = this.getDatesAndTimes().get(datesAndTimesIndex).get(0);
-        return date;
-    }
-    
-    // Returns a name from the event's Attendees vector
-    public String getAttendeeName(int attendeeIndex) {
-        String name = "Name error";
-        name = this.getAttendees().get(attendeeIndex).get(0);
-        return name;	
-    }
 }

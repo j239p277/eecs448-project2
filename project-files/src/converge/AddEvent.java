@@ -3,6 +3,7 @@ package converge;
 import java.util.Scanner;
 import java.util.Vector;
 import java.util.Calendar;
+import java.util.Date;
 
 public class AddEvent{
 
@@ -18,6 +19,7 @@ public class AddEvent{
 	
 	Vector<Vector<String>> datesAndTimes;
 	Vector<String> tasks;
+	Vector<Vector<String>> attendees;
 	
 	Vector<String> tempDay; //vector that stores all times for a specific day
 	
@@ -27,9 +29,10 @@ public class AddEvent{
 	 * Method runs the user interaction allowing the admin to create an event.
 	 * @throws IOException On invalid user input
 	 */
-	public Vector<Event> start(Vector<Event> eventsVector) {
-		datesAndTimes = new Vector<Vector<String>>();
-		tasks = new Vector<String>();
+	public void start(Vector<Event> eventsVector) {
+		datesAndTimes = new Vector();
+		tasks = new Vector();
+		attendees = new Vector();
 		
 		clearPrint("Enter event name:");
 		String eventName = scan.nextLine(); //get event name
@@ -45,14 +48,11 @@ public class AddEvent{
 			hostName = scan.nextLine();
 		}
 
-		datesAndTimes = getDatesAndTimes();
-		tasks = getTasks();
+		getDatesAndTimes(datesAndTimes);
+		getTasks(tasks);
+		constructAttendeesVector(attendees, hostName, datesAndTimes);
 		
-		// ADD HOST TO ATTENDEES
-		
-		eventsVector.addElement(new Event(eventName, hostName, datesAndTimes, tasks, new Vector<Vector<String>>()));
-		
-		return eventsVector; //temp return REMOVE THIS LATER
+		eventsVector.addElement(new Event(eventName, hostName, datesAndTimes, tasks, attendees));
 	}
 	
 	/**
@@ -60,8 +60,7 @@ public class AddEvent{
 	 *
 	 * @return an integer array that stores the date in the format mm/dd/yyyy.
 	 */
-	private Vector<Vector<String>> getDatesAndTimes() {
-		Vector<Vector<String>> tempDatesAndTimes = new Vector<Vector<String>>();
+	private void getDatesAndTimes(Vector<Vector<String>> datesAndTimes) {
 		boolean moreDates = true; //boolean that checks if user wants to add more dates
 		String addAnotherDay;
 		subsequentDate = false;
@@ -95,7 +94,7 @@ public class AddEvent{
 			
 			tempDay = new Vector();
 			getTimes(tempDate);
-			tempDatesAndTimes.addElement(tempDay);
+			datesAndTimes.addElement(tempDay);
 			
 			clearPrint("Would you like to add another day? Enter: 'y' or 'n' (Without quotes)");
 			addAnotherDay = scan.nextLine();
@@ -111,8 +110,6 @@ public class AddEvent{
 				subsequentDate = true;
 			}
 		}
-		
-		return tempDatesAndTimes;
 	}
 	/**
 	 * This method checks if a given date is real
@@ -197,6 +194,7 @@ public class AddEvent{
 		boolean validInput = false;
 		String modeInput = "";
 		String copyTimesInput = "";
+		boolean differentTimeSameDay = false;
 		
 		if(subsequentDate) {
 			clearPrint("Would you like to copy times from original date? Enter: 'y' or 'n' (Without quotes)");
@@ -260,7 +258,9 @@ public class AddEvent{
 					endAvailability = scan.nextLine();
 				}
 				
-				tempDay.addElement(day);
+				if(!differentTimeSameDay) {
+					tempDay.addElement(day);
+				}
 				
 				for(int i = twelveHourtoInt(startAvailability); i <= twelveHourtoInt(endAvailability); i++) {
 					tempDay.addElement(Integer.toString(i));
@@ -282,7 +282,9 @@ public class AddEvent{
 					endAvailability = scan.nextLine();
 				}
 				
-				tempDay.addElement(day);
+				if(!differentTimeSameDay) {
+					tempDay.addElement(day);
+				}
 				
 				for(int i = twentyFourHourtoInt(startAvailability); i <= twentyFourHourtoInt(endAvailability); i++) {
 					tempDay.addElement(Integer.toString(i));
@@ -297,6 +299,12 @@ public class AddEvent{
 				addAnotherTime = scan.nextLine();
 			}
 			
+			if(addAnotherTime.charAt(0) == 'y') {
+				differentTimeSameDay = true;
+			} else {
+				differentTimeSameDay = false;
+			}
+			
 		} while(addAnotherTime.charAt(0) == 'y');}
 	}
 	
@@ -305,8 +313,7 @@ public class AddEvent{
 	 * @return string vector containing tasks
 	 */
 	
-	private Vector<String> getTasks() {
-		Vector<String> tempTasks = new Vector<String>();
+	private void getTasks(Vector<String> tasks) {
 		boolean moreTasks = true;
 		boolean firstTask = true;
 		String addAnotherTask = "";
@@ -342,14 +349,28 @@ public class AddEvent{
 					taskInput = scan.nextLine();
 				}
 				
-				tempTasks.addElement(taskInput);
+				tasks.addElement(taskInput);
 			} else {
 				moreTasks = false;
 			}
 		}
-		
-		return tempTasks;
 	}
+	
+	private void constructAttendeesVector(Vector<Vector<String>> attendees, String hostName, Vector<Vector<String>> datesAndTimes) {
+		Vector<String> tempHost = new Vector();
+		tempHost.addElement(hostName);
+		
+		for(int i = 0; i < datesAndTimes.size(); i++) {
+			
+			for(int j = 0; j < datesAndTimes.elementAt(i).size(); j++) {
+				tempHost.addElement(datesAndTimes.elementAt(i).elementAt(j));
+			}
+		}
+		
+		attendees.addElement(tempHost);
+	}
+	
+	
 	/**
 	 * This is a method that will take in ints placed in the availability vectors
 	 * and will convert it into its corresponding time string for 12 hour mode.
