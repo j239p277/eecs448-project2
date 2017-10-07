@@ -62,8 +62,17 @@ public class Event {
 		this.m_attendees.add(temp);
 	}
 	
-	public void viewAllEvents() {
-		
+	// Prints info for this event
+	public void viewEvent() {
+		System.out.println("Event: " + this.getEventName());
+		System.out.println("Host: " + this.getHostName());
+		for (int i = 0; i<m_datesAndTimes.size(); i++) {	// TODO ADD TIMES
+			System.out.println("Times: " + this.getDate(i));
+		}
+		for (int i = 0; i<m_attendees.size(); i++) {
+			System.out.println("Attendees: " + this.getAttendeeName(i));
+		}
+			System.out.println("Tasks: " + this.getTasks());
 	}
     
     // Returns a date string from the event's DatesAndTimes vector

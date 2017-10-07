@@ -44,7 +44,6 @@ public class Main {
 			}
 			
 			choice = Integer.parseInt(input);
-			
 			if(choice == 1) {
 				eventsVector = addEvent.start(eventsVector);
 				fileIO.saveEventsVector(eventsVector);
@@ -53,7 +52,13 @@ public class Main {
 				joinEvent.start();
 				fileIO.saveEventsVector(eventsVector);
 			} else if(choice == 3) {
-				event.viewAllEvents();
+				if (eventsVector.size() == 0) {
+					clearPrint("No event has been created, yet!\n");
+				} else {
+					for (int i = 0; i<eventsVector.size(); i++) {
+						eventsVector.get(i).viewEvent();
+					}
+				}
 			} else {
 				quit = true;
 			}
