@@ -1,6 +1,5 @@
 package converge;
 
-import java.io.*;
 import java.util.Vector;
 import java.util.Scanner;
 
@@ -52,6 +51,7 @@ public class Main {
 				joinEvent.start();
 				fileIO.saveEventsVector(eventsVector);
 			} else if(choice == 3) {
+				clearScreen();
 				if (eventsVector.size() == 0) {
 					clearPrint("No event has been created, yet!\n");
 				} else {
