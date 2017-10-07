@@ -1,142 +1,72 @@
 package converge;
-import java.io.IOException;
+
 import java.util.Vector;
 import java.util.Scanner;
 
-/**
- * The main.java file will be used to run the Convergent App.
- * 
- * @author Menita Vedantam
- * @since 2017-09-15
- */
 public class Main {
-	public static void main(String []args) throws IOException
-	{
-		Scanner myScan = new Scanner(System.in);
-		String choice = "";
-		boolean incorrectInput = true;
-		boolean cont = true;
-		int c = 0;
-		AddEvent AdminEvent = new AddEvent();
-
-		while (cont)
-		{
-			clearScreen();
-			incorrectInput = true;
-			while(incorrectInput) {
-				System.out.println("What would you like to do?\n 1. Create an Event\n 2. Join an event\n 3. View an existing event\n 0. Quit\nPlease enter number corresponding to the option you choose.");
-				try 
-				{
-					if (!myScan.hasNextInt())
-					{
-						myScan.next();
+	
+	static Vector<Event> eventsVector = new Vector();
+	static FileIO fileIO = new FileIO();
+	
+	public static void main(String[] args) {
+		Vector<Event> eventsVector = new Vector();
+		FileIO fileIO = new FileIO();
+		Event event = new Event();
+		AddEvent addEvent = new AddEvent();
+		JoinEvent joinEvent = new JoinEvent();
+		
+		Scanner scan = new Scanner(System.in);
+		eventsVector = fileIO.loadEventsVector();
+		boolean quit = false;
+		boolean validInput;
+		String input = "";
+		int choice;
+		
+		clearScreen();
+		
+		while(!quit) {	
+			validInput = false;
+			
+			while(!validInput) {
+				System.out.println("What would you like to do?\n 1. Create an Event\n 2. Join an event\n 3. View an existing event\n 0. Quit\n\nPlease enter number corresponding to the option you choose.");
+				input = scan.nextLine();
+				
+				try {
+					if(Integer.parseInt(input) >= 0 && Integer.parseInt(input) <= 3) {
+						validInput = true;
+					} else {
 						throw new Exception();
 					}
-					
-					c = myScan.nextInt();
-					
-					if(c == 0 || c == 1 || c == 2 || c == 3) {
-						incorrectInput = false;
-					}
-				}
-				catch (Exception e)
-				{
-					clearPrint("Error\nPlease enter valid option.");
+				} catch(Exception e) {
+					clearPrint("Error! Please enter a valid option\n");
 				}
 			}
-			if (c == 0)
-			{
-				clearScreen();
-				System.exit(0);
-			}
-			else if(c == 1) 
-			{
-				AdminEvent.start();
-			}
-			else if (c == 2) {
-				JoinEvent.run();
-			}
-			else if (c == 3)
-			{
-				JoinEvent.view();
-			}
-
-			c = 0;
-			incorrectInput = true;
-			choice = "";
-			String exit = "";
-
-			while (incorrectInput)
-			{
-				try 
-				{
-					System.out.println("\nType 'return' to return to main menu\nType 'quit' to exit:\n");
-					//myScan.next();
-					exit = myScan.next();
-					if (exit.equals("quit"))
-					{
-						clearScreen();
-						cont = false;
-						incorrectInput = false;
-						System.exit(0);
-					}
-					else if (exit.equals("return"))
-					{
-						cont = true;
-						incorrectInput = false;
-					}
-					else
-					{
-						throw new Exception();
-					}
-				}
-				catch (Exception e)
-				{
-					clearPrint("Error\nPlease enter valid option.");
-				}
+			
+			choice = Integer.parseInt(input);
+			
+			if(choice == 1) {
+				eventsVector = addEvent.start(eventsVector);
+				fileIO.saveEventsVector(eventsVector);
+				clearPrint("Event successfully created!\n");
+			} else if(choice == 2) {
+				joinEvent.start();
+				fileIO.saveEventsVector(eventsVector);
+			} else if(choice == 3) {
+				event.viewAllEvents();
+			} else {
+				quit = true;
 			}
 		}
-		clearScreen();
-		myScan.close();
 	}
 	
-	/**
-	 * Checks to see if the given value is an integer.
-	 * @param s the string that will be checked to see if it is
-	 * an integer.
-	 * @return boolean that determines if the string is an integer.
-	 */
-	public static boolean isInteger(String s) {
-	    try { 
-	        Integer.parseInt(s); 
-	    } 
-	    catch(NumberFormatException e) { 
-	        return false; 
-	    } 
-	    catch(NullPointerException e) {
-	        return false;
-	    }
-	    return true;
-	}
-	
-	/**
-	 * Method that clearly prints whatever string is given to the method.
-	 * 
-	 * @param text that will be clearly printed.
-	 */
-	private static void clearPrint(String text)
-	{
+	public static void clearPrint(String text) {
 		clearScreen();
 		System.out.println(text);
 	}
+
 	
-	/**
-	 * Method that will clear the screen of all output.
-	 */
-	private static void clearScreen()
-	{
-		for (int i = 0; i < 100; i++)
-		{
+	public static void clearScreen() {
+		for (int i = 0; i < 50; i++) {
 			System.out.println("\n");
 		}
 	}

@@ -2,159 +2,78 @@ package converge;
 
 import java.util.Scanner;
 import java.util.Vector;
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * The AddEvent.java file will be used to implement the Admin Mode for the Converge Application
- *
- * @author Vivek Tallavajhala
- * @since 2017-09-15
- */
 public class AddEvent{
-	/**
-	 * integer used to track the user's choice input.
-	 */
-	int choice;
 
-	/**
-	 * integer used to track the current year.
-	 */
+	
 	int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-
-	/**
-	 * integer used to track the current month.
-	 */
 	int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
-
-	/**
-	 * integer used to track the current day.
-	 */
 	int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
 
-	/**
-	 * string used to store the starting availability of the admin.
-	 */
 	String startAvailability;
-
-	/**
-	 * string used to store the ending availability of the admin.
-	 */
 	String endAvailability;
 
-	/**
-	 * vector that hold integers 0-47 that each represent time availability in 30
-	 * minute periods throughout the day.
-	 */
-	Vector<Integer> timeVec = new Vector<Integer>() ;
-	{
-	for (int i = 0; i < 48; i++)
-		{
-			timeVec.addElement(i);
-		}
-	}
-
-	/**
-	 * attendee object created for the admin.
-	 */
-	Attendee admin = new Attendee();
-
-	/**
-	 * Event object initialized to later store all admin event information.
-	 */
-	Event adminEvent = new Event();
-
-	/**
-	 * Scanner object initialized to handle user interaction.
-	 */
-	Scanner userInput = new Scanner(System.in);
+	Scanner scan = new Scanner(System.in);
 	
-	Vector<Vector<String>> datesAndTimes = new Vector();
+	Vector<Vector<String>> datesAndTimes;
+	Vector<String> tasks;
+	
+	Vector<String> tempDay; //vector that stores all times for a specific day
+	
+	boolean subsequentDate;
 
 	/**
 	 * Method runs the user interaction allowing the admin to create an event.
 	 * @throws IOException On invalid user input
 	 */
-	public void start() throws IOException
-	{
+	public Vector<Event> start(Vector<Event> eventsVector) {
+		datesAndTimes = new Vector();
+		tasks = new Vector();
+		
 		clearPrint("Enter event name:");
-		String eventName = userInput.nextLine(); //get event name
+		String eventName = scan.nextLine(); //get event name
 		while(eventName.length() == 0) {
-			clearPrint("Error! Event name cannot be blank\nEnter event name:");
-			eventName = userInput.nextLine();
+			clearPrint("Error! Event name cannot be blank\n\nEnter event name:");
+			eventName = scan.nextLine();
 		}
-		//sets Name of the event to the string the user inputs
-		adminEvent.setEventName(eventName);
 
 		clearPrint("Enter host name:");
-		String hostName = userInput.nextLine(); //get host name
+		String hostName = scan.nextLine(); //get host name
 		while(hostName.length() == 0) {
-			clearPrint("Error! Host name cannot be blank\nEnter host name:");
-			hostName = userInput.nextLine();
+			clearPrint("Error! Host name cannot be blank\n\nEnter host name:");
+			hostName = scan.nextLine();
 		}
-		adminEvent.setAdminName(hostName);
 
-		getDatesAndTimes();
+		datesAndTimes = getDatesAndTimes();
+		tasks = getTasks();
 		
-		System.out.println(datesAndTimes);
-		//now the variable "days" holds number of days for this event
+		// ADD HOST TO ATTENDEES
 		
-		//Vector<String> tasks = getTasks();
+		eventsVector.addElement(new Event(eventName, hostName, datesAndTimes, tasks, new Vector()));
 		
-		
-		//NOW WRITE TO FILE
-		adminEvent.exportEvent();
+		return eventsVector; //temp return REMOVE THIS LATER
 	}
-
-	/**
-	 * This method is used to clearly print a string for better looking output.
-	 *
-	 * @param text The string that will get clearly printed.
-	 * @throws IOException On input error.
-	 */
-	private void clearPrint(String text)
-	{
-		clearScreen();
-		System.out.println(text);
-	}
-
-	/**
-	 * This method clears the output of whatever has been previously displayed.
-	 */
-	private void clearScreen()
-	{
-		for (int i = 0; i < 100; i++)
-		{
-			System.out.println("\n");
-		}
-	}
-	
-	Vector<String> tempDay; //vector that stores all times for a specific day
-
-	int days;
-	
-	boolean subsequentDate;
 	
 	/**
 	 * This method requests the Admin's event date and stores it in an integer array.
 	 *
 	 * @return an integer array that stores the date in the format mm/dd/yyyy.
 	 */
-	private void getDatesAndTimes()
-	{
+	private Vector<Vector<String>> getDatesAndTimes() {
+		Vector<Vector<String>> tempDatesAndTimes = new Vector();
 		boolean moreDates = true; //boolean that checks if user wants to add more dates
-		days = 0; //number of days the event takes place
 		String addAnotherDay;
 		subsequentDate = false;
 
 		while(moreDates) {
 			clearPrint("Enter event date (mm/dd/yyyy)");
-			String tempDate = userInput.nextLine();
+			String tempDate = scan.nextLine();
 
 			while(!checkDate(tempDate)) {
-				clearPrint("Error! Invalid date.\nEnter event date(mm/dd/yyyy)");
-				tempDate = userInput.nextLine();
+				clearPrint("Error! Invalid date.\n\nEnter event date(mm/dd/yyyy)");
+				tempDate = scan.nextLine();
 			}
 				
 			int monthInt = Integer.parseInt(tempDate.substring(0,2));
@@ -162,12 +81,12 @@ public class AddEvent{
 			int yearInt = Integer.parseInt(tempDate.substring(6,10));
 
 			while((yearInt < currentYear) || (yearInt == currentYear && monthInt < currentMonth + 1) || (yearInt == currentYear && monthInt == currentMonth + 1 && dayInt < currentDay)) {
-				clearPrint("Error! Cannot create an event in the past.\nEnter event date(mm/dd/yyyy)");
-				tempDate = userInput.nextLine();
+				clearPrint("Error! Cannot create an event in the past.\n\nEnter event date(mm/dd/yyyy)");
+				tempDate = scan.nextLine();
 				
 				while(!checkDate(tempDate)) {
-					clearPrint("Error! Invalid date.\nEnter event date(mm/dd/yyyy)");
-					tempDate = userInput.nextLine();
+					clearPrint("Error! Invalid date.\n\nEnter event date(mm/dd/yyyy)");
+					tempDate = scan.nextLine();
 				}
 				
 				monthInt = Integer.parseInt(tempDate.substring(0,2));
@@ -177,15 +96,14 @@ public class AddEvent{
 			
 			tempDay = new Vector();
 			getTimes(tempDate);
-			datesAndTimes.addElement(tempDay);
-			days++;
+			tempDatesAndTimes.addElement(tempDay);
 			
 			clearPrint("Would you like to add another day? Enter: 'y' or 'n' (Without quotes)");
-			addAnotherDay = userInput.nextLine();
+			addAnotherDay = scan.nextLine();
 			
 			while(!(addAnotherDay.charAt(0) == 'y' || addAnotherDay.charAt(0) == 'n')) {
-				clearPrint("Error! Invalid input\nWould you like to add another day? Enter: 'y' or 'n' (Without quotes)");
-				addAnotherDay = userInput.nextLine();
+				clearPrint("Error! Invalid input\n\nWould you like to add another day? Enter: 'y' or 'n' (Without quotes)");
+				addAnotherDay = scan.nextLine();
 			}
 			
 			if(addAnotherDay.charAt(0) == 'n') {
@@ -194,6 +112,8 @@ public class AddEvent{
 				subsequentDate = true;
 			}
 		}
+		
+		return tempDatesAndTimes;
 	}
 	/**
 	 * This method checks if a given date is real
@@ -281,11 +201,11 @@ public class AddEvent{
 		
 		if(subsequentDate) {
 			clearPrint("Would you like to copy times from original date? Enter: 'y' or 'n' (Without quotes)");
-			copyTimesInput = userInput.nextLine();
+			copyTimesInput = scan.nextLine();
 			
 			while(copyTimesInput.charAt(0) != 'y' && copyTimesInput.charAt(0) != 'n') {
-				clearPrint("Error! Invalid input\nWould you like to copy times from original date? Enter: 'y' or 'n' (Without quotes)");
-				copyTimesInput = userInput.nextLine();
+				clearPrint("Error! Invalid input\n\nWould you like to copy times from original date? Enter: 'y' or 'n' (Without quotes)");
+				copyTimesInput = scan.nextLine();
 			}
 			
 			if(copyTimesInput.charAt(0) == 'y') {
@@ -305,7 +225,7 @@ public class AddEvent{
 		
 		clearPrint("Would you like to use 12 hour mode or 24 hour mode? (12/24)");
 		
-		modeInput = userInput.nextLine();
+		modeInput = scan.nextLine();
 		
 		while(!validInput) {
 			try {
@@ -316,8 +236,8 @@ public class AddEvent{
 				}
 				
 			} catch (Exception e) {
-				clearPrint("Error! Invalid input\nWould you like to use 12 hour mode or 24 hour mode? (12/24)");
-				modeInput = userInput.nextLine();
+				clearPrint("Error! Invalid input\n\nWould you like to use 12 hour mode or 24 hour mode? (12/24)");
+				modeInput = scan.nextLine();
 			}
 		}
 		
@@ -326,19 +246,19 @@ public class AddEvent{
 		do {
 			if(Integer.parseInt(modeInput) == 12) {
 				clearPrint("Enter your starting availability. Format: 3:00AM or 3:00PM");
-				startAvailability = userInput.nextLine();
+				startAvailability = scan.nextLine();
 				
 				while(twelveHourtoInt(startAvailability) == 50) {
-					clearPrint("Error! Invalid input\nEnter your starting availability. Format: 3:00AM or 3:00PM");
-					startAvailability = userInput.nextLine();
+					clearPrint("Error! Invalid input\n\nEnter your starting availability. Format: 3:00AM or 3:00PM");
+					startAvailability = scan.nextLine();
 				}
 				
 				clearPrint("Enter your ending availability. Format: 3:00AM or 3:00PM");
-				endAvailability = userInput.nextLine();
+				endAvailability = scan.nextLine();
 				
 				while(twelveHourtoInt(endAvailability) == 50 || twelveHourtoInt(endAvailability) < twelveHourtoInt(startAvailability)) {
-					clearPrint("Error! The input time is invalid\nEnter your ending availability. Format: 3:00AM or 3:00PM");
-					endAvailability = userInput.nextLine();
+					clearPrint("Error! The input time is invalid\n\nEnter your ending availability. Format: 3:00AM or 3:00PM");
+					endAvailability = scan.nextLine();
 				}
 				
 				tempDay.addElement(day);
@@ -348,19 +268,19 @@ public class AddEvent{
 				}
 			} else {
 				clearPrint("Enter your starting availability. Format: 3:00 or 15:00");
-				startAvailability = userInput.nextLine();
+				startAvailability = scan.nextLine();
 				
 				while(twentyFourHourtoInt(startAvailability) == 50) {
-					clearPrint("Error! Invalid input\nEnter your starting availability. Format: 3:00 or 15:00");
-					startAvailability = userInput.nextLine();
+					clearPrint("Error! Invalid input\n\nEnter your starting availability. Format: 3:00 or 15:00");
+					startAvailability = scan.nextLine();
 				}
 				
 				clearPrint("Enter your ending availability. Format: 3:00 or 15:00");
-				endAvailability = userInput.nextLine();
+				endAvailability = scan.nextLine();
 				
 				while(twentyFourHourtoInt(endAvailability) == 50 || twentyFourHourtoInt(endAvailability) < twentyFourHourtoInt(startAvailability)) {
-					clearPrint("Error! The input time is invalid\nEnter your ending availability. Format: 3:00 or 15:00");
-					endAvailability = userInput.nextLine();
+					clearPrint("Error! The input time is invalid\n\nEnter your ending availability. Format: 3:00 or 15:00");
+					endAvailability = scan.nextLine();
 				}
 				
 				tempDay.addElement(day);
@@ -371,30 +291,66 @@ public class AddEvent{
 			}
 			
 			clearPrint("Would you like to add another slot of availability? Enter: 'y' or 'n' (Without quotes)");
-			addAnotherTime = userInput.nextLine();
+			addAnotherTime = scan.nextLine();
 			
 			while(addAnotherTime.charAt(0) != 'y' && addAnotherTime.charAt(0) != 'n') {
-				clearPrint("Error! Invalid input\nWould you like to add another slot of availability? Enter: 'y' or 'n' (Without quotes)");
-				addAnotherTime = userInput.nextLine();
+				clearPrint("Error! Invalid input\n\nWould you like to add another slot of availability? Enter: 'y' or 'n' (Without quotes)");
+				addAnotherTime = scan.nextLine();
 			}
 			
 		} while(addAnotherTime.charAt(0) == 'y');}
 	}
-	
-	int numberOfTasks;
 	
 	/**
 	 * This method prompts user to input tasks their event requires
 	 * @return string vector containing tasks
 	 */
 	
-	/*private Vector<String> getTasks() {
+	private Vector<String> getTasks() {
+		Vector<String> tempTasks = new Vector();
 		boolean moreTasks = true;
-		numberOfTasks = 0;
+		boolean firstTask = true;
+		String addAnotherTask = "";
+		String taskInput;
+		
 		while(moreTasks) {
 			
+			if(firstTask) {
+				clearPrint("Would you like to add a task for this event? Enter: 'y' or 'n' (Without quotes)");
+				addAnotherTask = scan.nextLine();
+				
+				while(addAnotherTask.charAt(0) != 'y' && addAnotherTask.charAt(0) != 'n') {
+					clearPrint("Error! Invalid input\n\nWould you like to add a task for this event? Enter: 'y' or 'n' (Without quotes)");
+					addAnotherTask = scan.nextLine();
+				}
+				
+			} else {
+				clearPrint("Would you like to add another task for this event? Enter: 'y' or 'n' (Without quotes)");
+				addAnotherTask = scan.nextLine();
+				
+				while(addAnotherTask.charAt(0) != 'y' && addAnotherTask.charAt(0) != 'n') {
+					clearPrint("Error! Invalid input\n\nWould you like to add another task for this event? Enter: 'y' or 'n' (Without quotes)");
+					addAnotherTask = scan.nextLine();
+				}
+			}
+			
+			if(addAnotherTask.charAt(0) == 'y') {
+				clearPrint("What is the task?");
+				taskInput = scan.nextLine();
+				
+				while(taskInput.length() == 0) {
+					clearPrint("Error! Task input cannot be blank\n\nWhat is the task?");
+					taskInput = scan.nextLine();
+				}
+				
+				tempTasks.addElement(taskInput);
+			} else {
+				moreTasks = false;
+			}
 		}
-	}*/
+		
+		return tempTasks;
+	}
 	/**
 	 * This is a method that will take in ints placed in the availability vectors
 	 * and will convert it into its corresponding time string for 12 hour mode.
@@ -1210,6 +1166,29 @@ public class AddEvent{
 		else
 		{
 			return 50; //random value that for all other cases that will throw an error else if the time isn't one of the above.
+		}
+	}
+	
+	/**
+	 * This method is used to clearly print a string for better looking output.
+	 *
+	 * @param text The string that will get clearly printed.
+	 * @throws IOException On input error.
+	 */
+	private void clearPrint(String text)
+	{
+		clearScreen();
+		System.out.println(text);
+	}
+
+	/**
+	 * This method clears the output of whatever has been previously displayed.
+	 */
+	private void clearScreen()
+	{
+		for (int i = 0; i < 50; i++)
+		{
+			System.out.println("\n");
 		}
 	}
 }
