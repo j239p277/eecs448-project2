@@ -66,10 +66,17 @@ public class Event {
 		
 	}
     
-    // Returns date from the event's DatesAndTimes vector
-    public String getDate(int index) {
+    // Returns a date string from the event's DatesAndTimes vector
+    public String getDate(int datesAndTimesIndex) {
         String date = "Date error";
-        date = this.getDatesAndTimes().get(index).get(0);
+        date = this.getDatesAndTimes().get(datesAndTimesIndex).get(0);
         return date;
+    }
+    
+    // Returns a name from the event's Attendees vector
+    public String getAttendeeName(int attendeeIndex) {
+        String name = "Name error";
+        name = this.getAttendees().get(attendeeIndex).get(0);
+        return name;	
     }
 }
