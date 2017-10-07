@@ -12,11 +12,11 @@ import java.util.*;
  */
 public class Event {
 	
-	String m_eventName = "";
-	String m_hostName = "";
-	Vector<Vector<String>> m_datesAndTimes = new Vector<Vector<String>>();
-	Vector<String> m_tasks = new Vector<String>();
-	Vector<Vector<String>> m_attendees = new Vector<Vector<String>>();
+	private String m_eventName = "";
+	private String m_hostName = "";
+	private Vector<Vector<String>> m_datesAndTimes = new Vector<Vector<String>>();
+	private Vector<String> m_tasks = new Vector<String>();
+	private Vector<Vector<String>> m_attendees = new Vector<Vector<String>>();
 	
 	public Event() {}
 	

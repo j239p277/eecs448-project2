@@ -1,15 +1,16 @@
 package converge;
 
+import java.io.*;
 import java.util.Vector;
 import java.util.Scanner;
 
 public class Main {
 	
-	static Vector<Event> eventsVector = new Vector();
+	static Vector<Event> eventsVector = new Vector<Event>();
 	static FileIO fileIO = new FileIO();
 	
 	public static void main(String[] args) {
-		Vector<Event> eventsVector = new Vector();
+		Vector<Event> eventsVector = new Vector<Event>();
 		FileIO fileIO = new FileIO();
 		Event event = new Event();
 		AddEvent addEvent = new AddEvent();

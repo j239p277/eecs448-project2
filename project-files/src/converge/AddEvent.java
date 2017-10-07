@@ -3,7 +3,6 @@ package converge;
 import java.util.Scanner;
 import java.util.Vector;
 import java.util.Calendar;
-import java.util.Date;
 
 public class AddEvent{
 
@@ -29,8 +28,8 @@ public class AddEvent{
 	 * @throws IOException On invalid user input
 	 */
 	public Vector<Event> start(Vector<Event> eventsVector) {
-		datesAndTimes = new Vector();
-		tasks = new Vector();
+		datesAndTimes = new Vector<Vector<String>>();
+		tasks = new Vector<String>();
 		
 		clearPrint("Enter event name:");
 		String eventName = scan.nextLine(); //get event name
@@ -51,7 +50,7 @@ public class AddEvent{
 		
 		// ADD HOST TO ATTENDEES
 		
-		eventsVector.addElement(new Event(eventName, hostName, datesAndTimes, tasks, new Vector()));
+		eventsVector.addElement(new Event(eventName, hostName, datesAndTimes, tasks, new Vector<Vector<String>>()));
 		
 		return eventsVector; //temp return REMOVE THIS LATER
 	}
@@ -62,7 +61,7 @@ public class AddEvent{
 	 * @return an integer array that stores the date in the format mm/dd/yyyy.
 	 */
 	private Vector<Vector<String>> getDatesAndTimes() {
-		Vector<Vector<String>> tempDatesAndTimes = new Vector();
+		Vector<Vector<String>> tempDatesAndTimes = new Vector<Vector<String>>();
 		boolean moreDates = true; //boolean that checks if user wants to add more dates
 		String addAnotherDay;
 		subsequentDate = false;
@@ -307,7 +306,7 @@ public class AddEvent{
 	 */
 	
 	private Vector<String> getTasks() {
-		Vector<String> tempTasks = new Vector();
+		Vector<String> tempTasks = new Vector<String>();
 		boolean moreTasks = true;
 		boolean firstTask = true;
 		String addAnotherTask = "";
