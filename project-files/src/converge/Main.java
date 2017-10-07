@@ -11,6 +11,7 @@ public class Main {
 		Event event = new Event();
 		AddEvent addEvent = new AddEvent();
 		JoinEvent joinEvent = new JoinEvent();
+		ViewAllEvents eventViewer = new ViewAllEvents();
 		
 		Scanner scan = new Scanner(System.in);
 		fileIO.loadEventsVector(eventsVector);
@@ -50,7 +51,7 @@ public class Main {
 				fileIO.saveEventsVector(eventsVector);
 				clearPrint("Availability successfully added!\n");
 			} else if(choice == 3) {
-				event.viewAllEvents(eventsVector);
+				eventViewer.viewAllEventNames(eventsVector);
 				clearScreen();
 			} else {
 				quit = true;
