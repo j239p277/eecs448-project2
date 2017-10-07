@@ -97,7 +97,7 @@ public class FileIO {
 					writer.newLine(); //print each day on a separate line
 				}
 				
-				writer.write(eventsVector.elementAt(i).getTasks().size()); //write the number of tasks for the event
+				writer.write(Integer.toString(eventsVector.elementAt(i).getTasks().size())); //write the number of tasks for the event
 				writer.newLine();
 				
 				for(int j = 0; j < eventsVector.elementAt(i).getTasks().size(); j++) {
@@ -105,7 +105,7 @@ public class FileIO {
 					writer.newLine(); //print each task on its own line
 				}
 				
-				writer.write(eventsVector.elementAt(i).getAttendees().size()); //write the number of people attending the event
+				writer.write(Integer.toString(eventsVector.elementAt(i).getAttendees().size())); //write the number of people attending the event
 				writer.newLine();
 				
 				for(int j = 0; j < eventsVector.elementAt(i).getAttendees().size(); j++) { //for each attendee for the event
