@@ -1,5 +1,7 @@
 package converge;
 
+import java.text.NumberFormat;
+import java.text.ParsePosition;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -44,7 +46,12 @@ public class ViewAllEvents {
 				}
 				eventChoice = Integer.parseInt(input) - 1;
 			}
-			viewEventDetails(eventsVector.get(eventChoice));
+			
+			if(eventChoice == -1) {
+				clearScreen();
+			} else {
+				viewEventDetails(eventsVector.get(eventChoice));
+			}
 		}
 	}
 
@@ -81,43 +88,71 @@ public class ViewAllEvents {
 		clearPrint("Event:\t" + event.getEventName());
 		System.out.println("Host:\t" + event.getHostName());
 		System.out.println("Times:");
-		for(int i = 0; i < event.getDatesAndTimes().size(); i++) {
+//		for(int i = 0; i < event.getDatesAndTimes().size(); i++) {
+//			for(int j = 0; j < event.getDatesAndTimes().elementAt(i).size(); j++) {
+//				if(j == 0) {
+//					System.out.println(event.getDatesAndTimes().elementAt(i).elementAt(j) + " \n");
+//				} else if(hourMode == 12) {
+//					if ( j == event.getDatesAndTimes().elementAt(i).size() - 1 ) {
+//						System.out.print(twelveHourConversion(Integer.parseInt(event.getDatesAndTimes().elementAt(i).elementAt(j))) + "\n");
+//					}else {
+//						//This Needs Fixed
+//						if( Integer.parseInt(event.getDatesAndTimes().elementAt(i).elementAt(j + 1)) != Integer.parseInt(event.getDatesAndTimes().elementAt(i).elementAt(j)) + 1 ) {
+//							System.out.print(twelveHourConversion(Integer.parseInt(event.getDatesAndTimes().elementAt(i).elementAt(j))) + " - ");
+//						}
+//					}
+//				} else {
+//					if ( j == event.getDatesAndTimes().elementAt(i).size() - 1 ) {
+//						System.out.print(twelveHourConversion(Integer.parseInt(event.getDatesAndTimes().elementAt(i).elementAt(j))) + "\n");
+//					}else {
+//						//This Needs Fixed
+//						if( Integer.parseInt(event.getDatesAndTimes().elementAt(i).elementAt(j + 1)) != Integer.parseInt(event.getDatesAndTimes().elementAt(i).elementAt(j)) + 1 ) {
+//							System.out.print(twelveHourConversion(Integer.parseInt(event.getDatesAndTimes().elementAt(i).elementAt(j))) + " - ");
+//						}
+//					}
+//				}
+//			}
+//			System.out.println();
+//		}
+		for(int i = 0; i < event.getDatesAndTimes().size(); i++) { 
 			for(int j = 0; j < event.getDatesAndTimes().elementAt(i).size(); j++) {
-				if(j == 0) {
-					System.out.println(event.getDatesAndTimes().elementAt(i).elementAt(j) + " \n");
-				} else if(hourMode == 12) {
-					if ( j % 5 == 0 ) {
-						System.out.print(TimeConverter.twelveHourConversion(Integer.parseInt(event.getDatesAndTimes().elementAt(i).elementAt(j))) + "-\n\n");
-					}else if ( j == event.getDatesAndTimes().elementAt(i).size() - 1 ) {
-						System.out.print(TimeConverter.twelveHourConversion(Integer.parseInt(event.getDatesAndTimes().elementAt(i).elementAt(j))) + "\n");
-					}else {
-						System.out.print(TimeConverter.twelveHourConversion(Integer.parseInt(event.getDatesAndTimes().elementAt(i).elementAt(j))) + " - ");
-					}
-				} else {
-					if ( j % 5 == 0 && j != event.getDatesAndTimes().elementAt(i).size() - 1 ) {
-						System.out.print(TimeConverter.twentyFourHourConversion(Integer.parseInt(event.getDatesAndTimes().elementAt(i).elementAt(j))) + " -\n\n");
-					}else if ( j == event.getDatesAndTimes().elementAt(i).size() - 1 ) {
-						System.out.print(TimeConverter.twentyFourHourConversion(Integer.parseInt(event.getDatesAndTimes().elementAt(i).elementAt(j))) + "\n");
-					}else {
-						System.out.print(TimeConverter.twentyFourHourConversion(Integer.parseInt(event.getDatesAndTimes().elementAt(i).elementAt(j))) + " - ");
-					}
+				if(j == 0) { // print date
+					System.out.print(" " + event.getDatesAndTimes().elementAt(i).elementAt(j) + " ");
+				} else if(hourMode == 12) {  // prints times for 12hr format
+					System.out.print(TimeConverter.twelveHourConversion(Integer.parseInt(event.getDatesAndTimes().elementAt(i).elementAt(j))) + " ");
+				} else {  // prints times for 24hr format
+					System.out.print(TimeConverter.twentyFourHourConversion(Integer.parseInt(event.getDatesAndTimes().elementAt(i).elementAt(j))) + " ");
 				}
 			}
 			System.out.println();
 		}
+		// display tasks
+		if (event.getTasks().size() != 0) { 
+			System.out.println("Event tasks:");
+			for(int i = 0; i < event.getTasks().size(); i++) {
+				System.out.println(" " + event.getTasks().get(i));
+			}
+		}
+		// display attendees names, attendees times, attendees tasks
 		if (event.getAttendees().size() != 0) {
 			System.out.println("Attendees:");
-			for (int i = 0; i<event.getAttendees().size(); i++) {
-				System.out.println("\t" + event.getAttendeeName(i));
+			for(int attIndex = 0; attIndex < event.getAttendees().size(); attIndex++) { 
+				// print attendee name
+				System.out.print(event.getAttendeeName(attIndex) + " "); 
+				for(int attDateAndTimesIndex = 1; attDateAndTimesIndex < event.getAttendees().elementAt(attIndex).size(); attDateAndTimesIndex++) {
+					if (!isTime(event.getAttendees().elementAt(attIndex).elementAt(attDateAndTimesIndex))) {
+						// print attendee date
+						System.out.print("\n " + event.getAttendees().elementAt(attIndex).elementAt(attDateAndTimesIndex) + " "); 
+					} else if(hourMode == 12) {   // prints times for 12hr format
+						System.out.print(TimeConverter.twelveHourConversion(Integer.parseInt(event.getAttendees().elementAt(attIndex).elementAt(attDateAndTimesIndex))) + " ");
+					} else {   // prints times for 24hr format
+							System.out.print(TimeConverter.twentyFourHourConversion(Integer.parseInt(event.getAttendees().elementAt(attIndex).elementAt(attDateAndTimesIndex))) + " "); 					
+					}
+				}
+				System.out.println();
 			}
+			System.out.println();
 		}
-		if (event.getTasks().size() != 0) {
-			System.out.println("Tasks:");
-			for(int i = 0; i < event.getTasks().size(); i++) {
-				System.out.println("\t" + event.getTasks().get(i));
-			}
-		}
-		System.out.println();
 	}
 
 	public static void clearPrint(String text) {
@@ -129,5 +164,26 @@ public class ViewAllEvents {
 		for (int i = 0; i < 50; i++) {
 			System.out.println("\n");
 		}
+	}
+	
+	// Checks if string in vector with name, dates and times id a time string
+	// @return true if string represents time
+	public Boolean isTime(String str) {
+		Boolean time = false;
+		if (isNumber(str)  == true) {
+			if (Integer.parseInt(str)>=0 || Integer.parseInt(str)<=47) {
+				time = true;
+			}
+		}
+		return time;
+	}
+	
+	// Checks if string is a valid number
+	// @return true if string represents a number
+	public static boolean isNumber(String str) {
+	  NumberFormat formatter = NumberFormat.getInstance();
+	  ParsePosition pos = new ParsePosition(0);
+	  formatter.parse(str, pos);
+	  return str.length() == pos.getIndex();
 	}
 }
