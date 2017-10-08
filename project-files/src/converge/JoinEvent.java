@@ -69,9 +69,15 @@ public class JoinEvent {
 
 				clearPrint("Would you like to use 12 hour mode or 24 hour mode? (12/24)"); //ask how they would like times formatted
 				input = scan.nextLine();
+				validInput = false;
 
 				while(!validInput) {
 					try {
+						
+						if(input.length() == 0) {
+							throw new Exception();
+						}
+						
 						if(Integer.parseInt(input) == 12 || Integer.parseInt(input) == 24) {
 							validInput = true;
 						} else {
@@ -233,7 +239,7 @@ public class JoinEvent {
 						validInput = false;
 
 						while(!validInput) {
-							if(input.charAt(0) != 'y' && input.charAt(0) != 'n') {
+							if(input.length() == 0 || input.charAt(0) != 'y' && input.charAt(0) != 'n') {
 								clearPrint("Error! Invalid input\n\nWould you like to add another time for this day? Enter 'y' or 'n' (Without quotes)");
 								input = scan.nextLine();
 							} else {
@@ -252,7 +258,7 @@ public class JoinEvent {
 					validInput = false;
 
 					while(!validInput) {
-						if(input.charAt(0) != 'y' && input.charAt(0) != 'n') {
+						if(input.length() == 0 || input.charAt(0) != 'y' && input.charAt(0) != 'n') {
 							clearPrint("Error! Invalid input\n\nWould you like to add another day? Enter 'y' or 'n' (Without quotes)");
 							input = scan.nextLine();
 						} else {
@@ -281,7 +287,7 @@ public class JoinEvent {
 						input = scan.nextLine();
 					
 						while(!validInput) {
-							if(input.charAt(0) != 'y' && input.charAt(0) != 'n') {
+							if(input.length() == 0 || input.charAt(0) != 'y' && input.charAt(0) != 'n') {
 								clearPrint("Error! Invalid input\n\nWould you like to sign up for a task? Enter 'y' or 'n' (Without quotes)");
 								input = scan.nextLine();
 							} else {
