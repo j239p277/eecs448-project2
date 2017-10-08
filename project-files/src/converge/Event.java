@@ -12,7 +12,7 @@ import java.util.*;
  */
 public class Event {
 	
-	private static String m_eventName = "";
+	String m_eventName = "";
 	String m_hostName = "";
 	Vector<Vector<String>> m_datesAndTimes = new Vector<Vector<String>>();
 	Vector<String> m_tasks = new Vector<String>();
