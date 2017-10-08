@@ -79,11 +79,23 @@ public class ViewAllEvents {
 		for(int i = 0; i < event.getDatesAndTimes().size(); i++) {
 			for(int j = 0; j < event.getDatesAndTimes().elementAt(i).size(); j++) {
 				if(j == 0) {
-					System.out.print(event.getDatesAndTimes().elementAt(i).elementAt(j) + " ");
+					System.out.println(event.getDatesAndTimes().elementAt(i).elementAt(j) + " \n");
 				} else if(hourMode == 12) {
-					System.out.print(twelveHourConversion(Integer.parseInt(event.getDatesAndTimes().elementAt(i).elementAt(j))) + " -");
-				} else if(j == event.getDatesAndTimes().elementAt(i).size()- 1){
-					System.out.print(twentyFourHourConversion(Integer.parseInt(event.getDatesAndTimes().elementAt(i).elementAt(j))) + " \n");
+					if ( j % 5 == 0 ) {
+						System.out.print(twelveHourConversion(Integer.parseInt(event.getDatesAndTimes().elementAt(i).elementAt(j))) + "-\n\n");
+					}else if ( j == event.getDatesAndTimes().elementAt(i).size() - 1 ) {
+						System.out.print(twelveHourConversion(Integer.parseInt(event.getDatesAndTimes().elementAt(i).elementAt(j))) + "\n");
+					}else {
+						System.out.print(twelveHourConversion(Integer.parseInt(event.getDatesAndTimes().elementAt(i).elementAt(j))) + " - ");
+					}
+				} else {
+					if ( j % 5 == 0 && j != event.getDatesAndTimes().elementAt(i).size() - 1 ) {
+						System.out.print(twentyFourHourConversion(Integer.parseInt(event.getDatesAndTimes().elementAt(i).elementAt(j))) + " -\n\n");
+					}else if ( j == event.getDatesAndTimes().elementAt(i).size() - 1 ) {
+						System.out.print(twentyFourHourConversion(Integer.parseInt(event.getDatesAndTimes().elementAt(i).elementAt(j))) + "\n");
+					}else {
+						System.out.print(twentyFourHourConversion(Integer.parseInt(event.getDatesAndTimes().elementAt(i).elementAt(j))) + " - ");
+					}
 				}
 			}
 			System.out.println();
@@ -95,9 +107,9 @@ public class ViewAllEvents {
 			}
 		}
 		if (event.getTasks().size() != 0) {
-			System.out.print("Tasks:\n");
+			System.out.println("Tasks:");
 			for(int i = 0; i < event.getTasks().size(); i++) {
-				System.out.print(event.getTasks().get(i) + " \n");
+				System.out.println("\t" + event.getTasks().get(i));
 			}
 		}
 		System.out.println();
