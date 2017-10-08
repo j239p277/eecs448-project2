@@ -61,4 +61,11 @@ public class Event {
 	public void addAttendee(Vector<String> temp) {
 		this.m_attendees.add(temp);
 	}
+	
+	// Returns a name from the event's Attendees vector
+	public String getAttendeeName(int attendeeIndex) {
+		String name = "Name error";
+		name = this.getAttendees().get(attendeeIndex).get(0);
+		return name;	
+	}
 }
