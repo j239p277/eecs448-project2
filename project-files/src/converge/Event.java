@@ -48,4 +48,8 @@ public class Event {
 	public Vector<Vector<String>> getAttendees() {
 		return m_attendees;
 	}
+	
+	public void addAttendee(Vector<String> attendee) {
+		m_attendees.addElement(attendee);
+	}
 }

@@ -54,6 +54,7 @@ public class FileIO {
 						attendees.addElement(tempAttendee);
 					}
 					eventsVector.addElement(new Event(eventName, hostName, datesAndTimes, tasks, attendees)); //add event to events vector that will be returned
+					reader.readLine(); //read in blank line that separates events
 				}	
 				
 				reader.close();

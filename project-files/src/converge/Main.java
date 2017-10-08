@@ -49,7 +49,6 @@ public class Main {
 			} else if(choice == 2) {
 				joinEvent.start(eventsVector);
 				fileIO.saveEventsVector(eventsVector);
-				clearPrint("Availability successfully added!\n");
 			} else if(choice == 3) {
 				eventViewer.viewAllEventNames(eventsVector);
 				clearScreen();
