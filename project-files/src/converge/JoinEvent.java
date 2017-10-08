@@ -17,7 +17,6 @@ public class JoinEvent {
 			int day = 0;
 			String attendeeName = "";
 			boolean addAnotherDay = true;
-			boolean addATask = true;
 			Vector<String> attendee = new Vector();
 			boolean addAnotherTime = true;
 			boolean addAnotherTask = true;
@@ -260,49 +259,9 @@ public class JoinEvent {
 							validInput = true;
 						}
 					}
-
-					clearPrint("Would you like to sign up for a task? Enter 'y' or 'n' (Without quotes)");
-					input = scan.nextLine();
-					validInput = false;
-
-					while(!validInput) {
-						if(input.charAt(0) != 'y' && input.charAt(0) != 'n') {
-							clearPrint("Error! Invalid input\n\nWould you like to sign up for a task? Enter 'y' or 'n' (Without quotes)");
-							input = scan.nextLine();
-						} else {
-							validInput = true;
-						}
-					}
-
+					
 					if(input.charAt(0) == 'n') {
-						addATask = false;
-					}
-
-					if(addATask) {
-							for(int i = 0; i < eventsVector.elementAt(eventChoice).getTasks().size(); i++) {
-								System.out.print(eventsVector.elementAt(eventChoice).getTasks().get(i) + " \n");
-							}
-							System.out.print("Enter the task you can undertake\n");
-							input = scan.nextLine();
-							validInput = false;
-
-							while(!validInput) {
-								boolean notFound = true;
-								for(int i = 0; i < eventsVector.elementAt(eventChoice).getTasks().size(); i++) {
-									if(eventsVector.elementAt(eventChoice).getTasks().get(i) == input) {
-										notFound = false;
-									}
-								}
-								if(notFound) {
-									clearPrint("Error! Invalid input\n\nEnter the task you can undertake");
-									for(int i = 0; i < eventsVector.elementAt(eventChoice).getTasks().size(); i++) {
-										System.out.print(eventsVector.elementAt(eventChoice).getTasks().get(i) + " \n");
-									}
-									input = scan.nextLine();
-								} else {
-									validInput = true;
-								}
-							}
+						addAnotherDay = false;
 					}
 				
 				}
