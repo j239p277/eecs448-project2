@@ -70,7 +70,7 @@ public class AddEvent{
 			String tempDate = scan.nextLine();
 
 			while(!checkDate(tempDate)) {
-				clearPrint("Error! Invalid date.\n\nEnter event date(mm/dd/yyyy)");
+				clearPrint("Error! Invalid date.\n\nEnter event date (mm/dd/yyyy)");
 				tempDate = scan.nextLine();
 			}
 				
@@ -79,11 +79,11 @@ public class AddEvent{
 			int yearInt = Integer.parseInt(tempDate.substring(6,10));
 
 			while((yearInt < currentYear) || (yearInt == currentYear && monthInt < currentMonth + 1) || (yearInt == currentYear && monthInt == currentMonth + 1 && dayInt < currentDay)) {
-				clearPrint("Error! Cannot create an event in the past.\n\nEnter event date(mm/dd/yyyy)");
+				clearPrint("Error! Cannot create an event in the past.\n\nEnter event date (mm/dd/yyyy)");
 				tempDate = scan.nextLine();
 				
 				while(!checkDate(tempDate)) {
-					clearPrint("Error! Invalid date.\n\nEnter event date(mm/dd/yyyy)");
+					clearPrint("Error! Invalid date.\n\nEnter event date (mm/dd/yyyy)");
 					tempDate = scan.nextLine();
 				}
 				
@@ -99,7 +99,7 @@ public class AddEvent{
 			clearPrint("Would you like to add another day? Enter: 'y' or 'n' (Without quotes)");
 			addAnotherDay = scan.nextLine();
 			
-			while(!(addAnotherDay.charAt(0) == 'y' || addAnotherDay.charAt(0) == 'n')) {
+			while(addAnotherDay.length() == 0 || addAnotherDay.charAt(0) != 'y' && addAnotherDay.charAt(0) != 'n') {
 				clearPrint("Error! Invalid input\n\nWould you like to add another day? Enter: 'y' or 'n' (Without quotes)");
 				addAnotherDay = scan.nextLine();
 			}
@@ -294,7 +294,7 @@ public class AddEvent{
 			clearPrint("Would you like to add another slot of availability? Enter: 'y' or 'n' (Without quotes)");
 			addAnotherTime = scan.nextLine();
 			
-			while(addAnotherTime.charAt(0) != 'y' && addAnotherTime.charAt(0) != 'n') {
+			while(addAnotherTime.length() == 0 || addAnotherTime.charAt(0) != 'y' && addAnotherTime.charAt(0) != 'n') {
 				clearPrint("Error! Invalid input\n\nWould you like to add another slot of availability? Enter: 'y' or 'n' (Without quotes)");
 				addAnotherTime = scan.nextLine();
 			}
@@ -325,7 +325,7 @@ public class AddEvent{
 				clearPrint("Would you like to add a task for this event? Enter: 'y' or 'n' (Without quotes)");
 				addAnotherTask = scan.nextLine();
 				
-				while(addAnotherTask.charAt(0) != 'y' && addAnotherTask.charAt(0) != 'n') {
+				while(addAnotherTask.length() == 0 || addAnotherTask.charAt(0) != 'y' && addAnotherTask.charAt(0) != 'n') {
 					clearPrint("Error! Invalid input\n\nWould you like to add a task for this event? Enter: 'y' or 'n' (Without quotes)");
 					addAnotherTask = scan.nextLine();
 				}
