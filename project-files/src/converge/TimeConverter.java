@@ -7,11 +7,10 @@ package converge;
 
 public class TimeConverter {
 	/**
-	 * This is a method that will take in ints placed in the availability vectors
-	 * and will convert it into its corresponding time string for 12 hour mode.
+	 * Converts arbitrary fileIO ints to their corresponding strings in the 12 hour format
 	 *
-	 * @param i This is the integer value given to the method.
-	 * @return A string representing the integers corresponding time string.
+	 * @param i integer value representing an abstract time
+	 * @return a string representing a time in the 12 hour format
 	 */
 	public static String twelveHourConversion(int i)
 	{
@@ -210,11 +209,10 @@ public class TimeConverter {
 	}
 
 	/**
-	 * This is a method that will take in ints places in the availability vectors
-	 * and will convert it into its corresponding time string for 24 hour mode.
+	 * Converts arbitrary fileIO ints to their corresponding strings in the 24 hour format
 	 *
-	 * @param i This is the integer value given to the method.
-	 * @return A string representing the integers corresponding time string.
+	 * @param i integer value representing an abstract time
+	 * @return a string representing a time in the 24 hour format
 	 */
 	public static String twentyFourHourConversion(int i)
 	{
@@ -413,10 +411,10 @@ public class TimeConverter {
 	}
 
 	/**
-	 * Converts time strings for 12 hour mode as its corresponding integer for the availability vectors.
+	 * Converts 12 hour time strings to abstract ints for fileIO
 	 *
-	 * @param time The time as a string that the user inputs in 12 hour mode.
-	 * @return an integer representing the time string's corresponding integer for the availability vector.
+	 * @param time string representing the time in 12 hour format
+	 * @return arbitrary integer representing time
 	 */
 	public static int twelveHourtoInt(String time)
 	{
@@ -619,10 +617,10 @@ public class TimeConverter {
 	}
 
 	/**
-	 * Converts time strings for 24 hour mode as its corresponding integer for the availability vectors.
+	 * Converts 24 hour time strings to abstract ints for fileIO
 	 *
-	 * @param time The time as a string that the user inputs in 24 hour mode.
-	 * @return an integer representing the time string's corresponding integer for the availability vector.
+	 * @param time string representing the time in 24 hour format
+	 * @return arbitrary integer representing time
 	 */
 	public static int twentyFourHourtoInt(String time)
 	{

@@ -67,11 +67,19 @@ public class Main {
         }
     }
     
+	/**
+	 * Clearly prints a string for better looking output.
+	 * @param text The string that will get clearly printed.
+	 */
+	
     public static void clearPrint(String text) {
         clearScreen();
         System.out.println(text);
     }
     
+	/**
+	 * Clears terminal window
+	 */
     
     public static void clearScreen() {
         for (int i = 0; i < 50; i++) {

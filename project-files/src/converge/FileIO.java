@@ -10,6 +10,10 @@ import java.util.Vector;
 
 public class FileIO {
 	
+	/**
+	 * Reads events in from "events.txt", stores infromation in the eventsVector
+	 * @param eventsVector dynamic data structure that stores all event objects
+	 */
 	public void loadEventsVector(Vector<Event> eventsVector) {
 		File eventsFile = new File("events.txt");
 		
@@ -73,7 +77,10 @@ public class FileIO {
 			eventsVector = new Vector();
 		}
 	}
-	
+	/**
+	 * Writes information about every from the eventsVector to "events.txt"
+	 * @param eventsVector dynamic data structure that stores all event objects
+	 */
 	public void saveEventsVector(Vector<Event> eventsVector) {
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter("events.txt", false)); //create file writer, output will be stored in "events.txt"

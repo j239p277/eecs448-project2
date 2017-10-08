@@ -12,6 +12,11 @@ import java.util.Vector;
 
 public class ViewAllEvents {
 
+	/**
+	 * Displays all event names and prompts the user to select an event to find out more
+	 * @param eventsVector dynamic data structure that stores all event objects
+	 */
+
 	public void viewAllEventNames(Vector<Event> eventsVector) {
 		if(eventsVector.size() == 0) {
 			clearPrint("Error! There are no scheduled events.\n");
@@ -54,6 +59,11 @@ public class ViewAllEvents {
 			}
 		}
 	}
+	
+	/**
+	 * Displays detailed information about a certain event. Includes dates, times, attendee, tasks, etc.
+	 * @param event specific event that the user would like to know more about
+	 */
 
 	public void viewEventDetails(Event event) {
 
@@ -155,19 +165,31 @@ public class ViewAllEvents {
 		}
 	}
 
+	/**
+	 * Clearly prints a string for better looking output.
+	 * @param text The string that will get clearly printed.
+	 */
+	
 	public static void clearPrint(String text) {
 		clearScreen();
 		System.out.println(text);
 	}
 
+	/**
+	 * Clears terminal window
+	 */
+	
 	public static void clearScreen() {
 		for (int i = 0; i < 50; i++) {
 			System.out.println("\n");
 		}
 	}
 	
-	// Checks if string in vector with name, dates and times id a time string
-	// @return true if string represents time
+	/**
+	 * Checks if given is between 0 and 47
+	 * @param str string representing a time int
+	 * @return true if it is, false if not
+	 */
 	public Boolean isTime(String str) {
 		Boolean time = false;
 		if (isNumber(str)  == true) {
@@ -177,6 +199,12 @@ public class ViewAllEvents {
 		}
 		return time;
 	}
+	
+	/**
+	 * Checks if string is a valid number
+	 * @param str string representing a number
+	 * @return true if it is, false if not
+	 */
 	
 	// Checks if string is a valid number
 	// @return true if string represents a number

@@ -10,6 +10,11 @@ import java.util.Scanner;
 
 public class JoinEvent {
 
+	/**
+	 * Prompts user to input information about themselves and the event they want to join
+	 * @param eventsVector dynamic data structure that stores all event objects
+	 */
+
 	public void start(Vector<Event> eventsVector) {
 		if(eventsVector.size() == 0) {
 			clearPrint("Error! There are no events to join\n");
@@ -348,13 +353,20 @@ public class JoinEvent {
 		}
 	}
 
+	/**
+	 * Clearly prints a string for better looking output.
+	 * @param text The string that will get clearly printed.
+	 */
 	
 	public static void clearPrint(String text) {
 		clearScreen();
 		System.out.println(text);
 	}
 
-
+	/**
+	 * Clears terminal window
+	 */
+	
 	public static void clearScreen() {
 		for (int i = 0; i < 50; i++) {
 			System.out.println("\n");
