@@ -3,6 +3,11 @@ package converge;
 import java.util.Scanner;
 import java.util.Vector;
 
+/**
+ * Displays all relevant information about each event.
+ * @since 2017-10-8
+ */
+
 public class ViewAllEvents {
 
 	public void viewAllEventNames(Vector<Event> eventsVector) {

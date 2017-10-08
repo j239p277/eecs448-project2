@@ -5,29 +5,61 @@ import java.util.Vector;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * Controls event creation, prompting the user for all required information, then creates an event obejct containing given information.
+ * @since 2017-10-8
+ */
+
 public class AddEvent{
 
-	
+	/**
+	 * int representing current year
+	 */
 	int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+	/**
+	 * int representing current month
+	 */
 	int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
+	/**
+	 * int representing current day of the month
+	 */
 	int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-
+	/**
+	 * temporary string representing start time for a slot of availability
+	 */
 	String startAvailability;
+	/**
+	 * temporary string representing end time for a slot of availability
+	 */
 	String endAvailability;
-
+	/**
+	 * instance of Scanner object that allows for user input
+	 */
 	Scanner scan = new Scanner(System.in);
-	
+	/**
+	 * temporary 2d string vector containing dates the event takes place over and the times on each date
+	 */
 	Vector<Vector<String>> datesAndTimes;
+	/**
+	 * temporary string vector that contains the tasks for the new event
+	 */
 	Vector<String> tasks;
+	/**
+	 * temporary 2d vector containing the names and availabilities of each attendee
+	 */
 	Vector<Vector<String>> attendees;
-	
-	Vector<String> tempDay; //vector that stores all times for a specific day
-	
+	/**
+	 * temporary string vector that stores all times the event takes place on a specific
+	 */
+	Vector<String> tempDay;
+	/**
+	 * boolean that simply changes prompt for all dates after the first
+	 */
 	boolean subsequentDate;
 
 	/**
-	 * Method runs the user interaction allowing the admin to create an event.
-	 * @throws IOException On invalid user input
+	 * Begins user interaction, prompts user for all information required to make an event. Stores given information in a new event object in the eventsVector
+	 * @param eventsVector dynamic data structure containing all event objects
 	 */
 	public void start(Vector<Event> eventsVector) {
 		datesAndTimes = new Vector();
@@ -56,9 +88,9 @@ public class AddEvent{
 	}
 	
 	/**
-	 * This method requests the Admin's event date and stores it in an integer array.
+	 * Prompts user to input the days and times over which the event takes place
 	 *
-	 * @return an integer array that stores the date in the format mm/dd/yyyy.
+	 * @param datesAndTimes dynamic data structure containing all dates and times that an event takes place over
 	 */
 	private void getDatesAndTimes(Vector<Vector<String>> datesAndTimes) {
 		boolean moreDates = true; //boolean that checks if user wants to add more dates
@@ -112,7 +144,8 @@ public class AddEvent{
 		}
 	}
 	/**
-	 * This method checks if a given date is real
+	 * Checks if a given date is real
+	 * @param input a string representing a date
 	 * @return true if given date is an authentic date, false if not
 	 */
 
@@ -165,8 +198,10 @@ public class AddEvent{
 	}
 
 	/**
-	 * This method checks if given date is a valid leap year
-	 * @return true if date is valid, false if not
+	 * Checks if given date is a valid leap day
+	 * @param year integer representing a year
+	 * @param day integer representing a day of the month
+	 * @return true if given date is a valid leap day, false if not
 	 */
 	private boolean checkLeapYear(int year, int day) {
 	 	if(day < 1) {
@@ -186,8 +221,8 @@ public class AddEvent{
 	}
 	
 	/**
-	 * This method takes in a day and prompts user to input times for that day
-	 * @return Vector<String> containing times
+	 * Prompts user to input all times the event takes place during for a given day
+	 * @param day string representing a day
 	 */
 	private void getTimes(String day) {
 		boolean moreTimes = true; //boolean that checks if user wants to add more times to a certain date
@@ -309,8 +344,8 @@ public class AddEvent{
 	}
 	
 	/**
-	 * This method prompts user to input tasks their event requires
-	 * @return string vector containing tasks
+	 * Prompts user to input all tasks the event requires
+	 * @param tasks dynamic data structure storing the tasks
 	 */
 	
 	private void getTasks(Vector<String> tasks) {
@@ -356,6 +391,13 @@ public class AddEvent{
 		}
 	}
 	
+	/**
+	 * Constructs dynamic data structure that will contain all attendees for an event, places event host in list of attendees
+	 * @param attendees dynamic data structure that will hold information about the availability of every attendees
+	 * @param hostName name of the event host
+	 * @param datesAndTimes dynamic data structure containing the dates and times over which an event takes place
+	 */
+	
 	private void constructAttendeesVector(Vector<Vector<String>> attendees, String hostName, Vector<Vector<String>> datesAndTimes) {
 		Vector<String> tempHost = new Vector();
 		tempHost.addElement(hostName);
@@ -371,10 +413,8 @@ public class AddEvent{
 	}
 	
 	/**
-	 * This method is used to clearly print a string for better looking output.
-	 *
+	 * Clearly prints a string for better looking output.
 	 * @param text The string that will get clearly printed.
-	 * @throws IOException On input error.
 	 */
 	private void clearPrint(String text)
 	{
@@ -383,7 +423,7 @@ public class AddEvent{
 	}
 
 	/**
-	 * This method clears the output of whatever has been previously displayed.
+	 * Clears terminal window
 	 */
 	private void clearScreen()
 	{

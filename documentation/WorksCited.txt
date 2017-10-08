@@ -1,37 +1,74 @@
 Works Cited
 
+
+
+
 Link: https://alvinalexander.com/blog/post/java/how-open-read-file-java-string-array-list
+
 Date Accessed: 9/12/2017
 
+
+
 Link: https://stackoverflow.com/questions/7899525/how-to-split-a-string-by-space
+
 Date Accessed: 9/13/2017
+
+
 
 Link: https://www.tutorialspoint.com/java/java_filereader_class.htm
+
 Date Accessed: 9/13/2017
 
+
+
 Link: https://www.javatpoint.com/Scanner-class
+
 Date Accessed: 9/14/2017
+
+
 
 Link: https://www.tutorialspoint.com/java/util/vector_get.htm
+
 Date Accessed: 9/14/2017
 
+
+
 Link: https://stackoverflow.com/questions/136419/get-integer-value-of-the-current-year-in-java
+
 Date Accessed: 9/16/2017
+
+
 
 Link: https://stackoverflow.com/questions/10631715/how-to-split-a-comma-separated-string
+
 Date Accessed: 9/16/2017
+
+
 
 Link: https://stackoverflow.com/questions/5455794/removing-whitespace-from-strings-in-java
+
 Date Accessed: 9/16/2017
 
+
+
 Link: https://stackoverflow.com/questions/5439529/determine-if-a-string-is-an-integer-in-java
+
 Date Accessed: 9/17/2017
+
+
 
 Link: https://stackoverflow.com/questions/13115266/how-to-insist-that-a-users-input-is-an-int
+
 Date Accessed: 9/17/2017
+
+
 
 Link: http://www.dummies.com/programming/java/how-to-use-javadoc-to-document-your-classes/
+
 Date Accessed: 9/17/2017
 
+
+
 Link: https://www.tutorialspoint.com/java/java_documentation.htm
+
 Date Accessed: 9/17/2017

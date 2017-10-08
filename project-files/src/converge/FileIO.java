@@ -3,6 +3,11 @@ package converge;
 import java.io.*;
 import java.util.Vector;
 
+/**
+ * Controls reading from and writing to the file where information about events is stored.
+ * @since 2017-10-8
+ */
+
 public class FileIO {
 	
 	public void loadEventsVector(Vector<Event> eventsVector) {

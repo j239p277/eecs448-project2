@@ -1,5 +1,10 @@
 package converge;
 
+/**
+ * Contains methods that allow switching between 12 and 24 hour mode.
+ * @since 2017-10-8
+ */
+
 public class TimeConverter {
 	/**
 	 * This is a method that will take in ints placed in the availability vectors

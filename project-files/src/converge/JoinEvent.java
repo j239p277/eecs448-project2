@@ -3,6 +3,11 @@ package converge;
 import java.util.Vector;
 import java.util.Scanner;
 
+/**
+ * Facilitates the process of users signing up to attend an event.
+ * @since 2017-10-8
+ */
+
 public class JoinEvent {
 
 	public void start(Vector<Event> eventsVector) {

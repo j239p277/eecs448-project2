@@ -3,12 +3,22 @@ package converge;
 import java.util.Vector;
 import java.util.Scanner;
 
+/**
+ * Program starting point, connects all other classes, begins user interaction.
+ * @since 2017-10-8
+ */
+
 public class Main {
     
+	/**
+	 * As the program starting point, main controls all other classes and controls initial user interaction
+	 * 
+	 * @param args user input from command line
+	 */
+	
     public static void main(String[] args) {
         Vector<Event> eventsVector = new Vector();
         FileIO fileIO = new FileIO();
-        Event event = new Event();
         AddEvent addEvent = new AddEvent();
         JoinEvent joinEvent = new JoinEvent();
         ViewAllEvents eventViewer = new ViewAllEvents();
