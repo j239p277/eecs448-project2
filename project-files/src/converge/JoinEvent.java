@@ -377,7 +377,8 @@ public class JoinEvent {
 			}
 		}
 	}
-}
+
+	
 	public static void clearPrint(String text) {
 		clearScreen();
 		System.out.println(text);
@@ -389,4 +390,6 @@ public class JoinEvent {
 			System.out.println("\n");
 		}
 	}
+	
+	
 }
