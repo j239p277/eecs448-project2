@@ -12,6 +12,6 @@ Kaden Griffith		kadengriffith@ku.edu
 Matthew Taylor		mjt@ku.edu
 
 
-This project was written in Java. To run the program, navigate to /program-files in the terminal and type 'make'.
+This project was written in Java. To run the program, navigate to /project-files in the terminal and type 'make'.
 
 To view code documentation, go to documentation/code documentation/converge/package-summary.html
