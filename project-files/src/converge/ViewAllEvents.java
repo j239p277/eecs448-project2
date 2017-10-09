@@ -31,11 +31,15 @@ public class ViewAllEvents {
 			for(int i = 0; i < eventsVector.size(); i++) {
 				System.out.println((i + 1) + ". " + eventsVector.elementAt(i).getEventName() + ", hosted by " + eventsVector.elementAt(i).getHostName());
 			}
-			System.out.println("0. Return to menu\n\nPlease enter the number of the event you would like to join or enter 0 to return to menu");
+			System.out.println("0. Return to menu\n\nPlease enter the number of the event you would like to see details for or enter 0 to return to menu");
 			input = scan.nextLine();
 
 			while(!validInput) {
 				try {
+					if(input.length() == 0) {
+						throw new Exception();
+					}
+					
 					if(Integer.parseInt(input) >= 0 && Integer.parseInt(input) <= eventsVector.size()) {
 						validInput = true;
 					} else {
@@ -46,11 +50,12 @@ public class ViewAllEvents {
 					for(int i = 0; i < eventsVector.size(); i++) {
 						System.out.println((i + 1) + ". " + eventsVector.elementAt(i).getEventName() + ", hosted by " + eventsVector.elementAt(i).getHostName());
 					}
-					System.out.println("0. Return to menu\n\nPlease enter the number of the event you would like to join or enter 0 to return to menu");
+					System.out.println("0. Return to menu\n\nPlease enter the number of the event you would like to see details for or enter 0 to return to menu");
 					input = scan.nextLine();
 				}
-				eventChoice = Integer.parseInt(input) - 1;
 			}
+			
+			eventChoice = Integer.parseInt(input) - 1;
 			
 			if(eventChoice == -1) {
 				clearScreen();
@@ -97,7 +102,7 @@ public class ViewAllEvents {
 		//display host, days, times, tasks, attendees names, attendees times, attendees tasks
 		clearPrint("Event:\t" + event.getEventName());
 		System.out.println("Host:\t" + event.getHostName());
-		System.out.println("Times:");
+		System.out.println("\nTimes:");
 //		for(int i = 0; i < event.getDatesAndTimes().size(); i++) {
 //			for(int j = 0; j < event.getDatesAndTimes().elementAt(i).size(); j++) {
 //				if(j == 0) {
@@ -138,14 +143,14 @@ public class ViewAllEvents {
 		}
 		// display tasks
 		if (event.getTasks().size() != 0) { 
-			System.out.println("Event tasks:");
+			System.out.println("\nEvent tasks:");
 			for(int i = 0; i < event.getTasks().size(); i++) {
 				System.out.println(" " + event.getTasks().get(i));
 			}
 		}
 		// display attendees names, attendees times, attendees tasks
 		if (event.getAttendees().size() != 0) {
-			System.out.println("Attendees:");
+			System.out.println("\nAttendees:");
 			for(int attIndex = 0; attIndex < event.getAttendees().size(); attIndex++) { 
 				// print attendee name
 				System.out.print(event.getAttendeeName(attIndex) + " "); 
@@ -163,6 +168,10 @@ public class ViewAllEvents {
 			}
 			System.out.println();
 		}
+		
+		System.out.println("Press 'enter' to return to menu");
+		input = scan.nextLine();
+		clearScreen();
 	}
 
 	/**
