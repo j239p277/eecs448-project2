@@ -1,0 +1,35 @@
+Date: October 2, 2017
+Time: 11:30 am
+Location: EECS 448 class (scrum)
+
+	Initial high level project details discussed. Implementation details not discussed. A new file storage
+	format was talked about to simplify file io. Nothing planned to be done before next meeting.
+
+Date: October 2, 2017
+Time: 1:00 pm
+Location: EECS 448 lab
+
+	Implementation details discussed, specifically, multi-day scheduling and task list creation. New file
+	format discussed again. Before next meeting, finish multi-day scheduling.
+
+Date: October 4, 2017
+Time: 11:30 am
+Location: EECS 448 class (scrum)
+
+	Multi-day scheduling almost completed, not entirely. New file format decided upon. Prompt format for
+	collecting event/attendee information discussed. Before next meeting, finish task list creation and
+	multi-day scheduling.
+
+Date: October 6, 2017
+Time: 11:30 am
+Location: EECS 448 class (scrum)
+
+	Multi-day scheduling and task list finished. New file io format implemented. Attendee addition discussed.
+	Admin view discussed. Before next meeting, finish attendee addition (joining events) and admin view.
+
+Date: October 8, 2017
+Time: 4:00 pm
+Location: discord
+
+	Attendee addition and admin view finalized, program stability and administrative details discussed.
+	Before project is submitted, improve stability, add documentation.
