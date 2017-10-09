@@ -1,3 +1,15 @@
+Date: September 27, 2017
+Time: 11:30 am
+Location: EECS 448 class (scrum)
+
+	Discussed how the previous group did the project, and discussed the new requirements we have to add.
+
+Date: September 29, 2017
+Time: 11:30 am
+Location: EECS 448 class (scrum)
+
+	Discussed how to better implement file I/O.
+
 Date: October 2, 2017
 Time: 11:30 am
 Location: EECS 448 class (scrum)
