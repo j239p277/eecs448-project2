@@ -1,0 +1,25 @@
+List of features and descriptions of exstimated complexity and time required to complete:
+
+1. Add multi-day scheduling functionality
+
+	To complete this task, we need to change the event object implementation from its final project 1 state
+	to support more than one date object. Then we need to add the ability to add multiple days during the event's
+	creation. This simply involves adding a loop that creates date objects. FileIO must be updated to store
+	all days in a file. The time required to complete this task is about 3 hours.
+
+2. Add a task list
+
+	To complete this task, we must add a new member variable to the event object. Then, we must add prompts
+	during event creation to add these tasks to our event. FileIO must be updated to store tasks for each
+	event in a text file. The time required to complete this task is about 3 hours.
+
+3. Update event creator view
+
+	This task simply printing all information about an event to the console. This can easily be done with
+	a set of for loops. The time required to complete this task is about 30 minutes.
+
+4. Update event joining process (event attendee view)
+
+	This task involves allowing attendees to now sign up for events across multiple days. Attendees must also
+	now be able to sign up for tasks. The time required to complete this task and provide stability is about
+	4 hours.
