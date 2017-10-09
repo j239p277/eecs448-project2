@@ -12,6 +12,6 @@ Kaden Griffith		kadengriffith@ku.edu
 Matthew Taylor		mjt@ku.edu
 
 
-This project was written in Java. To run the program, navigate to /project-files in the terminal and type 'make'.
+This project was written in Java, compiled and tested using JDK 8u144. To run the program, make sure you have JDK installed, navigate to /project-files in the terminal and type 'make'.
 
 To view code documentation, go to documentation/code documentation/converge/package-summary.html
